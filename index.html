@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap Clockpicker</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="src/bootstrap-clockpicker.css">
+<style type="text/css">
+.footer {
+	border-top: 1px solid #eee;
+	margin-top: 40px;
+	padding: 40px 0;
+}
+.input-group {
+	width: 110px;
+	margin-bottom: 20px;
+}
+</style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href=".">Bootstrap ClockPicker</a>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<p class="lead">
+		A android-like clock-style timepicker for Bootstrap. 
+		<a href="https://github.com/weareoutman/clockpicker">Fork me on GitHub</a>.
+	</p>
+	<p>
+		We support all major browsers, including IE 9+, in destop and mobile device.
+		It should look and behave well enough in IE 8.
+	</p>
+	<br>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label>Default: </label>
+				<div class="input-group clockpicker">
+					<input type="text" class="form-control" value="09:30">
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-time"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label>Place at left, align the arrow to top, auto close:</label>
+				<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+					<input type="text" class="form-control" value="13:14">
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-time"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top:200px;">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label>Place at top, align the arrow to left:</label>
+				<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
+					<input type="text" class="form-control" value="18:00">
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-time"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label>Place at left, align the arrow to bottom, auto close:</label>
+				<div class="input-group clockpicker" data-placement="left" data-align="bottom" data-autoclose="true">
+					<input type="text" class="form-control" value="20:48">
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-time"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="footer">
+		<p>
+			&copy; WangShenwei. 
+			<a href="https://github.com/weareoutman/clockpicker">Fork me on GitHub</a>
+		</p>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="src/bootstrap-clockpicker.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.clockpicker').clockpicker()
+		.find('input').change(function(){
+			console.log(this.value);
+		});
+});
+</script>
+</body>
+</html>
