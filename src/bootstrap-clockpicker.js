@@ -349,7 +349,7 @@
 			}
 		}
 		if (this[this.currentView] !== value) {
-			vibrate && navigator[vibrate](100);
+			vibrate && navigator[vibrate](10);
 		}
 		this[this.currentView] = value;
 		this[isHours ? 'spanHours' : 'spanMinutes'].html(leadingZero(value));
