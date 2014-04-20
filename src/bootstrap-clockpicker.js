@@ -354,7 +354,7 @@
 					navigator[vibrate](10);
 					this.vibrateTimer = setTimeout($.proxy(function(){
 						this.vibrateTimer = null;
-					}, this), 200);
+					}, this), 100);
 				}
 			}
 		}
