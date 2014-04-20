@@ -17,6 +17,8 @@
 		mousemoveEvent = touchSupported ? 'touchmove' : 'mousemove',
 		mouseupEvent = touchSupported ? 'touchend' : 'mouseup';
 
+	var vibrate = navigator.vibrate ? 'vibrate' : navigator.webkitVibrate ? 'webkitVibrate' : null;
+
 	function createSvgElement(name) {
 		return document.createElementNS(svgNS, name);
 	}
@@ -345,6 +347,9 @@
 			if (value === 60) {
 				value = 0;
 			}
+		}
+		if (this[this.currentView] !== value) {
+			vibrate && navigator[vibrate](100);
 		}
 		this[this.currentView] = value;
 		this[isHours ? 'spanHours' : 'spanMinutes'].html(leadingZero(value));
