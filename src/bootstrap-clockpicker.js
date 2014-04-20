@@ -349,7 +349,14 @@
 			}
 		}
 		if (this[this.currentView] !== value) {
-			vibrate && navigator[vibrate](10);
+			if (vibrate) {
+				if (! this.vibrateTimer) {
+					navigator[vibrate](10);
+					this.vibrateTimer = setTimeout($.proxy(function(){
+						this.vibrateTimer = null;
+					}, this), 200);
+				}
+			}
 		}
 		this[this.currentView] = value;
 		this[isHours ? 'spanHours' : 'spanMinutes'].html(leadingZero(value));
