@@ -1,6 +1,7 @@
 # Bootstrap Clock-Style TimePicker
 
 A android-like clock-style timepicker for Bootstrap.
+[Documentation and examples](http://weareoutman.github.io/clockpicker/).
 
 ![Screenshot](http://weareoutman.github.io/clockpicker/images/screenshot-1.png)
 
@@ -50,6 +51,7 @@ $(function(){
 - [ ] Add documentation and more examples.
 - [ ] Customize format.
 - [ ] Seconds View ?
+- [ ] Comments in code.
 - [ ] Add tests.
 
 ## License
