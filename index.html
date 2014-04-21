@@ -134,8 +134,8 @@ $('.clockpicker').clockpicker({
 		<pre class="hljs-pre"><code class="html">&lt;input type="text" class="form-control" id="single-input" value="" placeholder="现在"&gt;
 &lt;script type="text/javascript"&gt;
 $('.clockpicker').clockpicker({
-	placement: 'left',
-	align: 'bottom',
+	placement: 'bottom',
+	align: 'right',
 	autoclose: true,
 	'default': '20:48'
 });
@@ -161,7 +161,12 @@ $(function(){
 		.find('input').change(function(){
 			console.log(this.value);
 		});
-	$('#single-input').clockpicker();
+	$('#single-input').clockpicker({
+		placement: 'bottom',
+		align: 'right',
+		autoclose: true,
+		'default': '20:48'
+	});
 });
 </script>
 <script type="text/javascript" src="js/highlight.min.js"></script>
