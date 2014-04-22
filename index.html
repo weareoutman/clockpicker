@@ -7,7 +7,12 @@
 <title>Bootstrap Clockpicker</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="src/bootstrap-clockpicker.css">
+<link rel="stylesheet" type="text/css" href="css/github.min.css">
 <style type="text/css">
+.hljs-pre {
+	background: #f8f8f8;
+	padding: 3px;
+}
 .footer {
 	border-top: 1px solid #eee;
 	margin-top: 40px;
@@ -15,7 +20,21 @@
 }
 .input-group {
 	width: 110px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+}
+.pull-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+@media (max-width: 767px) {
+  .pull-center {
+    float: right;
+  }
 }
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -39,61 +58,88 @@
 		A android-like clock-style timepicker for Bootstrap. 
 		<a href="https://github.com/weareoutman/clockpicker">Fork me on GitHub</a>.
 	</p>
+
 	<p>
 		We support all major browsers, including IE 9+, in destop and mobile device.
 		It should look and behave well enough in IE 8.
 	</p>
-	<br>
-</div>
 
-<div class="container">
-	<div class="row">
-		<div class="col-sm-6">
-			<div class="form-group">
-				<label>Default: </label>
-				<div class="input-group clockpicker" data-autoclose="true">
-					<input type="text" class="form-control" value="09:30">
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-time"></span>
-					</span>
-				</div>
-			</div>
+	<div class="form-group">
+		<h3>Default: </h3>
+		<div class="input-group clockpicker">
+			<input type="text" class="form-control" value="09:30">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-time"></span>
+			</span>
 		</div>
-		<div class="col-sm-6">
-			<div class="form-group">
-				<label>Place at left, align the arrow to top, auto close:</label>
-				<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-					<input type="text" class="form-control" value="13:14">
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-time"></span>
-					</span>
-				</div>
-			</div>
-		</div>
+		<pre class="hljs-pre"><code class="html">&lt;div class="input-group clockpicker"&gt;
+	&lt;input type="text" class="form-control" value="09:30"&gt;
+	&lt;span class="input-group-addon"&gt;
+		&lt;span class="glyphicon glyphicon-time"&gt;&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+$('.clockpicker').clockpicker();
+&lt;/script&gt;</code></pre>
 	</div>
-	<div class="row" style="margin-top:200px;">
-		<div class="col-sm-6">
-			<div class="form-group">
-				<label>Place at top, align the arrow to left:</label>
-				<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
-					<input type="text" class="form-control" value="18:00">
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-time"></span>
-					</span>
-				</div>
+	<div class="form-group">
+		<h3>Place at left, align the arrow to top, auto close:</h3>
+		<div class="clearfix">
+			<div class="input-group clockpicker pull-center" data-placement="left" data-align="top" data-autoclose="true">
+				<input type="text" class="form-control" value="13:14">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-time"></span>
+				</span>
 			</div>
 		</div>
-		<div class="col-sm-6">
-			<div class="form-group">
-				<label>Place at left, align the arrow to bottom, auto close:</label>
-				<div class="input-group clockpicker" data-placement="left" data-align="bottom" data-autoclose="true" data-value="20:48">
-					<input type="text" class="form-control" value="" placeholder="现在">
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-time"></span>
-					</span>
-				</div>
+		<pre class="hljs-pre"><code class="html">&lt;div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true"&gt;
+	&lt;input type="text" class="form-control" value="13:14"&gt;
+	&lt;span class="input-group-addon"&gt;
+		&lt;span class="glyphicon glyphicon-time"&gt;&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+$('.clockpicker').clockpicker();
+&lt;/script&gt;</code></pre>
+	</div>
+	<div class="form-group">
+		<h3>Set options in javascript, instead of <code>data-*</code> :</h3>
+		<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
+			<input type="text" class="form-control" value="18:00">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-time"></span>
+			</span>
+		</div>
+		<pre class="hljs-pre"><code class="html">&lt;div class="input-group clockpicker"&gt;
+	&lt;input type="text" class="form-control" value="18:00"&gt;
+	&lt;span class="input-group-addon"&gt;
+		&lt;span class="glyphicon glyphicon-time"&gt;&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+$('.clockpicker').clockpicker({
+	placement: 'top',
+	align: 'left',
+	donetext: 'Done'
+});
+&lt;/script&gt;</code></pre>
+	</div>
+	<div class="form-group">
+		<h3>Set default value, input without addon:</h3>
+		<div class="clearfix">
+			<div class="pull-center" style="width:80px;margin-bottom:10px;">
+				<input type="text" class="form-control" id="single-input" value="" placeholder="现在">
 			</div>
 		</div>
+		<pre class="hljs-pre"><code class="html">&lt;input type="text" class="form-control" id="single-input" value="" placeholder="现在"&gt;
+&lt;script type="text/javascript"&gt;
+$('#single-input').clockpicker({
+	placement: 'bottom',
+	align: 'right',
+	autoclose: true,
+	'default': '20:48'
+});
+&lt;/script&gt;</code></pre>
 	</div>
 </div>
 
@@ -115,7 +161,17 @@ $(function(){
 		.find('input').change(function(){
 			console.log(this.value);
 		});
+	$('#single-input').clockpicker({
+		placement: 'bottom',
+		align: 'right',
+		autoclose: true,
+		'default': '20:48'
+	});
 });
+</script>
+<script type="text/javascript" src="js/highlight.min.js"></script>
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
 </script>
 </body>
 </html>
