@@ -1,4 +1,4 @@
-# ClockPicker
+# ClockPicker [![Build Status](https://travis-ci.org/weareoutman/clockpicker.png)](https://travis-ci.org/weareoutman/clockpicker)  [![devDependency Status](https://david-dm.org/weareoutman/clockpicker.png)](https://david-dm.org/weareoutman/clockpicker#info=devDependencies)
 
 A android-like clock-style timepicker for Bootstrap (or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
@@ -50,11 +50,11 @@ Feel free to using `jquery-*` files instead of `bootstrap-*` for no-bootstrap pr
 ## Todo
 
 - [*] Compiling CSS and JavaScript.
+- [*] Comments in code.
+- [*] Add tests.
 - [ ] Add documentation and more examples.
 - [ ] Customize format.
 - [ ] Seconds View ?
-- [*] Comments in code.
-- [ ] Add tests.
 
 ## License
 

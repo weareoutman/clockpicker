@@ -2,7 +2,8 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	minifyCSS = require('gulp-minify-css'),
 	rename = require('gulp-rename'),
-	concat = require('gulp-concat');
+	concat = require('gulp-concat'),
+	qunit = require('gulp-qunit');
 
 // Rename and uglify scripts
 function js(prefix) {
@@ -56,6 +57,11 @@ gulp.task('css', function() {
 gulp.task('watch', function() {
 	gulp.watch('src/*.js', ['js']);
 	gulp.watch('src/*.css', ['css']);
+});
+
+gulp.task('test', function() {
+    return gulp.src('test/*.html')
+        .pipe(qunit());
 });
 
 gulp.task('default', ['js', 'css', 'watch']);

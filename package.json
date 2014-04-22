@@ -12,12 +12,16 @@
     "type": "git",
     "url": "git://github.com/weareoutman/clockpicker.git"
   },
+  "scripts": {
+    "test": "gulp test"
+  },
   "dependencies": {},
   "devDependencies": {
     "gulp": "~3.6.1",
     "gulp-uglify": "~0.2.1",
     "gulp-minify-css": "~0.3.1",
     "gulp-rename": "~1.2.0",
-    "gulp-concat": "~2.2.0"
+    "gulp-concat": "~2.2.0",
+    "gulp-qunit": "^0.3.3"
   }
 }
