@@ -49,11 +49,11 @@ Feel free to using `jquery-*` files instead of `bootstrap-*` for no-bootstrap pr
 
 ## Todo
 
-- [ ] Compiling CSS and JavaScript.
+- [*] Compiling CSS and JavaScript.
 - [ ] Add documentation and more examples.
 - [ ] Customize format.
 - [ ] Seconds View ?
-- [ ] Comments in code.
+- [*] Comments in code.
 - [ ] Add tests.
 
 ## License

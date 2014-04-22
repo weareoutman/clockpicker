@@ -2,15 +2,13 @@
  * jQuery-ClockPicker v0.0.2 (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/master/LICENSE)
- */
-
-/* Picked from bootstrap .popover, .btn, .text-primary */
-
-/*!
+ * 
  * Bootstrap v3.1.1 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+/* Picked from bootstrap: .popover, .btn, .text-primary */
 
 .popover {
   position: absolute;

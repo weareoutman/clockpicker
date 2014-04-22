@@ -4,6 +4,7 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	concat = require('gulp-concat');
 
+// Rename and uglify scripts
 function js(prefix) {
 	gulp.src('src/clockpicker.js')
 		.pipe(rename({
@@ -19,11 +20,13 @@ function js(prefix) {
 		.pipe(gulp.dest('dist'));
 }
 
+// Rename, concat and minify stylesheets
 function css(prefix) {
 	var stream;
 	if (prefix === 'bootstrap') {
 		stream = gulp.src('src/clockpicker.css');
 	} else {
+		// Concat with some styles picked from bootstrap
 		stream = gulp.src(['src/standalone.css', 'src/clockpicker.css'])
 			.pipe(concat('clockpicker.css'));
 	}

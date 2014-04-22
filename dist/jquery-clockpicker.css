@@ -2,15 +2,13 @@
  * jQuery-ClockPicker v0.0.2 (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/master/LICENSE)
- */
-
-/* Picked from bootstrap .popover, .btn, .text-primary */
-
-/*!
+ * 
  * Bootstrap v3.1.1 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+/* Picked from bootstrap: .popover, .btn, .text-primary */
 
 .popover {
   position: absolute;
@@ -283,33 +281,28 @@
 	outline: none!important;
 }
 .clockpicker-dial {
-	transition: transform 350ms, opacity 350ms;
 	-webkit-transition: -webkit-transform 350ms, opacity 350ms;
 	-moz-transition: -moz-transform 350ms, opacity 350ms;
 	-ms-transition: -ms-transform 350ms, opacity 350ms;
 	-o-transition: -o-transform 350ms, opacity 350ms;
-	transform-origin: 50% 50%;
-	-webkit-transform-origin: 50% 50%;
-	-moz-transform-origin: 50% 50%;
-	-ms-transform-origin: 50% 50%;
-	-o-transform-origin: 50% 50%;
+	transition: transform 350ms, opacity 350ms;
 }
 .clockpicker-dial-out {
 	opacity: 0;
 }
 .clockpicker-hours.clockpicker-dial-out {
-	transform: scale(1.2, 1.2);
 	-webkit-transform: scale(1.2, 1.2);
 	-moz-transform: scale(1.2, 1.2);
 	-ms-transform: scale(1.2, 1.2);
 	-o-transform: scale(1.2, 1.2);
+	transform: scale(1.2, 1.2);
 }
 .clockpicker-minutes.clockpicker-dial-out {
-	transform: scale(.8, .8);
 	-webkit-transform: scale(.8, .8);
 	-moz-transform: scale(.8, .8);
 	-ms-transform: scale(.8, .8);
 	-o-transform: scale(.8, .8);
+	transform: scale(.8, .8);
 }
 .clockpicker-canvas {
 	transition: opacity 175ms;
