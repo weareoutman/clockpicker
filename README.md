@@ -1,22 +1,22 @@
-# Bootstrap Clock-Style TimePicker
+# ClockPicker
 
-A android-like clock-style timepicker for Bootstrap.
+A android-like clock-style timepicker for Bootstrap (or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
 
-![Screenshot](http://weareoutman.github.io/clockpicker/images/screenshot-1.png)
+![Screenshot](http://weareoutman.github.io/clockpicker/assets/images/screenshot-1.png)
 
 ## Browser and device support
 
-We support all major browsers, including IE 9+, in destop and mobile device. It should look and behave well enough in IE 8.
+We support all major browsers, including IE 9+, in both destop and mobile device. It should look and behave well enough in IE 8.
 
 ## Usage
 
 ```html
 <!-- Bootstrap stylesheet -->
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
 <!-- ClockPicker Stylesheet -->
-<link rel="stylesheet" type="text/css" href="src/bootstrap-clockpicker.css">
+<link rel="stylesheet" type="text/css" href="dist/bootstrap-clockpicker.min.css">
 
 <!-- Input group, just add class 'clockpicker', and optional data-* -->
 <div class="input-group clockpicker" data-placement="right" data-align="top" data-autoclose="true">
@@ -27,11 +27,11 @@ We support all major browsers, including IE 9+, in destop and mobile device. It 
 </div>
 
 <!-- jQuery and Bootstrap scripts -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 
 <!-- ClockPicker script -->
-<script type="text/javascript" src="src/bootstrap-clockpicker.js"></script>
+<script type="text/javascript" src="dist/bootstrap-clockpicker.min.js"></script>
 
 <script type="text/javascript">
 $(function(){
@@ -44,6 +44,8 @@ $(function(){
 });
 </script>
 ```
+
+Feel free to using `jquery-*` files instead of `bootstrap-*` for no-bootstrap project.
 
 ## Todo
 

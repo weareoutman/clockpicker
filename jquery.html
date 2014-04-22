@@ -5,10 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ClockPicker</title>
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="dist/bootstrap-clockpicker.min.css">
+<link rel="stylesheet" type="text/css" href="dist/jquery-clockpicker.css">
 <link rel="stylesheet" type="text/css" href="assets/css/github.min.css">
 <style type="text/css">
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
 .hljs-pre {
 	background: #f8f8f8;
 	padding: 3px;
@@ -37,11 +40,6 @@
   }
 }
 </style>
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-  <script src="assets/js/html5shiv.js"></script>
-  <script src="assets/js/respond.min.js"></script>
-<![endif]-->
 </head>
 <body>
 
@@ -68,7 +66,7 @@
 	</p>
 
 	<p>
-		<a href="jquery.html">See ClockPicker for jQuery</a>.
+		<a href="./">See ClockPicker for Bootstrap</a>.
 	</p>
 
 	<div class="form-group">
@@ -160,8 +158,7 @@ $('#single-input').clockpicker({
 </div>
 
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="dist/bootstrap-clockpicker.min.js"></script>
+<script type="text/javascript" src="dist/jquery-clockpicker.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.clockpicker').clockpicker()
