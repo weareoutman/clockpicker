@@ -27,8 +27,6 @@ test('data-default="20:48" on input', function(){
          .triggerHandler('focus');
     strictEqual(picker.hours, 20, 'hours reset');
     strictEqual(picker.minutes, 48, 'minutes reset');
-
-    input.remove();
 });
 
 test('data-default="20:48" on input-group', function(){
@@ -57,8 +55,6 @@ test('data-default="20:48" on input-group', function(){
          .triggerHandler('focus');
     strictEqual(picker.hours, 20, 'hours reset');
     strictEqual(picker.minutes, 48, 'minutes reset');
-
-    group.remove();
 });
 
 test('data-placement="bottom|left|right|top" on input', function(){
