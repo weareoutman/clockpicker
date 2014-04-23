@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.0.2 (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v0.0.3 (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/master/LICENSE)
  */
@@ -8,7 +8,7 @@
 	var $ = window.$,
 		$win = $(window),
 		$doc = $(document),
-		$body = $(document.body);
+		$body;
 
 	// Can I use inline svg ?
 	var svgNS = 'http://www.w3.org/2000/svg',
@@ -358,7 +358,7 @@
 		// Initialize
 		if (! this.isAppended) {
 			// Append popover to body
-			$body.append(this.popover);
+			$body = $(document.body).append(this.popover);
 
 			// Reset position when resize
 			$win.on('resize.clockpicker', function(){

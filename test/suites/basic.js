@@ -10,13 +10,13 @@ test('clockpicker on input', function(){
     input.clockpicker();
     var picker = input.data('clockpicker');
     ok(picker, 'clockpicker is initialized on input');
-    strictEqual(picker.isAppended, false, 'clockpicker is not appended to body when initialized');
+    ok(! picker.isAppended, 'clockpicker is not appended to body when initialized');
 
     // First shown
     // Using triggerHandler('focus') instead of focus(), since invisible element can not be focused in IE.
     input.triggerHandler('focus');
-    strictEqual(picker.isShown, true, 'clockpicker is shown');
-    strictEqual(picker.isAppended, true, 'clockpicker is appended to body before first shown');
+    ok(picker.isShown, 'clockpicker is shown');
+    ok(picker.isAppended, 'clockpicker is appended to body before first shown');
 
     // Ticks
     var hours = picker.hoursView.find('.clockpicker-tick'),
@@ -27,33 +27,66 @@ test('clockpicker on input', function(){
     // Toggle views, set hours and minutes
     strictEqual(picker.currentView, 'hours', 'first view is hours');
     strictEqual(picker.hours, 0, 'hours is 0 by default');
-    // var tick = hours.eq(1),
-    //     offset = tick.offset();
-    // strictEqual(tick.html(), '1', 'tick at index 1 is "01"');
-    // var e = $.Event('mousedown', { pageX: offset.left + 10, pageY: offset.top + 10});
-    // console.log(e);
-    // tick.triggerHandler('mousedown', e);
-    // tick.triggerHandler('mouseup', e);
-    // strictEqual(picker.hours, 1, 'hours is set to 1');
-    // picker.spanMinutes.click();
-    // strictEqual(picker.currentView, 'minutes', 'toggle view to minutes');
-    picker.spanHours.click();
-    strictEqual(picker.currentView, 'hours', 'toggle view to hours');
 
-    // Hide
-    $(document.body).click();
-    strictEqual(picker.isShown, false, 'clockpicker is hidden');
+    // Custom click event (mousedown, then mouseup)
+    var hour1 = hours.eq(1),
+        hour1Offset = hour1.offset();
+    strictEqual(hour1.html(), '1', 'hour at index 1 is "1"');
+
+    hour1.triggerHandler($.Event('mousedown', {
+        pageX: hour1Offset.left + 10,
+        pageY: hour1Offset.top + 10
+    }));
+    $(document).triggerHandler($.Event('mouseup', {
+        pageX: hour1Offset.left + 10,
+        pageY: hour1Offset.top + 10
+    }));
+    strictEqual(picker.hours, 1, 'hours is set to 1');
+
+    strictEqual(picker.currentView, 'minutes', 'toggle view to minutes after hours setted');
+    strictEqual(picker.minutes, 0, 'minutes is 0 by default');
+
+    var minute5 = minutes.eq(1),
+        minute5Offset = minute5.offset();
+    strictEqual(minute5.html(), '05', 'minute at index 1 is "05"');
+
+    minute5.triggerHandler($.Event('mousedown', {
+        pageX: minute5Offset.left + 10,
+        pageY: minute5Offset.top + 10
+    }));
+    $(document).triggerHandler($.Event('mouseup', {
+        pageX: minute5Offset.left + 10,
+        pageY: minute5Offset.top + 10
+    }));
+    strictEqual(picker.minutes, 5, 'minutes is set to 5');
+
+    ok(picker.isShown, 'clockpicker is still shown');
+    changed = 0;
+    input.on('change', function(){
+        changed += 1;
+    });
+    picker.popover.find('button').click();
+    ok(! picker.isShown, 'clockpicker is hidden after clicked on done button');
+    strictEqual(changed, 1, 'input triggerred a change event');
+    strictEqual(input.val(), '01:05', 'input value is changed to "01:05"');
 
     // Click on popover should not hide
     input.triggerHandler('focus');
-    strictEqual(picker.isShown, true, 'clockpicker is shown again');
+    ok(picker.isShown, 'clockpicker is shown again');
     picker.popover.click();
-    strictEqual(picker.isShown, true, 'clockpicker is not hidden when clicked on popover');
+    ok(picker.isShown, 'clockpicker is not hidden when clicked on popover');
+
+    // Hide
+    $(document.body).click();
+    ok(! picker.isShown, 'clockpicker is hidden');
+
+    // Show again
+    input.triggerHandler('focus');
+    ok(picker.isShown, 'clockpicker is shown again');
 
     // Press ESC to hide
-    var e = $.Event('keyup', { keyCode: 27 });
-    $(document).triggerHandler(e);
-    strictEqual(picker.isShown, false, 'clockpicker is hidden when ESC is pressed');
+    $(document).triggerHandler($.Event('keyup', { keyCode: 27 }));
+    ok(! picker.isShown, 'clockpicker is hidden when ESC is pressed');
 });
 
 test('clockpicker on input-group', function(){
@@ -64,14 +97,14 @@ test('clockpicker on input-group', function(){
     group.clockpicker();
     var picker = group.data('clockpicker');
     ok(picker, 'clockpicker is initialized on input-group');
-    strictEqual(picker.isAppended, false, 'clockpicker is not appended to body when initialized');
+    ok(! picker.isAppended, 'clockpicker is not appended to body when initialized');
 
     input.triggerHandler('focus');
-    strictEqual(picker.isShown, true, 'clockpicker is shown');
-    strictEqual(picker.isAppended, true, 'clockpicker is appended to body before first shown');
+    ok(picker.isShown, 'clockpicker is shown');
+    ok(picker.isAppended, 'clockpicker is appended to body before first shown');
 
     $(document.body).click();
-    strictEqual(picker.isShown, false, 'clockpicker is hidden');
+    ok(! picker.isShown, 'clockpicker is hidden');
 });
 
 test('clockpicker on input-group with addon', function(){
@@ -85,14 +118,14 @@ test('clockpicker on input-group with addon', function(){
     ok(picker, 'clockpicker is initialized on input-group');
 
     input.triggerHandler('focus');
-    strictEqual(picker.isShown, true, 'clockpicker is shown by focus');
+    ok(picker.isShown, 'clockpicker is shown by focus');
 
     $(document.body).click();
-    strictEqual(picker.isShown, false, 'clockpicker is hidden by click on body');
+    ok(! picker.isShown, 'clockpicker is hidden by click on body');
 
     addon.click();
-    strictEqual(picker.isShown, true, 'clockpicker is shown by click on addon');
+    ok(picker.isShown, 'clockpicker is shown by click on addon');
 
     addon.click();
-    strictEqual(picker.isShown, false, 'clockpicker is hidden by click on addon again');
+    ok(! picker.isShown, 'clockpicker is hidden by click on addon again');
 });
