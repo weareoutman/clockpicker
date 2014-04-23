@@ -97,6 +97,7 @@
 		this.id = uniqueId('cp');
 		this.element = element;
 		this.options = options;
+		this.isAppended = false;
 		this.isShown = false;
 		this.currentView = 'hours';
 		this.isInput = isInput;
@@ -279,16 +280,6 @@
 			this.g = g;
 			this.canvas = canvas;
 		}
-
-		// Append to body
-		$body.append(popover);
-
-		// Reset position when resize
-		$win.on('resize.clockpicker', function(){
-			if (self.isShown) {
-				self.locate();
-			}
-		});
 	}
 
 	// Default options
@@ -362,7 +353,22 @@
 			return;
 		}
 
-		this.isShown = true;
+		var self = this;
+
+		// Initialize
+		if (! this.isAppended) {
+			// Append popover to body
+			$body.append(this.popover);
+
+			// Reset position when resize
+			$win.on('resize.clockpicker', function(){
+				if (self.isShown) {
+					self.locate();
+				}
+			});
+
+			this.isAppended = true;
+		}
 
 		// Get the time
 		var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
@@ -377,7 +383,7 @@
 		// Set position
 		this.locate();
 
-		var self = this;
+		this.isShown = true;
 
 		// Hide when clicking on any element except the clock, input and addon
 		$doc.on('click.clockpicker.' + this.id, function(e){

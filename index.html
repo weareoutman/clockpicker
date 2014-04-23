@@ -178,17 +178,15 @@ $('#single-input').clockpicker({
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="dist/bootstrap-clockpicker.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	$('.clockpicker').clockpicker()
-		.find('input').change(function(){
-			console.log(this.value);
-		});
-	$('#single-input').clockpicker({
-		placement: 'bottom',
-		align: 'right',
-		autoclose: true,
-		'default': '20:48'
+$('.clockpicker').clockpicker()
+	.find('input').change(function(){
+		console.log(this.value);
 	});
+$('#single-input').clockpicker({
+	placement: 'bottom',
+	align: 'right',
+	autoclose: true,
+	'default': '20:48'
 });
 </script>
 <script type="text/javascript" src="assets/js/highlight.min.js"></script>

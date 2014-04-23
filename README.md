@@ -45,14 +45,11 @@ Feel free to use `jquery-*` files instead of `bootstrap-*` , for non-bootstrap p
 <script type="text/javascript" src="dist/bootstrap-clockpicker.min.js"></script>
 
 <script type="text/javascript">
-$(function(){
-	// After dom ready
-	$('.clockpicker').clockpicker()
-		.find('input').change(function(){
-			// TODO: time changed
-			console.log(this.value);
-		});
-});
+$('.clockpicker').clockpicker()
+	.find('input').change(function(){
+		// TODO: time changed
+		console.log(this.value);
+	});
 </script>
 ```
 
@@ -92,6 +89,7 @@ gulp
 - [*] Comments in code.
 - [*] Add tests.
 - [*] Add documentation and more examples.
+- [ ] Auto placement and align.
 - [ ] Customize format.
 - [ ] Seconds View ?
 
