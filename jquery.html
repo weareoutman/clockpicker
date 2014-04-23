@@ -194,6 +194,9 @@ $('#single-input').clockpicker({
 	autoclose: true,
 	'default': '20:48'
 });
+if (/Mobile/.test(navigator.userAgent)) {
+	$('input').prop('readOnly', true);
+}
 </script>
 <script type="text/javascript" src="assets/js/highlight.min.js"></script>
 <script type="text/javascript">
