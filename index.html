@@ -55,24 +55,39 @@
 
 <div class="container">
 	<p class="lead">
-		A android-like clock-style timepicker for Bootstrap (or jQuery). 
+		A clock-style timepicker for Bootstrap (or jQuery).
+		<a href="https://travis-ci.org/weareoutman/clockpicker"><img src="https://camo.githubusercontent.com/eed2d856315f7d3962a159976760c3bae07e64ba/68747470733a2f2f7472617669732d63692e6f72672f77656172656f75746d616e2f636c6f636b7069636b65722e706e67" alt="Build Status" data-canonical-src="https://travis-ci.org/weareoutman/clockpicker.png" style="max-width:100%;"></a>
 	</p>
 
 	<p>
 		<a href="https://github.com/weareoutman/clockpicker">Fork me on GitHub</a>.
 	</p>
 
+	<h3>Browser support</h3>
 	<p>
-		We support all major browsers, including IE 9+, in both destop and mobile device.
-		It should look and behave well enough in IE 8.
+		All major browsers are supported, including IE 9+. It should look and behave well enough in IE 8.
 	</p>
 
+	<h3>Device support</h3>
+	<p>
+		Both desktop and mobile device are supported. It also works great in touch screen device.
+	</p>
+
+	<h3>Dependencies</h3>
+	<p>
+		ClockPicker was originally designed for Bootstrap. So Bootstrap (and jQuery) is the only dependency(s).
+	</p>
+	<p>
+		Since it only used <code>.popover</code> and some of <code>.btn</code> styles of Bootstrap, I picked these styles to build a jQuery plugin.
+		Feel free to use <code>jquery-*</code> files instead of <code>bootstrap-*</code> , for non-bootstrap project.
+	</p>
 	<p>
 		<a href="jquery.html">See ClockPicker for jQuery</a>.
 	</p>
 
+	<h3>Examples</h3>
 	<div class="form-group">
-		<h3>Default: </h3>
+		<h4>Default: </h4>
 		<div class="input-group clockpicker">
 			<input type="text" class="form-control" value="09:30">
 			<span class="input-group-addon">
@@ -90,7 +105,7 @@ $('.clockpicker').clockpicker();
 &lt;/script&gt;</code></pre>
 	</div>
 	<div class="form-group">
-		<h3>Place at left, align the arrow to top, auto close:</h3>
+		<h4>Place at left, align the arrow to top, auto close:</h4>
 		<div class="clearfix">
 			<div class="input-group clockpicker pull-center" data-placement="left" data-align="top" data-autoclose="true">
 				<input type="text" class="form-control" value="13:14">
@@ -110,7 +125,7 @@ $('.clockpicker').clockpicker();
 &lt;/script&gt;</code></pre>
 	</div>
 	<div class="form-group">
-		<h3>Set options in javascript, instead of <code>data-*</code> :</h3>
+		<h4>Set options in javascript, instead of <code>data-*</code> :</h4>
 		<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
 			<input type="text" class="form-control" value="18:00">
 			<span class="input-group-addon">
@@ -132,7 +147,7 @@ $('.clockpicker').clockpicker({
 &lt;/script&gt;</code></pre>
 	</div>
 	<div class="form-group">
-		<h3>Set default value, input without addon:</h3>
+		<h4>Set default value, input without addon:</h4>
 		<div class="clearfix">
 			<div class="pull-center" style="width:80px;margin-bottom:10px;">
 				<input type="text" class="form-control" id="single-input" value="" placeholder="现在">

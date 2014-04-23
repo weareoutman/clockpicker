@@ -1,6 +1,6 @@
 {
   "name": "clockpicker",
-  "description": "A android-like clock-style timepicker for Bootstrap (or jQuery)",
+  "description": "A clock-style timepicker for Bootstrap (or jQuery)",
   "version": "0.0.2",
   "author": {
     "name": "Wang Shenwei",

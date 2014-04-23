@@ -1,13 +1,24 @@
 # ClockPicker [![Build Status](https://travis-ci.org/weareoutman/clockpicker.png)](https://travis-ci.org/weareoutman/clockpicker)  [![devDependency Status](https://david-dm.org/weareoutman/clockpicker.png)](https://david-dm.org/weareoutman/clockpicker#info=devDependencies)
 
-A android-like clock-style timepicker for Bootstrap (or jQuery).
+A clock-style timepicker for Bootstrap (or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
 
 ![Screenshot](http://weareoutman.github.io/clockpicker/assets/images/screenshot-1.png)
 
-## Browser and device support
+## Browser support
 
-We support all major browsers, including IE 9+, in both destop and mobile device. It should look and behave well enough in IE 8.
+All major browsers are supported, including IE 9+. It should look and behave well enough in IE 8.
+
+## Device support
+
+Both desktop and mobile device are supported. It also works great in touch screen device.
+
+## Dependencies
+
+ClockPicker was originally designed for Bootstrap. So Bootstrap (and jQuery) is the only dependency(s).
+
+Since it only used `.popover` and some of `.btn` styles of Bootstrap, I picked these styles to build a jQuery plugin.
+Feel free to use `jquery-*` files instead of `bootstrap-*` , for non-bootstrap project.
 
 ## Usage
 
@@ -45,14 +56,42 @@ $(function(){
 </script>
 ```
 
-Feel free to using `jquery-*` files instead of `bootstrap-*` for no-bootstrap project.
+## What's included
+
+```bash
+clockpicker/
+├── dist/
+│   ├── bootstrap-clockpicker.css      # full code for bootstrap
+│   ├── bootstrap-clockpicker.js
+│   ├── bootstrap-clockpicker.min.css  # compiled and minified files for bootstrap
+│   ├── bootstrap-clockpicker.min.js
+│   ├── jquery-clockpicker.css         # full code for jquery
+│   ├── jquery-clockpicker.js
+│   ├── jquery-clockpicker.min.css     # compiled and minified files for jquery
+│   └── jquery-clockpicker.min.js
+└── src/                               # source code
+    ├── clockpicker.css
+    ├── clockpicker.js
+    └── standalone.css                 # some styles picked from bootstrap
+```
+
+## Development
+
+```bash
+git clone https://github.com/weareoutman/clockpicker.git
+cd clockpicker
+npm install -g gulp
+npm install
+gulp
+# gulp test
+```
 
 ## Todo
 
 - [*] Compiling CSS and JavaScript.
 - [*] Comments in code.
 - [*] Add tests.
-- [ ] Add documentation and more examples.
+- [*] Add documentation and more examples.
 - [ ] Customize format.
 - [ ] Seconds View ?
 
