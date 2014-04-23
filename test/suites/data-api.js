@@ -1,3 +1,5 @@
+/* global module, test, ok, strictEqual */
+
 module('DATA-API');
 
 test('data-default="20:48" on input', function(){
@@ -8,21 +10,21 @@ test('data-default="20:48" on input', function(){
     var picker = input.data('clockpicker');
     ok(picker, 'clockpicker is initialized');
 
-    input.focus();
+    input.triggerHandler('focus');
     strictEqual(picker.hours, 20, 'hours is setted by default');
     strictEqual(picker.minutes, 48, 'minutes is setted by default');
 
     picker.hide();
     input.blur()
          .val('10:24')
-         .focus();
+         .triggerHandler('focus');
     strictEqual(picker.hours, 10, 'hours changed');
     strictEqual(picker.minutes, 24, 'minutes changed');
 
     picker.hide();
     input.blur()
          .val('')
-         .focus();
+         .triggerHandler('focus');
     strictEqual(picker.hours, 20, 'hours reset');
     strictEqual(picker.minutes, 48, 'minutes reset');
 
@@ -38,21 +40,21 @@ test('data-default="20:48" on input-group', function(){
     var picker = group.data('clockpicker');
     ok(picker, 'clockpicker is initialized');
 
-    input.focus();
+    input.triggerHandler('focus');
     strictEqual(picker.hours, 20, 'hours is setted by default');
     strictEqual(picker.minutes, 48, 'minutes is setted by default');
 
     picker.hide();
     input.blur()
          .val('10:24')
-         .focus();
+         .triggerHandler('focus');
     strictEqual(picker.hours, 10, 'hours changed');
     strictEqual(picker.minutes, 24, 'minutes changed');
 
     picker.hide();
     input.blur()
          .val('')
-         .focus();
+         .triggerHandler('focus');
     strictEqual(picker.hours, 20, 'hours reset');
     strictEqual(picker.minutes, 48, 'minutes reset');
 
@@ -67,7 +69,7 @@ test('data-placement="bottom|left|right|top" on input', function(){
     input.clockpicker();
     picker = input.data('clockpicker');
     ok(picker, 'clockpicker is initialized');
-    input.focus();
+    input.triggerHandler('focus');
     ok(picker.popover.hasClass('bottom'), 'place at bottom by default');
     input.remove();
 
@@ -79,7 +81,7 @@ test('data-placement="bottom|left|right|top" on input', function(){
         input.clockpicker();
         picker = input.data('clockpicker');
         ok(picker, 'clockpicker is initialized');
-        input.focus();
+        input.triggerHandler('focus');
         ok(picker.popover.hasClass(place), 'place at ' + place);
         input.remove();
     }
@@ -93,7 +95,7 @@ test('data-align="bottom|left|right|top" on input', function(){
     input.clockpicker();
     picker = input.data('clockpicker');
     ok(picker, 'clockpicker is initialized');
-    input.focus();
+    input.triggerHandler('focus');
     ok(picker.popover.hasClass('clockpicker-align-left'), 'place at left by default');
     input.remove();
 
@@ -105,7 +107,7 @@ test('data-align="bottom|left|right|top" on input', function(){
         input.clockpicker();
         picker = input.data('clockpicker');
         ok(picker, 'clockpicker is initialized');
-        input.focus();
+        input.triggerHandler('focus');
         ok(picker.popover.hasClass('clockpicker-align-' + align), 'align at ' + align);
         input.remove();
     }

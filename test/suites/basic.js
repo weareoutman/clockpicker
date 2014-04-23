@@ -1,3 +1,5 @@
+/* global module, test, ok, strictEqual */
+
 module('BASIC');
 
 test('clockpicker on input', function(){
@@ -7,9 +9,12 @@ test('clockpicker on input', function(){
     input.clockpicker();
     var picker = input.data('clockpicker');
     ok(picker, 'clockpicker is initialized on input');
+    strictEqual(picker.isAppended, false, 'clockpicker is not appended to body when initialized');
 
-    input.focus();
+    // Using triggerHandler('focus') instead of focus(), since invisible element can not be focused in IE.
+    input.triggerHandler('focus');
     strictEqual(picker.isShown, true, 'clockpicker is shown');
+    strictEqual(picker.isAppended, true, 'clockpicker is appended to body before first shown');
 
     $(document.body).click();
     strictEqual(picker.isShown, false, 'clockpicker is hidden');
@@ -25,9 +30,11 @@ test('clockpicker on input-group', function(){
     group.clockpicker();
     var picker = group.data('clockpicker');
     ok(picker, 'clockpicker is initialized on input-group');
+    strictEqual(picker.isAppended, false, 'clockpicker is not appended to body when initialized');
 
-    input.focus();
+    input.triggerHandler('focus');
     strictEqual(picker.isShown, true, 'clockpicker is shown');
+    strictEqual(picker.isAppended, true, 'clockpicker is appended to body before first shown');
 
     $(document.body).click();
     strictEqual(picker.isShown, false, 'clockpicker is hidden');
@@ -45,7 +52,7 @@ test('clockpicker on input-group with addon', function(){
     var picker = group.data('clockpicker');
     ok(picker, 'clockpicker is initialized on input-group');
 
-    input.focus();
+    input.triggerHandler('focus');
     strictEqual(picker.isShown, true, 'clockpicker is shown by focus');
 
     $(document.body).click();
