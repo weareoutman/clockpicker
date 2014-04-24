@@ -15,7 +15,7 @@ Both desktop and mobile device are supported. It also works great in touch scree
 
 ## Dependencies
 
-ClockPicker was originally designed for Bootstrap. So Bootstrap (and jQuery) is the only dependency(s).
+ClockPicker was designed for Bootstrap in the beginning. So Bootstrap (and jQuery) is the only dependency(s).
 
 Since it only used `.popover` and some of `.btn` styles of Bootstrap, I picked these styles to build a jQuery plugin.
 Feel free to use `jquery-*` files instead of `bootstrap-*` , for non-bootstrap project.
@@ -37,6 +37,9 @@ Feel free to use `jquery-*` files instead of `bootstrap-*` , for non-bootstrap p
 	</span>
 </div>
 
+<!-- Or just a input -->
+<input id="demo-input" />
+
 <!-- jQuery and Bootstrap scripts -->
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
@@ -50,8 +53,22 @@ $('.clockpicker').clockpicker()
 		// TODO: time changed
 		console.log(this.value);
 	});
+$('#demo-input').clockpicker({
+	autoclose: true
+});
 </script>
 ```
+
+## Options
+
+| Name | Default | Description |
+| ---- | ------- | ----------- |
+| default | '' | default time, '13:14' e.g. |
+| placement | 'bottom' | popover placement |
+| align | 'left' | popover arrow align |
+| donetext | '完成' | done button text |
+| autoclose | false | auto close when minute is selected |
+| vibrate | true | vibrate the device when dragging clock hand |
 
 ## What's included
 
@@ -90,6 +107,8 @@ gulp
 - [*] Add tests.
 - [*] Add documentation and more examples.
 - [ ] Auto placement and align.
+- [ ] Functional operations.
+- [ ] Events.
 - [ ] Customize format.
 - [ ] Seconds View ?
 

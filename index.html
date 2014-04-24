@@ -76,7 +76,7 @@
 
 	<h3>Dependencies</h3>
 	<p>
-		ClockPicker was originally designed for Bootstrap. So Bootstrap (and jQuery) is the only dependency(s).
+		ClockPicker was designed for Bootstrap in the beginning. So Bootstrap (and jQuery) is the only dependency(s).
 	</p>
 	<p>
 		Since it only used <code>.popover</code> and some of <code>.btn</code> styles of Bootstrap, I picked these styles to build a jQuery plugin.
@@ -164,6 +164,47 @@ $('#single-input').clockpicker({
 });
 &lt;/script&gt;</code></pre>
 	</div>
+
+	<h3>Options</h3>
+	<table class="table table-bordered table-striped">
+	<thead><tr>
+	<th>Name</th>
+	<th>Default</th>
+	<th>Description</th>
+	</tr></thead>
+	<tbody>
+	<tr>
+	<td>default</td>
+	<td>''</td>
+	<td>default time, '13:14' e.g.</td>
+	</tr>
+	<tr>
+	<td>placement</td>
+	<td>'bottom'</td>
+	<td>popover placement</td>
+	</tr>
+	<tr>
+	<td>align</td>
+	<td>'left'</td>
+	<td>popover arrow align</td>
+	</tr>
+	<tr>
+	<td>donetext</td>
+	<td>'完成'</td>
+	<td>done button text</td>
+	</tr>
+	<tr>
+	<td>autoclose</td>
+	<td>false</td>
+	<td>auto close when minute is selected</td>
+	</tr>
+	<tr>
+	<td>vibrate</td>
+	<td>true</td>
+	<td>vibrate the device when dragging clock hand</td>
+	</tr>
+	</tbody>
+	</table>
 </div>
 
 <div class="container">
