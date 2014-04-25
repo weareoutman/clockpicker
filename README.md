@@ -89,17 +89,6 @@ clockpicker/
     └── standalone.css                 # some styles picked from bootstrap
 ```
 
-## Options
-
-| Name | Default | Description |
-| ---- | ------- | ----------- |
-| default | '' | default value, '13:14' e.g. |
-| placement | 'bottom' | popover placement |
-| align | 'left' | popover arrow align |
-| donetext | '完成' | done button text |
-| autoclose | false | auto close when minute is selected |
-| vibrate | true | vibrate the device when dragging clock hand |
-
 ## Development
 
 ```bash
