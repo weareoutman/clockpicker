@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.0.3 (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v0.0.4 (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/master/LICENSE)
  */
@@ -165,7 +165,7 @@
 		}
 
 		// Clicking on minutes view space
-		minutesView.on(mousedownEvent, function(e){
+		plate.on(mousedownEvent, function(e){
 			if ($(e.target).closest('.clockpicker-tick').length === 0) {
 				mousedown(e, true);
 			}
