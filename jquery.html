@@ -12,6 +12,13 @@ body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 14px;
 }
+table {
+	border-collapse: collapse;
+}
+th, td {
+	border: 1px solid #ccc;
+	padding: 6px 12px;
+}
 code {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -177,6 +184,47 @@ $('#single-input').clockpicker({
 });
 &lt;/script&gt;</code></pre>
 	</div>
+
+	<h3>Options</h3>
+	<table class="table table-bordered table-striped">
+	<thead><tr>
+	<th>Name</th>
+	<th>Default</th>
+	<th>Description</th>
+	</tr></thead>
+	<tbody>
+	<tr>
+	<td>default</td>
+	<td>''</td>
+	<td>default time, '13:14' e.g.</td>
+	</tr>
+	<tr>
+	<td>placement</td>
+	<td>'bottom'</td>
+	<td>popover placement</td>
+	</tr>
+	<tr>
+	<td>align</td>
+	<td>'left'</td>
+	<td>popover arrow align</td>
+	</tr>
+	<tr>
+	<td>donetext</td>
+	<td>'完成'</td>
+	<td>done button text</td>
+	</tr>
+	<tr>
+	<td>autoclose</td>
+	<td>false</td>
+	<td>auto close when minute is selected</td>
+	</tr>
+	<tr>
+	<td>vibrate</td>
+	<td>true</td>
+	<td>vibrate the device when dragging clock hand</td>
+	</tr>
+	</tbody>
+	</table>
 </div>
 
 <div class="container">
