@@ -3,7 +3,11 @@ var gulp = require('gulp'),
 	minifyCSS = require('gulp-minify-css'),
 	rename = require('gulp-rename'),
 	concat = require('gulp-concat'),
-	qunit = require('gulp-qunit');
+	qunit = require('gulp-qunit'),
+	replace = require('gulp-replace'),
+	// Replace package.version
+	version = require('./package').version,
+	versionRegExp = /\{package\.version\}/;
 
 // Rename and uglify scripts
 function js(prefix) {
@@ -11,6 +15,7 @@ function js(prefix) {
 		.pipe(rename({
 			prefix: prefix + '-'
 		}))
+		.pipe(replace(versionRegExp, version))
 		.pipe(gulp.dest('dist'))
 		.pipe(uglify({
 			preserveComments: 'some'
@@ -34,6 +39,7 @@ function css(prefix) {
 	stream.pipe(rename({
 			prefix: prefix + '-'
 		}))
+		.pipe(replace(versionRegExp, version))
 		.pipe(gulp.dest('dist'))
 		.pipe(minifyCSS({
 			keepSpecialComments: 1

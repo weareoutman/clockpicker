@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.0.4 (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v{package.version} (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/master/LICENSE)
  */
@@ -347,7 +347,7 @@
 	};
 
 	// Show popover
-	ClockPicker.prototype.show = function(){
+	ClockPicker.prototype.show = function(e){
 		// Not show again
 		if (this.isShown) {
 			return;
@@ -361,7 +361,7 @@
 			$body = $(document.body).append(this.popover);
 
 			// Reset position when resize
-			$win.on('resize.clockpicker', function(){
+			$win.on('resize.clockpicker' + this.id, function(){
 				if (self.isShown) {
 					self.locate();
 				}
@@ -388,7 +388,7 @@
 		// Hide when clicking on any element except the clock, input and addon
 		$doc.on('click.clockpicker.' + this.id, function(e){
 			var target = $(e.target);
-			if (target.closest('.clockpicker-popover').length === 0 &&
+			if (target.closest(self.popover).length === 0 &&
 					target.closest(self.addon).length === 0 &&
 					target.closest(self.input).length === 0) {
 				self.hide();
@@ -417,7 +417,7 @@
 	// Toggle to hours or minutes view
 	ClockPicker.prototype.toggleView = function(view, delay){
 		var isHours = view === 'hours',
-			showView = isHours ? this.hoursView : this.minutesView,
+			nextView = isHours ? this.hoursView : this.minutesView,
 			hideView = isHours ? this.minutesView : this.hoursView;
 
 		this.currentView = view;
@@ -427,7 +427,7 @@
 
 		// Let's make transitions
 		hideView.addClass('clockpicker-dial-out');
-		showView.css('visibility', 'visible').removeClass('clockpicker-dial-out');
+		nextView.css('visibility', 'visible').removeClass('clockpicker-dial-out');
 
 		// Reset clock hand
 		this.resetClock(delay);
@@ -560,16 +560,35 @@
 		}
 	};
 
+	// Remove clockpicker from input
+	ClockPicker.prototype.remove = function() {
+		this.element.removeData('clockpicker');
+		this.input.off('focus.clockpicker');
+		this.addon.off('click.clockpicker');
+		if (this.isShown) {
+			this.hide();
+		}
+		if (this.isAppended) {
+			$win.off('resize.clockpicker' + this.id);
+			this.popover.remove();
+		}
+	};
+
 	// Extends $.fn.clockpicker
 	$.fn.clockpicker = function(option){
+		var args = Array.prototype.slice.call(arguments, 1);
 		return this.each(function(){
 			var $this = $(this),
 				data = $this.data('clockpicker');
 			if (! data) {
 				var options = $.extend({}, ClockPicker.DEFAULTS, $this.data(), typeof option == 'object' && option);
 				$this.data('clockpicker', new ClockPicker($this, options));
+			} else {
+				// Manual operatsions. show, hide, remove, e.g.
+				if (typeof data[option] === 'function') {
+					data[option].apply(data, args);
+				}
 			}
-			// TODO: operations
 		});
 	};
 }());

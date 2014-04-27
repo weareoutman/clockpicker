@@ -1,4 +1,4 @@
-# ClockPicker [![Build Status](https://travis-ci.org/weareoutman/clockpicker.png)](https://travis-ci.org/weareoutman/clockpicker)  [![devDependency Status](https://david-dm.org/weareoutman/clockpicker.png)](https://david-dm.org/weareoutman/clockpicker#info=devDependencies)
+# ClockPicker [![Build Status](https://travis-ci.org/weareoutman/clockpicker.svg)](https://travis-ci.org/weareoutman/clockpicker)  [![devDependency Status](https://david-dm.org/weareoutman/clockpicker.svg)](https://david-dm.org/weareoutman/clockpicker#info=devDependencies)
 
 A clock-style timepicker for Bootstrap (or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
@@ -56,6 +56,12 @@ $('.clockpicker').clockpicker()
 $('#demo-input').clockpicker({
 	autoclose: true
 });
+
+if (something) {
+	// Manual operations (after clockpicker is initialized).
+	$('#demo-input').clockpicker('show') // Or hide, remove ...
+			.clockpicker('toggleView', 'minutes');
+}
 </script>
 ```
 
@@ -69,6 +75,15 @@ $('#demo-input').clockpicker({
 | donetext | '完成' | done button text |
 | autoclose | false | auto close when minute is selected |
 | vibrate | true | vibrate the device when dragging clock hand |
+
+## Operations
+
+| operation | Arguments | Description |
+| --------- | --------- | ----------- |
+| show |   | show the clockpicker |
+| hide |   | hide the clockpicker |
+| remove |   | remove the clockpicker (and event listeners) |
+| toggleView | 'hours' or 'minutes' | toggle to hours or minutes view |
 
 ## What's included
 
@@ -102,12 +117,12 @@ gulp
 
 ## Todo
 
-- [*] Compiling CSS and JavaScript.
-- [*] Comments in code.
-- [*] Add tests.
-- [*] Add documentation and more examples.
+- [√] Compiling CSS and JavaScript.
+- [√] Comments in code.
+- [√] Add tests.
+- [√] Add documentation and more examples.
+- [√] Functional operations, since v0.0.5.
 - [ ] Auto placement and align.
-- [ ] Functional operations.
 - [ ] Events.
 - [ ] Customize format.
 - [ ] Seconds View ?

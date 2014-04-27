@@ -61,7 +61,7 @@
 <div class="container">
 	<p class="lead">
 		A clock-style timepicker for Bootstrap (or jQuery).
-		<a href="https://travis-ci.org/weareoutman/clockpicker"><img src="https://camo.githubusercontent.com/eed2d856315f7d3962a159976760c3bae07e64ba/68747470733a2f2f7472617669732d63692e6f72672f77656172656f75746d616e2f636c6f636b7069636b65722e706e67" alt="Build Status" data-canonical-src="https://travis-ci.org/weareoutman/clockpicker.png" style="max-width:100%;"></a>
+		<a href="https://travis-ci.org/weareoutman/clockpicker"><img src="https://travis-ci.org/weareoutman/clockpicker.svg" alt="Build Status" data-canonical-src="https://travis-ci.org/weareoutman/clockpicker.svg" style="max-width:100%;"></a>
 	</p>
 
 	<p>
@@ -155,19 +155,30 @@ $('.clockpicker').clockpicker({
 &lt;/script&gt;</code></pre>
 	</div>
 	<div class="form-group">
-		<h4>Set default value, input without addon:</h4>
+		<h4>Set default value, input without addon, and manual operations:</h4>
 		<div class="clearfix">
-			<div class="pull-center" style="width:80px;margin-bottom:10px;">
-				<input type="text" class="form-control" id="single-input" value="" placeholder="现在">
+			<div class="pull-center clearfix" style="margin-bottom:10px;">
+				<button type="button" class="btn btn-default pull-right" id="check-minutes">Check the minutes</button>
+				<input class="form-control pull-right" id="single-input" value="" placeholder="现在" style="width:80px;margin-right:20px;">
 			</div>
 		</div>
-		<pre class="hljs-pre"><code class="html">&lt;input type="text" class="form-control" id="single-input" value="" placeholder="现在"&gt;
+		<pre class="hljs-pre"><code class="html">&lt;input class="form-control" id="single-input" value="" placeholder="现在"&gt;
+&lt;button type="button" id="check-minutes"&gt;Check the minutes&lt;/button&gt;
+
 &lt;script type="text/javascript"&gt;
-$('#single-input').clockpicker({
+var input = $('#single-input').clockpicker({
 	placement: 'bottom',
-	align: 'right',
+	align: 'left',
 	autoclose: true,
 	'default': '20:48'
+});
+
+// Manually toggle to the minutes view
+$('#check-minutes').click(function(e){
+	// Have to stop propagation here
+	e.stopPropagation();
+	input.clockpicker('show')
+			.clockpicker('toggleView', 'minutes');
 });
 &lt;/script&gt;</code></pre>
 	</div>
@@ -213,6 +224,37 @@ $('#single-input').clockpicker({
 	</tbody>
 	</table>
 
+	<h3>Operations</h3>
+	<table class="table table-bordered table-striped">
+	<thead><tr>
+	<th>operation</th>
+	<th>Arguments</th>
+	<th>Description</th>
+	</tr></thead>
+	<tbody>
+	<tr>
+	<td>show</td>
+	<td></td>
+	<td>show the clockpicker</td>
+	</tr>
+	<tr>
+	<td>hide</td>
+	<td></td>
+	<td>hide the clockpicker</td>
+	</tr>
+	<tr>
+	<td>remove</td>
+	<td></td>
+	<td>remove the clockpicker (and event listeners)</td>
+	</tr>
+	<tr>
+	<td>toggleView</td>
+	<td>'hours' or 'minutes'</td>
+	<td>toggle to hours or minutes view</td>
+	</tr>
+	</tbody>
+	</table>
+
 	<h3>What's included</h3>
 	<pre class="hljs-pre"><code class="bash">clockpicker/
 ├── dist/
@@ -250,11 +292,19 @@ $('.clockpicker').clockpicker()
 	.find('input').change(function(){
 		console.log(this.value);
 	});
-$('#single-input').clockpicker({
+var input = $('#single-input').clockpicker({
 	placement: 'bottom',
-	align: 'right',
+	align: 'left',
 	autoclose: true,
 	'default': '20:48'
+});
+
+// Manually toggle to the minutes view
+$('#check-minutes').click(function(e){
+	// Have to stop propagation here
+	e.stopPropagation();
+	input.clockpicker('show')
+			.clockpicker('toggleView', 'minutes');
 });
 if (/mobile/i.test(navigator.userAgent)) {
 	$('input').prop('readOnly', true);
@@ -262,6 +312,7 @@ if (/mobile/i.test(navigator.userAgent)) {
 </script>
 <script type="text/javascript" src="assets/js/highlight.min.js"></script>
 <script type="text/javascript">
+hljs.configure({tabReplace: '    '});
 hljs.initHighlightingOnLoad();
 </script>
 </body>

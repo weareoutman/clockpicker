@@ -20,7 +20,15 @@ th, td {
 	padding: 6px 12px;
 }
 code {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.clearfix:before,
+.clearfix:after {
+	display: table;
+	content: " ";
+}
+.clearfix:after {
+	clear: both;
 }
 .navbar h3 {
 	color: #f5f5f5;
@@ -69,7 +77,7 @@ code {
 <div class="container">
 	<p class="lead">
 		A clock-style timepicker for Bootstrap (or jQuery).
-		<a href="https://travis-ci.org/weareoutman/clockpicker"><img src="https://camo.githubusercontent.com/eed2d856315f7d3962a159976760c3bae07e64ba/68747470733a2f2f7472617669732d63692e6f72672f77656172656f75746d616e2f636c6f636b7069636b65722e706e67" alt="Build Status" data-canonical-src="https://travis-ci.org/weareoutman/clockpicker.png" style="max-width:100%;"></a>
+		<a href="https://travis-ci.org/weareoutman/clockpicker"><img src="https://travis-ci.org/weareoutman/clockpicker.svg" alt="Build Status" data-canonical-src="https://travis-ci.org/weareoutman/clockpicker.svg" style="max-width:100%;"></a>
 	</p>
 
 	<p>
@@ -274,6 +282,7 @@ if (/Mobile/.test(navigator.userAgent)) {
 </script>
 <script type="text/javascript" src="assets/js/highlight.min.js"></script>
 <script type="text/javascript">
+hljs.configure({tabReplace: '    '});
 hljs.initHighlightingOnLoad();
 </script>
 </body>

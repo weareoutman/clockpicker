@@ -33,11 +33,12 @@ test('clockpicker on input', function(){
         hour1Offset = hour1.offset();
     strictEqual(hour1.html(), '1', 'hour at index 1 is "1"');
 
-    hour1.triggerHandler($.Event('mousedown', {
+    hour1.triggerHandler(CustomEvent('mousedown', {
         pageX: hour1Offset.left + 10,
         pageY: hour1Offset.top + 10
     }));
-    $(document).triggerHandler($.Event('mouseup', {
+
+    $(document).triggerHandler(CustomEvent('mouseup', {
         pageX: hour1Offset.left + 10,
         pageY: hour1Offset.top + 10
     }));
@@ -50,11 +51,11 @@ test('clockpicker on input', function(){
         minute5Offset = minute5.offset();
     strictEqual(minute5.html(), '05', 'minute at index 1 is "05"');
 
-    minute5.triggerHandler($.Event('mousedown', {
+    minute5.triggerHandler(CustomEvent('mousedown', {
         pageX: minute5Offset.left + 10,
         pageY: minute5Offset.top + 10
     }));
-    $(document).triggerHandler($.Event('mouseup', {
+    $(document).triggerHandler(CustomEvent('mouseup', {
         pageX: minute5Offset.left + 10,
         pageY: minute5Offset.top + 10
     }));
@@ -128,4 +129,28 @@ test('clockpicker on input-group with addon', function(){
 
     addon.click();
     ok(! picker.isShown, 'clockpicker is hidden by click on addon again');
+});
+
+test('clockpicker manual operations', function(){
+    var input = $('<input />')
+            .appendTo('#qunit-fixture');
+
+    // Initialize
+    input.clockpicker();
+    var picker = input.data('clockpicker');
+    ok(! picker.isShown, 'clockpicker is not shown');
+
+    input.clockpicker('show');
+    ok(picker.isShown, 'clockpicker is shown manually');
+
+    strictEqual(picker.currentView, 'hours', 'current view is hours');
+    input.clockpicker('toggleView', 'minutes');
+    strictEqual(picker.currentView, 'minutes', 'current view is toggled to minutes');
+
+    input.clockpicker('hide');
+    ok(! picker.isShown, 'clockpicker is hidden manually');
+
+    input.clockpicker('remove');
+    ok(picker.popover.parent().length === 0, 'clockpicker popover is removed');
+    ok(! input.data('clockpicker'), 'clockpicker is removed manually');
 });
