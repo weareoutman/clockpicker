@@ -51,6 +51,13 @@
 	height: 200px;
 	overflow: visible;
 	position: relative;
+	/* Disable text selection highlighting. Thanks to Hermanya */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 .clockpicker-canvas,
 .clockpicker-dial {
@@ -119,11 +126,11 @@
 	transform: scale(.8, .8);
 }
 .clockpicker-canvas {
-	transition: opacity 175ms;
 	-webkit-transition: opacity 175ms;
 	-moz-transition: opacity 175ms;
 	-ms-transition: opacity 175ms;
 	-o-transition: opacity 175ms;
+	transition: opacity 175ms;
 }
 .clockpicker-canvas-out {
 	opacity: 0.25;
