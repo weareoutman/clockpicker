@@ -284,10 +284,11 @@
 
 	// Default options
 	ClockPicker.DEFAULTS = {
-		'default': '',       // default value, '13:14' e.g.
+		'default': '',       // default time, 'now' or '13:14' e.g.
+		fromnow: 0,          // set default time to * milliseconds from now (using with default = 'now')
 		placement: 'bottom', // clock popover placement
 		align: 'left',       // popover arrow align
-		donetext: '完成',     // done button text
+		donetext: '完成',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		vibrate: true        // vibrate the device when dragging clock hand
 	};
@@ -372,6 +373,13 @@
 
 		// Get the time
 		var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
+		if (value[0] === 'now') {
+			var now = new Date(+ new Date() + this.options.fromnow);
+			value = [
+				now.getHours(),
+				now.getMinutes()
+			];
+		}
 		this.hours = + value[0] || 0;
 		this.minutes = + value[1] || 0;
 		this.spanHours.html(leadingZero(this.hours));
@@ -500,7 +508,7 @@
 
 		// Once hours or minutes changed, vibrate the device
 		if (this[this.currentView] !== value) {
-			if (vibrate) {
+			if (vibrate && this.options.vibrate) {
 				// Do not vibrate too frequently
 				if (! this.vibrateTimer) {
 					navigator[vibrate](10);
