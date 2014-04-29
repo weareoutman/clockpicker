@@ -160,10 +160,10 @@ $('.clockpicker').clockpicker({
 		<div class="clearfix">
 			<div class="pull-center clearfix" style="margin-bottom:10px;">
 				<button type="button" class="btn btn-default pull-right" id="check-minutes">Check the minutes</button>
-				<input class="form-control pull-right" id="single-input" value="" placeholder="现在" style="width:80px;margin-right:20px;">
+				<input class="form-control pull-right" id="single-input" value="" placeholder="Now" style="width:80px;margin-right:20px;">
 			</div>
 		</div>
-		<pre class="hljs-pre"><code class="html">&lt;input class="form-control" id="single-input" value="" placeholder="现在"&gt;
+		<pre class="hljs-pre"><code class="html">&lt;input class="form-control" id="single-input" value="" placeholder="Now"&gt;
 &lt;button type="button" id="check-minutes"&gt;Check the minutes&lt;/button&gt;
 
 &lt;script type="text/javascript"&gt;
@@ -171,7 +171,7 @@ var input = $('#single-input').clockpicker({
 	placement: 'bottom',
 	align: 'left',
 	autoclose: true,
-	'default': '20:48'
+	'default': 'now'
 });
 
 // Manually toggle to the minutes view
@@ -195,7 +195,7 @@ $('#check-minutes').click(function(e){
 	<tr>
 	<td>default</td>
 	<td>''</td>
-	<td>default time, '13:14' e.g.</td>
+	<td>default time, 'now' or '13:14' e.g.</td>
 	</tr>
 	<tr>
 	<td>placement</td>
@@ -221,6 +221,11 @@ $('#check-minutes').click(function(e){
 	<td>vibrate</td>
 	<td>true</td>
 	<td>vibrate the device when dragging clock hand</td>
+	</tr>
+	<tr>
+	<td>fromnow</td>
+	<td>0</td>
+	<td>set default time to * milliseconds from now (using with default = 'now')</td>
 	</tr>
 	</tbody>
 	</table>
@@ -297,7 +302,7 @@ var input = $('#single-input').clockpicker({
 	placement: 'bottom',
 	align: 'left',
 	autoclose: true,
-	'default': '20:48'
+	'default': 'now'
 });
 
 // Manually toggle to the minutes view

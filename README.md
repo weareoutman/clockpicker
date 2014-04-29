@@ -69,12 +69,13 @@ if (something) {
 
 | Name | Default | Description |
 | ---- | ------- | ----------- |
-| default | '' | default time, '13:14' e.g. |
+| default | '' | default time, 'now' or '13:14' e.g. |
 | placement | 'bottom' | popover placement |
 | align | 'left' | popover arrow align |
 | donetext | '完成' | done button text |
 | autoclose | false | auto close when minute is selected |
 | vibrate | true | vibrate the device when dragging clock hand |
+| fromnow | 0 | set default time to * milliseconds from now (using with default = 'now') |
 
 ## Operations
 
@@ -117,15 +118,21 @@ gulp
 
 ## Todo
 
-- [√] Compiling CSS and JavaScript.
-- [√] Comments in code.
-- [√] Add tests.
-- [√] Add documentation and more examples.
-- [√] Functional operations, since v0.0.5.
 - [ ] Auto placement and align.
 - [ ] Events.
 - [ ] Customize format.
 - [ ] Seconds View ?
+
+## Change log
+
+0.0.6
+
+* Default time can be setted to `now`.
+* Registered as a bower package.
+
+0.0.5
+
+* Functional operations.
 
 ## License
 

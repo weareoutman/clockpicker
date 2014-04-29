@@ -154,3 +154,32 @@ test('clockpicker manual operations', function(){
     ok(picker.popover.parent().length === 0, 'clockpicker popover is removed');
     ok(! input.data('clockpicker'), 'clockpicker is removed manually');
 });
+
+test('clockpicker default time is now', function(){
+    var input = $('<input />')
+            .appendTo('#qunit-fixture');
+
+    input.clockpicker({
+        'default': 'now'
+    });
+    var now = new Date();
+    var picker = input.data('clockpicker');
+    input.clockpicker('show');
+    strictEqual(picker.hours, now.getHours(), 'hours is setted to now');
+    strictEqual(picker.minutes, now.getMinutes(), 'minutes is setted to now');
+
+    input.remove();
+    input = $('<input />')
+            .appendTo('#qunit-fixture');
+
+    var fromnow = 9e4;
+    input.clockpicker({
+        'default': 'now',
+        fromnow: fromnow
+    });
+    now = new Date(+ new Date() + fromnow);
+    picker = input.data('clockpicker');
+    input.clockpicker('show');
+    strictEqual(picker.hours, now.getHours(), 'hours is setted to now');
+    strictEqual(picker.minutes, now.getMinutes(), 'minutes is setted to now');
+});
