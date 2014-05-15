@@ -5,7 +5,7 @@
  */
 
 ;(function(){
-	var $ = window.$,
+	var $ = window.jQuery,
 		$win = $(window),
 		$doc = $(document),
 		$body;
