@@ -393,8 +393,8 @@
 
 		this.isShown = true;
 
-		// Hide when clicking on any element except the clock, input and addon
-		$doc.on('click.clockpicker.' + this.id, function(e){
+		// Hide when clicking or tabbing on any element except the clock, input and addon
+		$doc.on('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id, function(e){
 			var target = $(e.target);
 			if (target.closest(self.popover).length === 0 &&
 					target.closest(self.addon).length === 0 &&
@@ -416,7 +416,7 @@
 		this.isShown = false;
 
 		// Unbinding events on document
-		$doc.off('click.clockpicker.' + this.id);
+		$doc.off('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id);
 		$doc.off('keyup.clockpicker.' + this.id);
 
 		this.popover.hide();
