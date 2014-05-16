@@ -125,7 +125,7 @@
 		this.spanMinutes.click($.proxy(this.toggleView, this, 'minutes'));
 
 		// Show or toggle
-		input.on('focus.clockpicker', $.proxy(this.show, this));
+		input.on('focus.clockpicker click.clockpicker', $.proxy(this.show, this));
 		addon.on('click.clockpicker', $.proxy(this.toggle, this));
 
 		// Build ticks
@@ -571,7 +571,7 @@
 	// Remove clockpicker from input
 	ClockPicker.prototype.remove = function() {
 		this.element.removeData('clockpicker');
-		this.input.off('focus.clockpicker');
+		this.input.off('focus.clockpicker click.clockpicker');
 		this.addon.off('click.clockpicker');
 		if (this.isShown) {
 			this.hide();
