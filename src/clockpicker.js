@@ -117,7 +117,10 @@
 				.appendTo(popover);
 		}
 
-		// Placement and arrow align
+		// Placement and arrow align - make sure they make sense.
+		if ((options.placement === 'top' || options.placement === 'bottom') && (options.align === 'top' || options.align === 'bottom')) options.align = 'left';
+		if ((options.placement === 'left' || options.placement === 'right') && (options.align === 'left' || options.align === 'right')) options.align = 'top';
+
 		popover.addClass(options.placement);
 		popover.addClass('clockpicker-align-' + options.align);
 
