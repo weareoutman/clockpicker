@@ -5,7 +5,7 @@
  */
 
 ;(function(){
-	var $ = window.$,
+	var $ = window.jQuery,
 		$win = $(window),
 		$doc = $(document),
 		$body;
@@ -116,8 +116,11 @@
 				.click($.proxy(this.done, this))
 				.appendTo(popover);
 		}
+		
+		// Placement and arrow align - make sure they make sense.
+		if ((options.placement === 'top' || options.placement === 'bottom') && (options.align === 'top' || options.align === 'bottom')) options.align = 'left';
+		if ((options.placement === 'left' || options.placement === 'right') && (options.align === 'left' || options.align === 'right')) options.align = 'top';
 
-		// Placement and arrow align
 		popover.addClass(options.placement);
 		popover.addClass('clockpicker-align-' + options.align);
 
@@ -125,7 +128,7 @@
 		this.spanMinutes.click($.proxy(this.toggleView, this, 'minutes'));
 
 		// Show or toggle
-		input.on('focus.clockpicker', $.proxy(this.show, this));
+		input.on('focus.clockpicker click.clockpicker', $.proxy(this.show, this));
 		addon.on('click.clockpicker', $.proxy(this.toggle, this));
 
 		// Build ticks
@@ -393,8 +396,8 @@
 
 		this.isShown = true;
 
-		// Hide when clicking on any element except the clock, input and addon
-		$doc.on('click.clockpicker.' + this.id, function(e){
+		// Hide when clicking or tabbing on any element except the clock, input and addon
+		$doc.on('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id, function(e){
 			var target = $(e.target);
 			if (target.closest(self.popover).length === 0 &&
 					target.closest(self.addon).length === 0 &&
@@ -416,7 +419,7 @@
 		this.isShown = false;
 
 		// Unbinding events on document
-		$doc.off('click.clockpicker.' + this.id);
+		$doc.off('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id);
 		$doc.off('keyup.clockpicker.' + this.id);
 
 		this.popover.hide();
@@ -571,7 +574,7 @@
 	// Remove clockpicker from input
 	ClockPicker.prototype.remove = function() {
 		this.element.removeData('clockpicker');
-		this.input.off('focus.clockpicker');
+		this.input.off('focus.clockpicker click.clockpicker');
 		this.addon.off('click.clockpicker');
 		if (this.isShown) {
 			this.hide();
