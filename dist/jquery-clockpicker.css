@@ -61,6 +61,21 @@
   height: 0;
   border-color: transparent;
   border-style: solid;
+  /* The following are set in WordPress (wp-admin/css/revisions.css) - reset them to initial values */
+  overflow:visible;
+  margin:0;
+  padding:0;
+  z-index:auto;
+  background-color:transparent;
+  -webkit-box-shadow:none;
+  box-shadow:none;
+  bottom:auto;
+  left:auto;
+  right:auto;
+  top:auto;
+  -webkit-transform:none;
+  -ms-transform:none;
+  transform:none;
 }
 .popover > .arrow {
   border-width: 11px;
