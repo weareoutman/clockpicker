@@ -310,6 +310,8 @@
 			height = element.outerHeight(),
 			placement = this.options.placement,
 			align = this.options.align,
+			scrollTop = $win.scrollTop(),
+			scrollBottom = $win.height() + scrollTop,
 			styles = {},
 			self = this;
 		
@@ -319,12 +321,26 @@
 		switch (placement) {
 			case 'bottom':
 				styles.top = offset.top + height;
+				// If popover bottom below view bottom and there's more room above than below
+				if (styles.top + popover.outerHeight() > scrollBottom && offset.top - scrollTop > scrollBottom - styles.top) {
+					styles.top = offset.top - popover.outerHeight();
+					popover.removeClass('bottom').addClass('top');
+				} else {
+					popover.removeClass('top').addClass('bottom');
+				}
 				break;
 			case 'right':
 				styles.left = offset.left + width;
 				break;
 			case 'top':
 				styles.top = offset.top - popover.outerHeight();
+				// If popover top above view top and there's more room below than above
+				if (styles.top < scrollTop && scrollBottom - offset.top - height > offset.top - scrollTop) {
+					styles.top = offset.top + height;
+					popover.removeClass('top').addClass('bottom');
+				} else {
+					popover.removeClass('bottom').addClass('top');
+				}
 				break;
 			case 'left':
 				styles.left = offset.left - popover.outerWidth();
@@ -341,9 +357,23 @@
 				break;
 			case 'top':
 				styles.top = offset.top;
+				// If popover bottom below view bottom and there's more room above than below
+				if (styles.top + popover.outerHeight() > scrollBottom && offset.top + height - scrollTop > scrollBottom - styles.top) {
+					styles.top = offset.top + height - popover.outerHeight();
+					popover.removeClass('clockpicker-align-top').addClass('clockpicker-align-bottom');
+				} else {
+					popover.removeClass('clockpicker-align-bottom').addClass('clockpicker-align-top');
+				}
 				break;
 			case 'bottom':
 				styles.top = offset.top + height - popover.outerHeight();
+				// If popover top above view top and there's more room below than above
+				if (styles.top < scrollTop && scrollBottom - offset.top > offset.top - scrollTop) {
+					styles.top = offset.top;
+					popover.removeClass('clockpicker-align-bottom').addClass('clockpicker-align-top');
+				} else {
+					popover.removeClass('clockpicker-align-top').addClass('clockpicker-align-bottom');
+				}
 				break;
 		}
 
