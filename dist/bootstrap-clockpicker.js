@@ -34,8 +34,8 @@
 	// Listen touch events in touch screen device, instead of mouse events in desktop.
 	var touchSupported = 'ontouchstart' in window,
 		mousedownEvent = 'mousedown' + ( touchSupported ? ' touchstart' : ''),
-		mousemoveEvent = 'mousemove' + ( touchSupported ? ' touchmove' : ''),
-		mouseupEvent = 'mouseup' + ( touchSupported ? ' touchend' : '');
+		mousemoveEvent = 'mousemove.clockpicker' + ( touchSupported ? ' touchmove.clockpicker' : ''),
+		mouseupEvent = 'mouseup.clockpicker' + ( touchSupported ? ' touchend.clockpicker' : '');
 
 	// Vibrate the device if supported
 	var vibrate = navigator.vibrate ? 'vibrate' : navigator.webkitVibrate ? 'webkitVibrate' : null;
@@ -205,9 +205,10 @@
 			self.setHand(dx, dy, ! space, true);
 
 			// Mousemove on document
-			$doc.off(mousemoveEvent + '.clockpicker').on(mousemoveEvent + '.clockpicker', function(e){
+			$doc.off(mousemoveEvent).on(mousemoveEvent, function(e){
 				e.preventDefault();
-				var x = (isTouch ? e.originalEvent.touches[0] : e).pageX - x0,
+				var isTouch = /^touch/.test(e.type),
+					x = (isTouch ? e.originalEvent.touches[0] : e).pageX - x0,
 					y = (isTouch ? e.originalEvent.touches[0] : e).pageY - y0;
 				if (! moved && x === dx && y === dy) {
 					// Clicking in chrome on windows will trigger a mousemove event
@@ -218,9 +219,10 @@
 			});
 
 			// Mouseup on document
-			$doc.off(mouseupEvent + '.clockpicker').one(mouseupEvent + '.clockpicker', function(e){
+			$doc.off(mouseupEvent).one(mouseupEvent, function(e){
 				e.preventDefault();
-				var x = (isTouch ? e.originalEvent.changedTouches[0] : e).pageX - x0,
+				var isTouch = /^touch/.test(e.type),
+					x = (isTouch ? e.originalEvent.changedTouches[0] : e).pageX - x0,
 					y = (isTouch ? e.originalEvent.changedTouches[0] : e).pageY - y0;
 				if ((space || moved) && x === dx && y === dy) {
 					self.setHand(x, y);
@@ -242,7 +244,7 @@
 				$body.removeClass('clockpicker-moving');
 
 				// Unbind mousemove event
-				$doc.off(mousemoveEvent + '.clockpicker');
+				$doc.off(mousemoveEvent);
 			});
 		}
 
