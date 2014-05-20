@@ -4,14 +4,15 @@
   "version": "0.0.6",
   "main": [
     "dist/jquery-clockpicker.js",
-    "dist/jquery-clockpicker.css"],
+    "dist/jquery-clockpicker.css"
+  ],
   "license": "MIT",
   "ignore": [
     "*",
     "!dist/*",
     "!bower.json",
     "!LICENSE",
-    "!README.md",
+    "!README.md"
   ],
   "keywords": ["timepicker", "jquery"],
   "authors": [
