@@ -33,9 +33,9 @@
 
 	// Listen touch events in touch screen device, instead of mouse events in desktop.
 	var touchSupported = 'ontouchstart' in window,
-		mousedownEvent = touchSupported ? 'touchstart' : 'mousedown',
-		mousemoveEvent = touchSupported ? 'touchmove' : 'mousemove',
-		mouseupEvent = touchSupported ? 'touchend' : 'mouseup';
+		mousedownEvent = 'mousedown' + ( touchSupported ? ' touchstart' : ''),
+		mousemoveEvent = 'mousemove' + ( touchSupported ? ' touchmove' : ''),
+		mouseupEvent = 'mouseup' + ( touchSupported ? ' touchend' : '');
 
 	// Vibrate the device if supported
 	var vibrate = navigator.vibrate ? 'vibrate' : navigator.webkitVibrate ? 'webkitVibrate' : null;
