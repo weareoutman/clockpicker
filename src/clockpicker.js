@@ -611,6 +611,7 @@
 					+ this.options.ampmPrefix + this.options.ampmNames[(this.hours < 12 ? 0 : 1)];
 		}
 		this.input.prop('value', value);
+		this.input.triggerHandler('clockpickerdone', [value, last]);
 		if (value !== last) {
 			this.input.triggerHandler('change');
 			if (! this.isInput) {
