@@ -610,6 +610,7 @@
 			value = leadingZero12Hours(this.hours) + this.options.separator + leadingZero(this.minutes)
 					+ this.options.ampmPrefix + this.options.ampmNames[(this.hours < 12 ? 0 : 1)];
 		}
+		this.input.prop('value', value);
 		if (value !== last) {
 			this.input.triggerHandler('change');
 			if (! this.isInput) {
