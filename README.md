@@ -76,6 +76,11 @@ if (something) {
 | autoclose | false | auto close when minute is selected |
 | vibrate | true | vibrate the device when dragging clock hand |
 | fromnow | 0 | set default time to * milliseconds from now (using with default = 'now') |
+| immediateset | false | set input as soon as the clock time changes |
+| show24Hours | true | if false set input value and clock title in 12 hour AM/PM format |
+| separator | ':' | separator between hour and minute |
+| ampmPrefix | '' | prefixed to AM/PM string (if used) on setting input value |
+| ampmNames | ['AM', 'PM'] | AM/PM strings to use if show24Hours is false |
 
 ## Operations
 
