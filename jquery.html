@@ -47,6 +47,9 @@ code {
 	width: 110px;
 	margin-bottom: 10px;
 }
+.input-group.ampm {
+	width: 125px;
+}
 .pull-center {
 	margin-left: auto;
 	margin-right: auto;
@@ -155,6 +158,26 @@ $('.clockpicker').clockpicker();
 &lt;/script&gt;</code></pre>
 	</div>
 	<div class="form-group">
+		<h4>12 hour AM/PM format, immediate set, auto close:</h4>
+		<div class="clearfix">
+			<div class="input-group ampm clockpicker pull-center" data-autoclose="true" data-show24-hours="false" data-immediateset="true">
+				<input type="text" class="form-control" value="01:14PM">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-time"></span>
+				</span>
+			</div>
+		</div>
+		<pre class="hljs-pre"><code class="html">&lt;div class="input-group clockpicker" data-autoclose="true" data-show24-hours="false" data-immediateset="true"&gt;
+	&lt;input type="text" class="form-control" value="13:14"&gt;
+	&lt;span class="input-group-addon"&gt;
+		&lt;span class="glyphicon glyphicon-time"&gt;&lt;/span&gt;
+	&lt;/span&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+$('.clockpicker').clockpicker();
+&lt;/script&gt;</code></pre>
+	</div>
+	<div class="form-group">
 		<h4>Set options in javascript, instead of <code>data-*</code> :</h4>
 		<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
 			<input type="text" class="form-control" value="18:00">
@@ -231,6 +254,31 @@ $('#single-input').clockpicker({
 	<td>vibrate</td>
 	<td>true</td>
 	<td>vibrate the device when dragging clock hand</td>
+	</tr>
+	<tr>
+	<td>immediateset</td>
+	<td>false</td>
+	<td>set input as soon as the clock time changes</td>
+	</tr>
+	<tr>
+	<td>show24Hours</td>
+	<td>true</td>
+	<td>if false set input value and clock title in 12 hour AM/PM format</td>
+	</tr>
+	<tr>
+	<td>separator</td>
+	<td>':'</td>
+	<td>separator between hour and minute</td>
+	</tr>
+	<tr>
+	<td>ampmPrefix</td>
+	<td>''</td>
+	<td>prefixed to AM/PM string (if used) on setting input value</td>
+	</tr>
+	<tr>
+	<td>ampmNames</td>
+	<td>['AM', 'PM']</td>
+	<td>AM/PM strings to use if show24Hours is false</td>
 	</tr>
 	</tbody>
 	</table>
