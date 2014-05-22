@@ -303,9 +303,10 @@
 		donetext: '完成',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		vibrate: true,       // vibrate the device when dragging clock hand
+		immediateset: false, // set input as soon as the clock time changes
 		show24Hours: true,   // if false set input value and clock title in 12 hour AM/PM format
 		separator: ':',      // separator between hour and minute
-		ampmPrefix: '',      // prefixed to AM/PM string if used on setting input value
+		ampmPrefix: '',      // prefixed to AM/PM string (if used) on setting input value
 		ampmNames: ['AM', 'PM'] // AM/PM strings to use if show24Hours is false
 	};
 
@@ -388,7 +389,7 @@
 		}
 
 		// Set the time from input
-		this.setTime();
+		this.getInput();
 
 		// Toggle to hours view
 		this.toggleView('hours');
@@ -417,7 +418,7 @@
 	};
 
 	// Set time from input
-	ClockPicker.prototype.setTime = function(){
+	ClockPicker.prototype.getInput = function(){
 		// Get the time
 		var value = (($.trim(this.input.prop('value')) || this.options['default'] || '') + '').toLowerCase();
 		var values = value.split(this.options.separator);
@@ -567,6 +568,10 @@
 			this[isHours ? 'spanHours' : 'spanMinutes'].html(leadingZero(value));
 		}
 
+		if (this.options.immediateset) {
+			this.setInput();
+		}
+
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {
 			this[isHours ? 'hoursView' : 'minutesView'].find('.clockpicker-tick').each(function(){
@@ -599,9 +604,8 @@
 		this.fg.setAttribute('cy', cy);
 	};
 
-	// Hours and minuts is selected
-	ClockPicker.prototype.done = function() {
-		this.hide();
+	// Set input from clock time
+	ClockPicker.prototype.setInput = function() {
 		var last = this.input.prop('value'),
 			value;
 		if (this.options.show24Hours) {
@@ -611,13 +615,21 @@
 					+ this.options.ampmPrefix + this.options.ampmNames[(this.hours < 12 ? 0 : 1)];
 		}
 		this.input.prop('value', value);
-		this.input.triggerHandler('clockpickerdone', [value, last]);
 		if (value !== last) {
+			this.input.off('change.clockpicker');
 			this.input.triggerHandler('change');
+			this.input.on('change.clockpicker', $.proxy(this.inputChange, this));
 			if (! this.isInput) {
 				this.element.trigger('change');
 			}
 		}
+	};
+
+	// Hours and minuts is selected
+	ClockPicker.prototype.done = function() {
+		this.hide();
+		this.setInput();
+		this.input.triggerHandler('clockpickerdone');
 	};
 
 	// Remove clockpicker from input
@@ -637,7 +649,7 @@
 
 	// When input changes, update the time and refresh the view
 	ClockPicker.prototype.inputChange = function() {
-		this.setTime();
+		this.getInput();
 		this.toggleView(this.currentView);
 	};
 
