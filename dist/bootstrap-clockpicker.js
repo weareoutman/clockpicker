@@ -317,10 +317,16 @@
 		
 		popover.show();
 
+		/*
+        #
+        # OVERRIDE OF POSITION
+        # TODO: FIX OF CLOCKPICKER
+        #
+         */
 		// Place the popover
 		switch (placement) {
 			case 'bottom':
-				styles.top = offset.top + height;
+				styles.top = offset.top - height-140;
 				break;
 			case 'right':
 				styles.left = offset.left + width;
