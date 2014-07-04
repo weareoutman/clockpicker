@@ -295,7 +295,8 @@
 		align: 'left',       // popover arrow align
 		donetext: '完成',    // done button text
 		autoclose: false,    // auto close when minute is selected
-		vibrate: true        // vibrate the device when dragging clock hand
+		vibrate: true,        // vibrate the device when dragging clock hand,
+		disabledTimes: []	// disabled times, {'18', '13:30', '22:50'} e.g.
 	};
 
 	// Show or hide popover
@@ -450,6 +451,9 @@
 		this.toggleViewTimer = setTimeout(function(){
 			hideView.css('visibility', 'hidden');
 		}, duration);
+		
+		// Set available time 
+		this.setToAvailableTime(isHours);
 	};
 
 	// Reset clock hand
@@ -509,6 +513,10 @@
 			if (value === 60) {
 				value = 0;
 			}
+		}
+		
+		if(this.isDisabled(value, isHours)){
+			return;
 		}
 
 		// Once hours or minutes changed, vibrate the device
@@ -586,6 +594,53 @@
 			this.popover.remove();
 		}
 	};
+	
+	// Check if the given value is or not disabled
+	ClockPicker.prototype.isDisabled = function(value, isHours){
+		var valueToCheck = leadingZero(value) + '';
+		if(this.options.disabledTimes.length > 0){
+			if(!isHours){
+				valueToCheck = leadingZero(this.hours) + ':' + leadingZero(value);
+			}
+			if(jQuery.inArray(valueToCheck, this.options.disabledTimes) > -1){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	//Set the clock to available time
+	ClockPicker.prototype.setToAvailableTime = function(isHours){
+		if(isHours){
+			// If the selected is disabled, start with the first hour of the day
+			if(this.isDisabled(this.hours, true)){
+				this.hours = '0';
+			}
+			while(this.isDisabled(this.hours, true)){
+				this.hours++;
+				
+				// Prevent infinite loop
+				if(this.hours > 24){
+					return;
+				}
+			}
+		}
+		else{
+			// If the selected is disabled, start with the first hour of the day
+			if(this.isDisabled(this.minutes, false)){
+				this.minutes = '0';
+			}
+			while(this.isDisabled(this.minutes, false)){
+				this.minutes++;
+				
+				// Prevent infinite loop
+				if(this.minutes > 60){
+					return;
+				}
+			}
+		}
+		
+	}
 
 	// Extends $.fn.clockpicker
 	$.fn.clockpicker = function(option){
