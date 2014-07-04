@@ -559,7 +559,7 @@
 		this.fg.setAttribute('cy', cy);
 	};
 
-	// Hours and minuts is selected
+	// Hours and minutes is selected
 	ClockPicker.prototype.done = function() {
 		this.hide();
 		var last = this.input.prop('value'),
