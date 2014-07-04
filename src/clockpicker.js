@@ -597,7 +597,7 @@
 				var options = $.extend({}, ClockPicker.DEFAULTS, $this.data(), typeof option == 'object' && option);
 				$this.data('clockpicker', new ClockPicker($this, options));
 			} else {
-				// Manual operatsions. show, hide, remove, e.g.
+				// Manual operations. show, hide, remove, e.g.
 				if (typeof data[option] === 'function') {
 					data[option].apply(data, args);
 				}
