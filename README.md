@@ -76,6 +76,15 @@ if (something) {
 | autoclose | false | auto close when minute is selected |
 | vibrate | true | vibrate the device when dragging clock hand |
 | fromnow | 0 | set default time to * milliseconds from now (using with default = 'now') |
+| init | | callback function triggered after the colorpicker has been initiated |
+| beforeShow | | callback function triggered before popup is shown |
+| afterShow | | callback function triggered after popup is shown |
+| beforeHide | | callback function triggered before popup is hidden Note:will be triggered between a beforeDone and afterDone |
+| afterHide | | callback function triggered after popup is hidden Note:will be triggered between a beforeDone and afterDone |
+| beforeHourSelect | | callback function triggered before user makes an hour selection |
+| afterHourSelect | | callback function triggered after user makes an hour selection |
+| beforeDone | | callback function triggered before time is written to input |
+| afterDone | | callback function triggered after time is written to input |
 
 ## Operations
 
