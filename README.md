@@ -4,7 +4,7 @@ A clock-style timepicker for Bootstrap (or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
 
 ![Screenshot](http://weareoutman.github.io/clockpicker/assets/images/screenshot-1.png)
-
+![clockpicker-12-hour-screenshot](https://cloud.githubusercontent.com/assets/5218249/3613434/03da9888-0db8-11e4-8bdb-dbabb5e91e5c.png)
 ## Browser support
 
 All major browsers are supported, including IE 9+. It should look and behave well enough in IE 8.
@@ -74,6 +74,7 @@ if (something) {
 | align | 'left' | popover arrow align |
 | donetext | '完成' | done button text |
 | autoclose | false | auto close when minute is selected |
+| twelvehour | false | enables twelve hour mode with AM & PM buttons |
 | vibrate | true | vibrate the device when dragging clock hand |
 | fromnow | 0 | set default time to * milliseconds from now (using with default = 'now') |
 
