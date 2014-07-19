@@ -126,6 +126,10 @@ gulp
 
 ## Change log
 
+0.0.7
+
+* Enables twelve hour mode with AM & PM buttons.
+
 0.0.6
 
 * Default time can be setted to `now`.
