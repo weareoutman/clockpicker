@@ -1,7 +1,7 @@
 /*!
  * ClockPicker v0.0.7 (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
- * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
  */
 
 ;(function(){
@@ -153,7 +153,7 @@
 				
 			$('<button type="button" class="btn btn-sm btn-default clockpicker-button pm-button">' + "PM" + '</button>')
 				.on("click", function() {
-					 self.amOrPm = "PM";
+					self.amOrPm = 'PM';
 					$('.clockpicker-span-am-pm').empty().append('PM');
 				}).appendTo(this.amPmBlock);
 				
@@ -182,30 +182,29 @@
 
 		// Build ticks
 		var tickTpl = $('<div class="clockpicker-tick"></div>'),
-			i, tick, radian;
+			i, tick, radian, radius;
 
 		// Hours view
 		if (options.twelvehour) {
-		  for (i = 1; i < 13; i += 1) {
-			tick = tickTpl.clone();
-			radian = i / 6 * Math.PI;
-			var radius = outerRadius;
-			tick.css('font-size', '120%');
-			tick.css({
-				left: dialRadius + Math.sin(radian) * radius - tickRadius,
-				top: dialRadius - Math.cos(radian) * radius - tickRadius
-			});
-			tick.html(i === 0 ? '00' : i);
-			hoursView.append(tick);
-			tick.on(mousedownEvent, mousedown);
-		  }
-		}    
-		else {
+			for (i = 1; i < 13; i += 1) {
+				tick = tickTpl.clone();
+				radian = i / 6 * Math.PI;
+				radius = outerRadius;
+				tick.css('font-size', '120%');
+				tick.css({
+					left: dialRadius + Math.sin(radian) * radius - tickRadius,
+					top: dialRadius - Math.cos(radian) * radius - tickRadius
+				});
+				tick.html(i === 0 ? '00' : i);
+				hoursView.append(tick);
+				tick.on(mousedownEvent, mousedown);
+			}
+		} else {
 			for (i = 0; i < 24; i += 1) {
 				tick = tickTpl.clone();
 				radian = i / 6 * Math.PI;
-				var inner = i > 0 && i < 13,
-					radius = inner ? innerRadius : outerRadius;
+				var inner = i > 0 && i < 13;
+				radius = inner ? innerRadius : outerRadius;
 				tick.css({
 					left: dialRadius + Math.sin(radian) * radius - tickRadius,
 					top: dialRadius - Math.cos(radian) * radius - tickRadius
@@ -607,7 +606,7 @@
 					value = 0;
 				}
 			}
-	   } else {
+		} else {
 			if (isHours) {
 				if (value === 12) {
 					value = 0;
