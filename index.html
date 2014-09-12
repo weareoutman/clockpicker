@@ -65,7 +65,7 @@
 	</p>
 
 	<p>
-		<a href="https://github.com/weareoutman/clockpicker/archive/master.zip" class="btn btn-lg btn-default" target="_blank">
+		<a href="https://github.com/weareoutman/clockpicker/archive/gh-pages.zip" class="btn btn-lg btn-default" target="_blank">
 			<span class="glyphicon glyphicon-cloud-download"></span> Download ZIP
 		</a>
 		&nbsp; CSS &lt; 6KB, JS &lt; 9KB, after minified.
@@ -183,6 +183,62 @@ $('#check-minutes').click(function(e){
 });
 &lt;/script&gt;</code></pre>
 	</div>
+	<div class="form-group">
+		<h4>Callbacks:</h4>
+		<div class="clearfix">
+			<div class="input-group clockpicker-with-callbacks">
+				<input type="text" class="form-control" value="10:10">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-time"></span>
+				</span>
+			</div>
+		</div>
+		<pre class="hljs-pre">
+			<code class="html">
+				&lt;input class="form-control" id="single-input" value="" placeholder="Now"&gt;
+				&lt;script type="text/javascript"&gt;
+				var input = $('.clockpicker-with-callbacks').clockpicker({
+					donetext: 'Done',
+						init: function() { 
+							console.log("colorpicker initiated");
+						},
+						beforeShow: function() {
+							console.log("before show");
+						},
+						afterShow: function() {
+							console.log("after show");
+						},
+						beforeHide: function() {
+							console.log("before hide");
+						},
+						afterHide: function() {
+							console.log("after hide");
+						},
+						beforeHourSelect: function() {
+							console.log("before hour selected");
+						},
+						afterHourSelect: function() {
+							console.log("after hour selected");
+						},
+						beforeDone: function() {
+							console.log("before done");
+						},
+						afterDone: function() {
+							console.log("after done");
+						}
+				});
+
+				// Manually toggle to the minutes view
+				$('#check-minutes').click(function(e){
+					// Have to stop propagation here
+					e.stopPropagation();
+					input.clockpicker('show')
+							.clockpicker('toggleView', 'minutes');
+				});
+				&lt;/script&gt;
+			</code>
+		</pre>
+	</div>
 
 	<h3>Options</h3>
 	<table class="table table-bordered table-striped">
@@ -226,6 +282,55 @@ $('#check-minutes').click(function(e){
 	<td>fromnow</td>
 	<td>0</td>
 	<td>set default time to * milliseconds from now (using with default = 'now')</td>
+	</tr>
+	<tr>
+		<td>init</td>
+		<td></td>
+		<td>callback function triggered after the colorpicker has been initiated</td>
+	</tr>
+	<tr>
+		<td>beforeShow</td>
+		<td></td>
+		<td>callback function triggered before popup is shown</td>
+	</tr>
+	<tr>
+		<td>afterShow</td>
+		<td></td>
+		<td>callback function triggered after popup is shown</td>
+	</tr>
+	<tr>
+		<td>beforeHide</td>
+		<td></td>
+		<td>callback function triggered before popup is hidden<br/>
+			<b>Note:</b>&nbsp;<i>will be triggered between a beforeDone and afterDone</i>
+		</td>
+	</tr>
+	<tr>
+		<td>afterHide</td>
+		<td></td>
+		<td>callback function triggered after popup is hidden<br/>
+			<b>Note:</b>&nbsp;<i>will be triggered between a beforeDone and afterDone</i>
+		</td>
+	</tr>
+	<tr>
+		<td>beforeHourSelect</td>
+		<td></td>
+		<td>callback function triggered before user makes an hour selection</td>
+	</tr>
+	<tr>
+		<td>afterHourSelect</td>
+		<td></td>
+		<td>callback function triggered after user makes an hour selection</td>
+	</tr>
+	<tr>
+		<td>beforeDone</td>
+		<td></td>
+		<td>callback function triggered before time is written to input</td>
+	</tr>
+	<tr>
+		<td>afterDone</td>
+		<td></td>
+		<td>callback function triggered after time is written to input</td>
 	</tr>
 	</tbody>
 	</table>
@@ -304,6 +409,40 @@ var input = $('#single-input').clockpicker({
 	autoclose: true,
 	'default': 'now'
 });
+
+$('.clockpicker-with-callbacks').clockpicker({
+		donetext: 'Done',
+		init: function() { 
+			console.log("colorpicker initiated");
+		},
+		beforeShow: function() {
+			console.log("before show");
+		},
+		afterShow: function() {
+			console.log("after show");
+		},
+		beforeHide: function() {
+			console.log("before hide");
+		},
+		afterHide: function() {
+			console.log("after hide");
+		},
+		beforeHourSelect: function() {
+			console.log("before hour selected");
+		},
+		afterHourSelect: function() {
+			console.log("after hour selected");
+		},
+		beforeDone: function() {
+			console.log("before done");
+		},
+		afterDone: function() {
+			console.log("after done");
+		}
+	})
+	.find('input').change(function(){
+		console.log(this.value);
+	});
 
 // Manually toggle to the minutes view
 $('#check-minutes').click(function(e){

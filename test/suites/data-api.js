@@ -70,9 +70,11 @@ test('data-placement="bottom|left|right|top" on input', function(){
     input.remove();
 
     var placements = ["bottom", "left", "right", "top"];
+    var aligns = ["left", "bottom", "top", "right"];
     for (var i = 0; i < placements.length; i += 1) {
         var place = placements[i];
-        input = $('<input data-placement="' + place + '" />')
+        var align = aligns[i];
+        input = $('<input data-placement="' + place + '" data-align="' + align + '" />')
                     .appendTo('#qunit-fixture');
         input.clockpicker();
         picker = input.data('clockpicker');
@@ -96,9 +98,11 @@ test('data-align="bottom|left|right|top" on input', function(){
     input.remove();
 
     var aligns = ["bottom", "left", "right", "top"];
+    var placements = ["left", "bottom", "top", "right"];
     for (var i = 0; i < aligns.length; i += 1) {
         var align = aligns[i];
-        input = $('<input data-align="' + align + '" />')
+        var place = placements[i];
+        input = $('<input data-align="' + align + '" data-placement="' + place + '" />')
                     .appendTo('#qunit-fixture');
         input.clockpicker();
         picker = input.data('clockpicker');

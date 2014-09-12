@@ -1,7 +1,7 @@
 {
   "name": "clockpicker",
   "description": "A clock-style timepicker for Bootstrap (or jQuery)",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": {
     "name": "Wang Shenwei",
     "email": "wangshenwei@qq.com",
@@ -17,12 +17,12 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "gulp": "~3.6.1",
-    "gulp-uglify": "~0.2.1",
+    "gulp": "~3.8.7",
+    "gulp-uglify": "~0.3.1",
     "gulp-minify-css": "~0.3.1",
     "gulp-rename": "~1.2.0",
-    "gulp-concat": "~2.2.0",
+    "gulp-concat": "~2.3.4",
     "gulp-qunit": "^0.3.3",
-    "gulp-replace": "^0.2.0"
+    "gulp-replace": "^0.4.0"
   }
 }
