@@ -117,7 +117,7 @@
 		this.spanMinutes = popover.find('.clockpicker-span-minutes');
 		this.spanAmPm = popover.find('.clockpicker-span-am-pm');
 		this.amOrPm = "PM";
-		
+		this.minuteInterval = 5;
 		// Setup for for 12 hour clock if option is selected
 		if (options.twelvehour) {
 			
@@ -219,7 +219,7 @@
 		}
 
 		// Minutes view
-		for (i = 0; i < 60; i += 5) {
+		for (i = 0; i < 60; i += this.minuteInterval) {
 			tick = tickTpl.clone();
 			radian = i / 30 * Math.PI;
 			tick.css({
