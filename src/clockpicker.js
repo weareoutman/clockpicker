@@ -610,7 +610,8 @@
 					value = 0;
 				}				
 				else if (this.options.quarterpick) {
-					value*=15;
+					if(value < 15)
+						value*=15;
 					if (value === 60)
 						value = 0;
 				}
@@ -629,7 +630,8 @@
 					value = 0;
 				}
 				else if (this.options.quarterpick) {
-					value*=15;
+					if(value < 15)
+						value*=15;
 					if (value === 60)
 						value = 0;
 				}
