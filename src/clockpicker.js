@@ -117,7 +117,7 @@
 		this.spanMinutes = popover.find('.clockpicker-span-minutes');
 		this.spanAmPm = popover.find('.clockpicker-span-am-pm');
 		this.amOrPm = "PM";
-		this.minuteInterval = 5;
+		
 		// Setup for for 12 hour clock if option is selected
 		if (options.twelvehour) {
 			
@@ -219,7 +219,10 @@
 		}
 
 		// Minutes view
-		for (i = 0; i < 60; i += this.minuteInterval) {
+		var interval = 5;
+		if(this.options.quarterpick)
+			interval = 15;
+		for (i = 0; i < 60; i += interval) {
 			tick = tickTpl.clone();
 			radian = i / 30 * Math.PI;
 			tick.css({
@@ -370,7 +373,8 @@
 		donetext: '完成',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-		vibrate: true        // vibrate the device when dragging clock hand
+		vibrate: true,       // vibrate the device when dragging clock hand
+		quarterpick: false	// pick minutes quarter by quarter
 	};
 
 	// Show or hide popover
@@ -549,7 +553,7 @@
 		var view = this.currentView,
 			value = this[view],
 			isHours = view === 'hours',
-			unit = Math.PI / (isHours ? 6 : 30),
+			unit = Math.PI / (isHours ? 6 : (this.options.quarterpick ? 2 : 30)),
 			radian = value * unit,
 			radius = isHours && value > 0 && value < 13 ? innerRadius : outerRadius,
 			x = Math.sin(radian) * radius,
@@ -570,7 +574,7 @@
 	ClockPicker.prototype.setHand = function(x, y, roundBy5, dragging){
 		var radian = Math.atan2(x, - y),
 			isHours = this.currentView === 'hours',
-			unit = Math.PI / (isHours || roundBy5 ? 6 : 30),
+			unit = Math.PI / (isHours || roundBy5 ? 6 : (this.options.quarterpick ? 2 : 30)),
 			z = Math.sqrt(x * x + y * y),
 			options = this.options,
 			inner = isHours && z < (outerRadius + innerRadius) / 2,
@@ -604,6 +608,11 @@
 				}
 				if (value === 60) {
 					value = 0;
+				}				
+				else if (this.options.quarterpick) {
+					value*=15;
+					if (value === 60)
+						value = 0;
 				}
 			}
 		} else {
@@ -618,6 +627,11 @@
 				}
 				if (value === 60) {
 					value = 0;
+				}
+				else if (this.options.quarterpick) {
+					value*=15;
+					if (value === 60)
+						value = 0;
 				}
 			}
 		}
