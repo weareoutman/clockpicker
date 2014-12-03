@@ -102,8 +102,8 @@
 		this.id = uniqueId('cp');
 		this.element = element;
 		this.options = options;
-        this.options.hourstep = this.parseStep(this.options.hourstep, 12);
-        this.options.minutestep = this.parseStep(this.options.minutestep, 60);
+		this.options.hourstep = this.parseStep(this.options.hourstep, 12);
+		this.options.minutestep = this.parseStep(this.options.minutestep, 60);
 		this.isAppended = false;
 		this.isShown = false;
 		this.currentView = 'hours';
@@ -165,7 +165,7 @@
 
 		// Hours view
 		if (options.twelvehour) {
-            this.spanAmPm.empty().append(self.amOrPm);
+			this.spanAmPm.empty().append(self.amOrPm);
 			for (i = 0; i < 12; i += options.hourstep) {
 				tick = tickTpl.clone();
 				radian = i / 6 * Math.PI;
@@ -199,7 +199,7 @@
 		}
 
 		// Minutes view
-        var incrementValue = Math.max(options.minutestep, 5);
+		var incrementValue = Math.max(options.minutestep, 5);
 		for (i = 0; i < 60; i += incrementValue) {
 			tick = tickTpl.clone();
 			radian = i / 30 * Math.PI;
@@ -342,22 +342,22 @@
 		}
 	}
 
-    ClockPicker.prototype.parseStep = function(givenStepSize, wholeSize) {
-        return wholeSize % givenStepSize === 0 ? givenStepSize : 1;
-    }
+	ClockPicker.prototype.parseStep = function(givenStepSize, wholeSize) {
+		return wholeSize % givenStepSize === 0 ? givenStepSize : 1;
+	}
 
 	// Default options
 	ClockPicker.DEFAULTS = {
-		'default': '',       // default time, 'now' or '13:14' e.g.
-		fromnow: 0,          // set default time to * milliseconds from now (using with default = 'now')
+		'default': '',	   // default time, 'now' or '13:14' e.g.
+		fromnow: 0,		  // set default time to * milliseconds from now (using with default = 'now')
 		placement: 'bottom', // clock popover placement
-		align: 'left',       // popover arrow align
-		donetext: '完成',    // done button text
-		autoclose: false,    // auto close when minute is selected
+		align: 'left',	   // popover arrow align
+		donetext: '完成',	// done button text
+		autoclose: false,	// auto close when minute is selected
 		twelvehour: false,   // change to 12 hour AM/PM clock from 24 hour
-		vibrate: true,       // vibrate the device when dragging clock hand
-        hourstep: 1,         // allow to multi increment the hour
-        minutestep: 1        // allow to multi increment the minute
+		vibrate: true,	   // vibrate the device when dragging clock hand
+		hourstep: 1,		 // allow to multi increment the hour
+		minutestep: 1		// allow to multi increment the minute
 	};
 
 	// Show or hide popover
@@ -451,12 +451,12 @@
 		}
 
 		this.hours = + value[0] || 0;
-        this.hours = Math.round(this.hours / this.options.hourstep) * this.options.hourstep;
+		this.hours = Math.round(this.hours / this.options.hourstep) * this.options.hourstep;
 		this.minutes = + value[1] || 0;
-        this.minutes = Math.round(this.minutes / this.options.minutestep) * this.options.minutestep;
+		this.minutes = Math.round(this.minutes / this.options.minutestep) * this.options.minutestep;
 		this.spanHours.html(leadingZero(this.hours));
 		this.spanMinutes.html(leadingZero(this.minutes));
-        this.amOrPm = this.hours < 12 ? 'AM' : 'PM';
+		this.amOrPm = this.hours < 12 ? 'AM' : 'PM';
 
 		// Toggle to hours view
 		this.toggleView('hours');
@@ -565,19 +565,19 @@
 			options = this.options,
 			inner = isHours && z < (outerRadius + innerRadius) / 2,
 			radius = inner ? innerRadius : outerRadius,
-            unit,
+			unit,
 			value;
 
-        // Calculate the unit
-        if (isHours) {
-            unit = options.hourstep / 6 * Math.PI
-        } else {
-            unit = options.minutestep / 30 * Math.PI
-        }
+		// Calculate the unit
+		if (isHours) {
+			unit = options.hourstep / 6 * Math.PI
+		} else {
+			unit = options.minutestep / 30 * Math.PI
+		}
 
-        if (options.twelvehour) {
-            radius = outerRadius;
-        }
+		if (options.twelvehour) {
+			radius = outerRadius;
+		}
 
 		// Radian should in range [0, 2PI]
 		if (radian < 0) {
@@ -590,25 +590,25 @@
 		// Get the round radian
 		radian = value * unit;
 
-        // Correct the hours or minutes
-        if (isHours) {
-            value *= options.hourstep;
+		// Correct the hours or minutes
+		if (isHours) {
+			value *= options.hourstep;
 
-            if (! options.twelvehour && ! inner) {
-                value += 12;
-            }
-            if (options.twelvehour && value === 0) {
-                value = 12;
-            }
-            if (value === 24) {
-                value = 0;
-            }
-        } else {
-            value *= options.minutestep;
-            if (value === 60) {
-                value = 0;
-            }
-        }
+			if (! options.twelvehour && ! inner) {
+				value += 12;
+			}
+			if (options.twelvehour && value === 0) {
+				value = 12;
+			}
+			if (value === 24) {
+				value = 0;
+			}
+		} else {
+			value *= options.minutestep;
+			if (value === 60) {
+				value = 0;
+			}
+		}
 
 		// Once hours or minutes changed, vibrate the device
 		if (this[this.currentView] !== value) {
