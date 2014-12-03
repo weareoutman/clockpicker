@@ -356,8 +356,8 @@
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false,   // change to 12 hour AM/PM clock from 24 hour
 		vibrate: true,       // vibrate the device when dragging clock hand
-        hourstep: 1,         // allow to change the hourly step size
-        minutestep: 1        // allow to change the minute step size. For example you can only select quarters
+        hourstep: 1,         // allow to multi increment the hour
+        minutestep: 1        // allow to multi increment the minute
 	};
 
 	// Show or hide popover
