@@ -457,9 +457,9 @@
 		this.spanMinutes.html(leadingZero(this.minutes));
 		this.amOrPm = this.hours < 12 ? 'AM' : 'PM';
 
-        if (this.options.twelvehour) {
-            this.spanAmPm.empty().append(this.amOrPm);
-        }
+		if (this.options.twelvehour) {
+			this.spanAmPm.empty().append(this.amOrPm);
+		}
 
 		// Toggle to hours view
 		this.toggleView('hours');
