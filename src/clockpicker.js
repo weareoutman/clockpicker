@@ -445,7 +445,7 @@
 		this.hours = + value[0] || 0;
 		this.minutes = + (value[1] + '').replace(/\D/g, '') || 0;
 
-		if (this.twelvehour) {
+		if (this.options.twelvehour) {
 			var period = (value[1] + '').replace(/\d+/g, '').toLowerCase();
 			this.amOrPm = this.hours < 12 || period === 'am' ? 'AM' : 'PM';
 		}
