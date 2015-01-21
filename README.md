@@ -149,6 +149,13 @@ gulp
 
 ## Change log
 
+0.1.0
+
+* Able to set incremental step for hours and minutes
+* Added getTime
+* Able to set the default value via Date object
+* Some AM & PM bug fixes
+
 0.0.7
 
 * Enables twelve hour mode with AM & PM buttons.
