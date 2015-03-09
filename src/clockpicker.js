@@ -467,6 +467,8 @@
 		this.spanHours.html(leadingZero(this.hours));
 		this.spanMinutes.html(leadingZero(this.minutes));
 
+		if (this.hours < 12) this.amOrPm = 'AM';
+
 		// Toggle to hours view
 		this.toggleView('hours');
 
@@ -525,6 +527,15 @@
 
 		this.spanHours.toggleClass('text-primary', isHours);
 		this.spanMinutes.toggleClass('text-primary', ! isHours);
+
+		// Select AM/PM
+		if (this.options.twelvehour) {
+			if (this.amOrPm === 'AM') {
+				this.amPmBlock.find('.am-button').trigger('click');
+			} else {
+				this.amPmBlock.find('.pm-button').trigger('click');
+			}
+		}
 
 		// Let's make transitions
 		hideView.addClass('clockpicker-dial-out');
