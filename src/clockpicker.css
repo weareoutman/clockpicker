@@ -32,8 +32,12 @@
 	line-height: 30px;
 	text-align: center;
 }
-.clockpicker-popover .popover-title span {
+.clockpicker-popover .clockpicker-span-hours,
+.clockpicker-popover .clockpicker-span-minutes {
 	cursor: pointer;
+}
+.clockpicker-popover .clockpicker-span-am-pm {
+	padding: 0 0 0 10px;
 }
 .clockpicker-popover .popover-content {
 	background-color: #f8f8f8;
