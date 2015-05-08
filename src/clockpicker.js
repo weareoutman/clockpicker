@@ -468,7 +468,10 @@
 		this.spanMinutes.html(leadingZero(this.minutes));
 
 		if (this.options.twelvehour) {
-			if (this.hours > 12) {
+			if (this.hours == 12) {
+				this.amOrPm = 'PM';
+			}
+			else if (this.hours > 12) {
 				this.amOrPm = 'PM';
 				this.hours -= 12;
 			}
