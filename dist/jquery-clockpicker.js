@@ -451,7 +451,7 @@
 
 		if (this.options.twelvehour) {
 			var period = (value[1] + '').replace(/\d+/g, '').toLowerCase();
-			this.amOrPm = this.hours < 12 || period === 'am' ? 'AM' : 'PM';
+			this.amOrPm = this.hours > 12 || period === 'pm' ? 'PM' : 'AM';
 		}
 	};
 
