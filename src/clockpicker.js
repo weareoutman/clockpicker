@@ -94,8 +94,8 @@
 			minutesView = popover.find('.clockpicker-minutes'),
 			amPmBlock = popover.find('.clockpicker-am-pm-block'),
 			isInput = element.prop('tagName') === 'INPUT',
-			isHTML5 = element.prop('type') === 'time',
 			input = isInput ? element : element.find('input'),
+			isHTML5 = input.prop('type') === 'time',
 			addon = element.find('.input-group-addon'),
 			self = this,
 			timer;
@@ -718,10 +718,10 @@
 		raiseCallback(this.options.beforeDone);
 		this.hide();
 		var last = this.input.prop('value'),
-			//outHours = (this.options.isHTML5 && this.options.twelvehour && hours < 12 && this.amOrPm === 'PM') ? 12 + this.hours : this.hours,
-			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
+			outHours = (this.isHTML5 && this.options.twelvehour && this.hours < 12 && this.amOrPm === 'PM') ? 12+this.hours : this.hours,
+			value = leadingZero(outHours) + ':' + leadingZero(this.minutes);
 		
-		if (!this.options.isHTML5 && this.options.twelvehour) {
+		if (!this.isHTML5 && this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
 		
