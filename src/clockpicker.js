@@ -632,7 +632,7 @@
 		if (isHours) {
 			value *= options.hourstep;
 
-			if (! options.twelvehour && ! inner) {
+			if (! options.twelvehour && (!inner)==(value>0)) {
 				value += 12;
 			}
 			if (options.twelvehour && value === 0) {
