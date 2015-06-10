@@ -718,8 +718,17 @@
 		raiseCallback(this.options.beforeDone);
 		this.hide();
 		var last = this.input.prop('value'),
-			outHours = (this.isHTML5 && this.options.twelvehour && this.hours < 12 && this.amOrPm === 'PM') ? 12+this.hours : this.hours,
-			value = leadingZero(outHours) + ':' + leadingZero(this.minutes);
+			outHours = this.hours,
+		
+		if (this.isHTML5 && this.options.twelvehour) {
+			if (this.hours < 12 && this.amOrPm === 'PM') {
+				outHours += 12;
+			}
+			if (this.hours === 12 && this.amOrPm === 'AM') {
+				outHours = 0;
+			}
+		}
+		
 		
 		if (!this.isHTML5 && this.options.twelvehour) {
 			value = value + this.amOrPm;
