@@ -94,6 +94,7 @@
 			minutesView = popover.find('.clockpicker-minutes'),
 			amPmBlock = popover.find('.clockpicker-am-pm-block'),
 			isInput = element.prop('tagName') === 'INPUT',
+			isHTML5 = element.prop('type') === 'time',
 			input = isInput ? element : element.find('input'),
 			addon = element.find('.input-group-addon'),
 			self = this,
@@ -108,6 +109,7 @@
 		this.isShown = false;
 		this.currentView = 'hours';
 		this.isInput = isInput;
+		this.isHTML5 = isHTML5;
 		this.input = input;
 		this.addon = addon;
 		this.popover = popover;
@@ -168,7 +170,9 @@
 		this.spanMinutes.click($.proxy(this.toggleView, this, 'minutes'));
 
 		// Show or toggle
-		input.on('focus.clockpicker click.clockpicker', $.proxy(this.show, this));
+		if (!options.addonOnly) {
+			input.on('focus.clockpicker click.clockpicker', $.proxy(this.show, this));
+		}
 		addon.on('click.clockpicker', $.proxy(this.toggle, this));
 
 		// Build ticks
@@ -371,7 +375,8 @@
 		vibrate: true,		// vibrate the device when dragging clock hand
 		hourstep: 1,		// allow to multi increment the hour
 		minutestep: 1,		// allow to multi increment the minute
-		ampmSubmit: false	// allow submit with AM and PM buttons instead of the minute selection/picker
+		ampmSubmit: false,	// allow submit with AM and PM buttons instead of the minute selection/picker
+		addonOnly: false	// only open on clicking on the input-addon
 	};
 
 	// Show or hide popover
@@ -713,8 +718,10 @@
 		raiseCallback(this.options.beforeDone);
 		this.hide();
 		var last = this.input.prop('value'),
+			//outHours = (this.options.isHTML5 && this.options.twelvehour && hours < 12 && this.amOrPm === 'PM') ? 12 + this.hours : this.hours,
 			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
-		if  (this.options.twelvehour) {
+		
+		if (!this.options.isHTML5 && this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
 		
