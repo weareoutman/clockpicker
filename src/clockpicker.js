@@ -719,6 +719,7 @@
 		this.hide();
 		var last = this.input.prop('value'),
 			outHours = this.hours,
+			value = ':' + leadingZero(this.minutes);
 		
 		if (this.isHTML5 && this.options.twelvehour) {
 			if (this.hours < 12 && this.amOrPm === 'PM') {
@@ -729,6 +730,7 @@
 			}
 		}
 		
+		value = leadingZero(outHours) + value;
 		
 		if (!this.isHTML5 && this.options.twelvehour) {
 			value = value + this.amOrPm;
