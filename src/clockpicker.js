@@ -95,6 +95,7 @@
 			amPmBlock = popover.find('.clockpicker-am-pm-block'),
 			isInput = element.prop('tagName') === 'INPUT',
 			input = isInput ? element : element.find('input'),
+			isHTML5 = input.prop('type') === 'time',
 			addon = element.find('.input-group-addon'),
 			self = this,
 			timer;
@@ -108,6 +109,7 @@
 		this.isShown = false;
 		this.currentView = 'hours';
 		this.isInput = isInput;
+		this.isHTML5 = isHTML5;
 		this.input = input;
 		this.addon = addon;
 		this.popover = popover;
@@ -168,7 +170,9 @@
 		this.spanMinutes.click($.proxy(this.toggleView, this, 'minutes'));
 
 		// Show or toggle
-		input.on('focus.clockpicker click.clockpicker', $.proxy(this.show, this));
+		if (!options.addonOnly) {
+			input.on('focus.clockpicker click.clockpicker', $.proxy(this.show, this));
+		}
 		addon.on('click.clockpicker', $.proxy(this.toggle, this));
 
 		// Build ticks
@@ -371,7 +375,8 @@
 		vibrate: true,		// vibrate the device when dragging clock hand
 		hourstep: 1,		// allow to multi increment the hour
 		minutestep: 1,		// allow to multi increment the minute
-		ampmSubmit: false	// allow submit with AM and PM buttons instead of the minute selection/picker
+		ampmSubmit: false,	// allow submit with AM and PM buttons instead of the minute selection/picker
+		addonOnly: false	// only open on clicking on the input-addon
 	};
 
 	// Show or hide popover
@@ -627,7 +632,7 @@
 		if (isHours) {
 			value *= options.hourstep;
 
-			if (! options.twelvehour && ! inner) {
+			if (! options.twelvehour && (!inner)==(value>0)) {
 				value += 12;
 			}
 			if (options.twelvehour && value === 0) {
@@ -713,8 +718,21 @@
 		raiseCallback(this.options.beforeDone);
 		this.hide();
 		var last = this.input.prop('value'),
-			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
-		if  (this.options.twelvehour) {
+			outHours = this.hours,
+			value = ':' + leadingZero(this.minutes);
+		
+		if (this.isHTML5 && this.options.twelvehour) {
+			if (this.hours < 12 && this.amOrPm === 'PM') {
+				outHours += 12;
+			}
+			if (this.hours === 12 && this.amOrPm === 'AM') {
+				outHours = 0;
+			}
+		}
+		
+		value = leadingZero(outHours) + value;
+		
+		if (!this.isHTML5 && this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
 		

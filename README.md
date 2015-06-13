@@ -90,6 +90,8 @@ if (something) {
 | fromnow | 0 | set default time to * milliseconds from now (using with default = 'now' or default = Date) |
 | hourstep | 1 | allow to multi increment the hour |
 | minutestep | 1 | allow to multi increment the minute |
+| ampmSubmit | false | allow submit with AM and PM buttons instead of the minute selection/picker |
+| addonOnly | false	| disables the focus and click triggers on the input field (to allow delegation to native pickers) |
 | init | | callback function triggered after the colorpicker has been initiated |
 | beforeShow | | callback function triggered before popup is shown |
 | afterShow | | callback function triggered after popup is shown |
