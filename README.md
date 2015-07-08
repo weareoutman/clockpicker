@@ -81,7 +81,7 @@ if (something) {
 | Name | Default | Description |
 | ---- | ------- | ----------- |
 | default | '' | default time, 'now', Date object or '13:14' e.g. |
-| placement | 'bottom' | popover placement |
+| placement | 'bottom' | popover placement. Supported values: 'top', 'bottom', 'left', 'right', 'top-adaptive', 'bottom-adaptive'. |
 | align | 'left' | popover arrow align |
 | donetext | '完成' | done button text |
 | autoclose | false | auto close when minute is selected |

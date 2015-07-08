@@ -121,6 +121,7 @@
 		this.spanMinutes = popover.find('.clockpicker-span-minutes');
 		this.spanAmPm = popover.find('.clockpicker-span-am-pm');
 		this.amOrPm = "";
+		this.currentPlacementClass = options.placement;
 
 		// Setup for for 12 hour clock if option is selected
 		if (options.twelvehour) {
@@ -160,7 +161,7 @@
 		}
 
 		// Placement and arrow align - make sure they make sense.
-		if ((options.placement === 'top' || options.placement === 'bottom') && (options.align === 'top' || options.align === 'bottom')) options.align = 'left';
+		if (/^(top|bottom)/.test(options.placement) && (options.align === 'top' || options.align === 'bottom')) options.align = 'left';
 		if ((options.placement === 'left' || options.placement === 'right') && (options.align === 'left' || options.align === 'right')) options.align = 'top';
 
 		popover.addClass(options.placement);
@@ -359,6 +360,44 @@
 		}
 	}
 
+	/**
+	 * Find most suitable vertical placement, doing our best to ensure it is inside of the viewport.
+	 *
+	 * First try to place the element according with preferredPlacement, then try the opposite
+	 * placement and as a last resort, popover will be placed on the very top of the viewport.
+	 *
+	 * @param {jQuery} element
+	 * @param {jQuery} popover
+	 * @param preferredPlacement Preferred placement, if there is enough room for it.
+	 * @returns {string} One of: 'top', 'bottom' or 'viewport-top'.
+	 */
+	function resolveAdaptiveVerticalPlacement(element, popover, preferredPlacement) {
+		var popoverHeight = popover.outerHeight(),
+			elementHeight = element.outerHeight(),
+			elementTopOffset = element.offset().top,
+			elementBottomOffset = element.offset().top + elementHeight,
+			minVisibleY = elementTopOffset - element[0].getBoundingClientRect().top,
+			maxVisibleY = minVisibleY + document.documentElement.clientHeight,
+			isEnoughRoomAbove = (elementTopOffset - popoverHeight) >= minVisibleY,
+			isEnoughRoomBelow = (elementBottomOffset + popoverHeight) <= maxVisibleY;
+
+		if (preferredPlacement === 'top') {
+			if (isEnoughRoomAbove) {
+				return 'top';
+			} else if (isEnoughRoomBelow) {
+				return 'bottom';
+			}
+		} else {
+			if (isEnoughRoomBelow) {
+				return 'bottom';
+			} else if (isEnoughRoomAbove) {
+				return 'top';
+			}
+		}
+
+		return 'viewport-top';
+	}
+
 	ClockPicker.prototype.parseStep = function(givenStepSize, wholeSize) {
 		return wholeSize % givenStepSize === 0 ? givenStepSize : 1;
 	}
@@ -384,7 +423,19 @@
 		this[this.isShown ? 'hide' : 'show']();
 	};
 
-	// Set popover position
+	// Set new placement class for popover and remove the old one, if any.
+	ClockPicker.prototype.updatePlacementClass = function(newClass) {
+		if (this.currentPlacementClass) {
+			this.popover.removeClass(this.currentPlacementClass);
+		}
+		if (newClass) {
+			this.popover.addClass(newClass);
+		}
+
+		this.currentPlacementClass = newClass;
+	};
+
+	// Set popover position and update placement class, if needed
 	ClockPicker.prototype.locate = function(){
 		var element = this.element,
 			popover = this.popover,
@@ -395,6 +446,15 @@
 			align = this.options.align,
 			styles = {},
 			self = this;
+
+		if (placement === 'top-adaptive' || placement === 'bottom-adaptive') {
+			var preferredPlacement = placement.substr(0, placement.indexOf('-'));
+			// Adaptive placement should be resolved into one of the "static" placement
+			// options, that is best suitable for the current window scroll position.
+			placement = resolveAdaptiveVerticalPlacement(element, popover, preferredPlacement);
+
+			this.updatePlacementClass(placement !== 'viewport-top' ? placement : '');
+		}
 
 		popover.show();
 
@@ -411,6 +471,9 @@
 				break;
 			case 'left':
 				styles.left = offset.left - popover.outerWidth();
+				break;
+			case 'viewport-top':
+				styles.top = offset.top - element[0].getBoundingClientRect().top;
 				break;
 		}
 
