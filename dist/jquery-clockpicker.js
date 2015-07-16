@@ -357,10 +357,9 @@
 
 	function raiseCallback(callbackFunction) {
 		if (callbackFunction && typeof callbackFunction === "function" && this.element) {
-            this.getTime((function(time){
-                callbackFunction.call(this.element, time);
-                this.element.trigger('clockpicker'+callbackFunction.name || 'NoName', [time]);
-            }).bind(this));
+            var time = this.getTime();
+            callbackFunction.call(this.element, time);
+            this.element.trigger('clockpicker'+callbackFunction.name || 'NoName', [time]);
 		}
 	}
 
