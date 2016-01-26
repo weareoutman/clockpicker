@@ -477,12 +477,17 @@
 
 		// Hide when clicking or tabbing on any element except the clock, input and addon
 		$doc.on('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id, function(e){
-			var target = $(e.relatedTarget ? e.relatedTarget : e.target);
-			if (target.closest(self.popover).length === 0 &&
-					target.closest(self.addon).length === 0 &&
-					target.closest(self.input).length === 0) {
-				self.hide();
-			}
+			var target = $(e.target);
+			var relatedTarget = $(e.relatedTarget);
+			if(target.closest(self.popover).length === 0 &&
+				target.closest(self.addon).length === 0 &&
+				target.closest(self.input).length === 0 &&
+				relatedTarget.closest(self.popover).length === 0 &&
+				relatedTarget.closest(self.addon).length === 0 &&
+				relatedTarget.closest(self.input).length === 0
+			 ) {
+					self.hide();
+				}
 		});
 
 		// Hide when ESC is pressed
