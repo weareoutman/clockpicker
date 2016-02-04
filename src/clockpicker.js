@@ -159,8 +159,8 @@
 				
 		}
 		
-		if (! options.autoclose) {
-			// If autoclose is not setted, append a button
+		if (options.showdonebutton) {
+			// Append a button if donetext was set
 			$('<button type="button" class="btn btn-sm btn-default btn-block clockpicker-button">' + options.donetext + '</button>')
 				.click($.proxy(this.done, this))
 				.appendTo(popover);
@@ -368,6 +368,7 @@
 		placement: 'bottom', // clock popover placement
 		align: 'left',       // popover arrow align
 		donetext: '完成',    // done button text
+		showdonebutton: 'true', // show done button
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
 		vibrate: true        // vibrate the device when dragging clock hand
