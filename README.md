@@ -72,6 +72,7 @@ if (something) {
 | default | '' | default time, 'now' or '13:14' e.g. |
 | placement | 'bottom' | popover placement |
 | align | 'left' | popover arrow align |
+| showdonebutton | true | show done button |
 | donetext | '完成' | done button text |
 | autoclose | false | auto close when minute is selected |
 | twelvehour | false | enables twelve hour mode with AM & PM buttons |
