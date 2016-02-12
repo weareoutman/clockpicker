@@ -7,6 +7,7 @@
     "email": "wangshenwei@qq.com",
     "url": "http://wangshenwei.com/"
   },
+  "main": "dist/jquery-clockpicker.js",
   "homepage": "http://weareoutman.github.io/clockpicker/",
   "repository": {
     "type": "git",
