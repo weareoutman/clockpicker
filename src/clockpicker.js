@@ -403,10 +403,10 @@
 
 		if(offset.left + pickerWidth > $(window).outerWidth()){
 			align = this.options.align = 'right';
-			popover.removeClass('left').addClass('right');
+			popover.removeClass('clockpicker-align-left').addClass('clockpicker-align-right');
 		} else{
 			align = this.options.align = 'left';
-			popover.removeClass('right').addClass('left');
+			popover.removeClass('clockpicker-align-right').addClass('clockpicker-align-left');
 		}
 
 		popover.show();
