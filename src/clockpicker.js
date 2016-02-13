@@ -391,7 +391,7 @@
 			self = this;
 
 		//Prevent opening off screen
-		var pickerHeight = popover.outerHeight();
+		var pickerHeight = popover.outerHeight() + 50;
 		var pickerWidth = popover.outerWidth();
 		if(offset.top + pickerHeight > $(window).outerHeight()){
 			placement = this.options.placement = 'top';
