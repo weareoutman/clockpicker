@@ -117,48 +117,48 @@
 		this.spanMinutes = popover.find('.clockpicker-span-minutes');
 		this.spanAmPm = popover.find('.clockpicker-span-am-pm');
 		this.amOrPm = "PM";
-		
+
 		// Setup for for 12 hour clock if option is selected
 		if (options.twelvehour) {
-			
+
 			var  amPmButtonsTemplate = ['<div class="clockpicker-am-pm-block">',
 				'<button type="button" class="btn btn-sm btn-default clockpicker-button clockpicker-am-button">',
 				'AM</button>',
 				'<button type="button" class="btn btn-sm btn-default clockpicker-button clockpicker-pm-button">',
 				'PM</button>',
 				'</div>'].join('');
-			
+
 			var amPmButtons = $(amPmButtonsTemplate);
 			//amPmButtons.appendTo(plate);
-			
+
 			////Not working b/c they are not shown when this runs
 			//$('clockpicker-am-button')
 			//    .on("click", function() {
 			//        self.amOrPm = "AM";
 			//        $('.clockpicker-span-am-pm').empty().append('AM');
 			//    });
-			//    
+			//
 			//$('clockpicker-pm-button')
 			//    .on("click", function() {
 			//         self.amOrPm = "PM";
 			//        $('.clockpicker-span-am-pm').empty().append('PM');
 			//    });
-	
+
 			$('<button type="button" class="btn btn-sm btn-default clockpicker-button am-button">' + "AM" + '</button>')
 				.on("click", function() {
 					self.amOrPm = "AM";
 					$('.clockpicker-span-am-pm').empty().append('AM');
 				}).appendTo(this.amPmBlock);
-				
-				
+
+
 			$('<button type="button" class="btn btn-sm btn-default clockpicker-button pm-button">' + "PM" + '</button>')
 				.on("click", function() {
 					self.amOrPm = 'PM';
 					$('.clockpicker-span-am-pm').empty().append('PM');
 				}).appendTo(this.amPmBlock);
-				
+
 		}
-		
+
 		if (! options.autoclose) {
 			// If autoclose is not setted, append a button
 			$('<button type="button" class="btn btn-sm btn-default btn-block clockpicker-button">' + options.donetext + '</button>')
@@ -390,6 +390,36 @@
 			styles = {},
 			self = this;
 
+		//Prevent opening off screen
+		var pickerHeight = popover.outerHeight() + 50;
+		var pickerWidth = popover.outerWidth();
+
+		//mobile view logic
+		if($(window).outerHeight() < 260 * 2 ||
+			 $(window).outerWidth() < 226 + 100){
+			popover.addClass('mobile-view');
+			popover.show();
+			return false;
+		} else{
+			popover.removeClass('mobile-view');
+		}
+
+		if(offset.top + pickerHeight > $(window).outerHeight()){
+			placement = this.options.placement = 'top';
+			popover.removeClass('bottom').addClass('top');
+		} else{
+			placement = this.options.placement = 'bottom';
+			popover.removeClass('top').addClass('bottom');
+		}
+
+		if(offset.left + pickerWidth > $(window).outerWidth()){
+			align = this.options.align = 'right';
+			popover.removeClass('clockpicker-align-left').addClass('clockpicker-align-right');
+		} else{
+			align = this.options.align = 'left';
+			popover.removeClass('clockpicker-align-right').addClass('clockpicker-align-left');
+		}
+
 		popover.show();
 
 		// Place the popover
@@ -576,7 +606,7 @@
 			inner = isHours && z < (outerRadius + innerRadius) / 2,
 			radius = inner ? innerRadius : outerRadius,
 			value;
-			
+
 			if (options.twelvehour) {
 				radius = outerRadius;
 			}
@@ -621,7 +651,7 @@
 				}
 			}
 		}
-		
+
 		// Once hours or minutes changed, vibrate the device
 		if (this[this.currentView] !== value) {
 			if (vibrate && this.options.vibrate) {
@@ -679,7 +709,7 @@
 		if  (this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
-		
+
 		this.input.prop('value', value);
 		if (value !== last) {
 			this.input.triggerHandler('change');
