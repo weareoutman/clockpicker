@@ -391,8 +391,19 @@
 			self = this;
 
 		//Prevent opening off screen
-		var pickerHeight = popover.outerHeight() + 50;
-		var pickerWidth = popover.outerWidth();
+		var pickerHeight = popover.outerHeight();
+		var pickerWidth = popover.outerWidth() + 50;
+
+		//mobile view logic
+		if($(window).outerHeight() < 226 * 2 ||
+			 $(window).outerWidth() < 226 + 100){
+			popover.addClass('mobile-view');
+			popover.show();
+			return false;
+		} else{
+			popover.removeClass('mobile-view');
+		}
+
 		if(offset.top + pickerHeight > $(window).outerHeight()){
 			placement = this.options.placement = 'top';
 			popover.removeClass('bottom').addClass('top');

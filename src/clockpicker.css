@@ -158,11 +158,28 @@
 	padding: 5px;
 	border: 1px solid rgba(0, 0, 0, .2);
 	border-radius: 4px;
-	
+
 }
 .clockpicker-button.pm-button {
 	margin: 1px 1px 1px 136px;
 	padding: 5px;
 	border: 1px solid rgba(0, 0, 0, .2);
 	border-radius: 4px;
+}
+
+.clockpicker-popover.mobile-view .popover-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 198px;
+  padding-top: 10px;
+  border-radius: 5px 5px 0 0;
+  transform: translate3d(-50%, -162px, 0);
+}
+
+.clockpicker-popover.mobile-view .popover-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }
