@@ -391,8 +391,8 @@
 			self = this;
 
 		//Prevent opening off screen
-		var pickerHeight = popover.outerHeight();
-		var pickerWidth = popover.outerWidth() + 50;
+		var pickerHeight = popover.outerHeight() + 50;
+		var pickerWidth = popover.outerWidth();
 
 		//mobile view logic
 		if($(window).outerHeight() < 226 * 2 ||

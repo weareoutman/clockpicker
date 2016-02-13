@@ -30,9 +30,8 @@
 }
 .popover.mobile-view{
   position: fixed;
-  z-index:
-  left: 0;
-  top: 0;
+  top: 0 !important;
+  left: 0 !important;
   right: 0;
   bottom: 0;
   width: 100%;
