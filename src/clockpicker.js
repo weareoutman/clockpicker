@@ -395,7 +395,7 @@
 		var pickerWidth = popover.outerWidth();
 
 		//mobile view logic
-		if($(window).outerHeight() < 226 * 2 ||
+		if($(window).outerHeight() < 260 * 2 ||
 			 $(window).outerWidth() < 226 + 100){
 			popover.addClass('mobile-view');
 			popover.show();
