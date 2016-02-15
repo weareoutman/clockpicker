@@ -397,7 +397,7 @@ $('#check-minutes').click(function(e){
 
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="dist/bootstrap-clockpicker.min.js"></script>
+<script type="text/javascript" src="dist/bootstrap-clockpicker.js"></script>
 <script type="text/javascript">
 $('.clockpicker').clockpicker()
 	.find('input').change(function(){
@@ -412,8 +412,8 @@ var input = $('#single-input').clockpicker({
 
 $('.clockpicker-with-callbacks').clockpicker({
 		donetext: 'Done',
-		init: function() { 
-			console.log("colorpicker initiated");
+		init: function (element) {
+		    console.log(element, "colorpicker initiated");
 		},
 		beforeShow: function() {
 			console.log("before show");
@@ -436,8 +436,8 @@ $('.clockpicker-with-callbacks').clockpicker({
 		beforeDone: function() {
 			console.log("before done");
 		},
-		afterDone: function() {
-			console.log("after done");
+		afterDone: function(element) {
+		    console.log(element, "after done");
 		}
 	})
 	.find('input').change(function(){
