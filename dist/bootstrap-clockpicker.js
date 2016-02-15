@@ -352,13 +352,7 @@
 			this.canvas = canvas;
 		}
 
-		raiseCallback(this.options.init);
-	}
-
-	function raiseCallback(callbackFunction) {
-		if (callbackFunction && typeof callbackFunction === "function") {
-			callbackFunction();
-		}
+		this.raiseCallback(this.options.init);
 	}
 
 	// Default options
@@ -371,6 +365,12 @@
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
 		vibrate: true        // vibrate the device when dragging clock hand
+	};
+
+	ClockPicker.prototype.raiseCallback = function (callbackFunction) {
+	    if (callbackFunction && typeof callbackFunction === "function") {
+	        callbackFunction(this);
+	    }
 	};
 
 	// Show or hide popover
@@ -434,7 +434,7 @@
 			return;
 		}
 
-		raiseCallback(this.options.beforeShow);
+		this.raiseCallback(this.options.beforeShow);
 
 		var self = this;
 
@@ -492,12 +492,12 @@
 			}
 		});
 
-		raiseCallback(this.options.afterShow);
+		this.raiseCallback(this.options.afterShow);
 	};
 
 	// Hide popover
 	ClockPicker.prototype.hide = function(){
-		raiseCallback(this.options.beforeHide);
+		this.raiseCallback(this.options.beforeHide);
 
 		this.isShown = false;
 
@@ -507,14 +507,14 @@
 
 		this.popover.hide();
 
-		raiseCallback(this.options.afterHide);
+		this.raiseCallback(this.options.afterHide);
 	};
 
 	// Toggle to hours or minutes view
 	ClockPicker.prototype.toggleView = function(view, delay){
 		var raiseAfterHourSelect = false;
 		if (view === 'minutes' && $(this.hoursView).css("visibility") === "visible") {
-			raiseCallback(this.options.beforeHourSelect);
+			this.raiseCallback(this.options.beforeHourSelect);
 			raiseAfterHourSelect = true;
 		}
 		var isHours = view === 'hours',
@@ -540,7 +540,7 @@
 		}, duration);
 
 		if (raiseAfterHourSelect) {
-			raiseCallback(this.options.afterHourSelect);
+			this.raiseCallback(this.options.afterHourSelect);
 		}
 	};
 
@@ -672,7 +672,7 @@
 
 	// Hours and minutes are selected
 	ClockPicker.prototype.done = function() {
-		raiseCallback(this.options.beforeDone);
+		this.raiseCallback(this.options.beforeDone);
 		this.hide();
 		var last = this.input.prop('value'),
 			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
@@ -692,7 +692,7 @@
 			this.input.trigger('blur');
 		}
 
-		raiseCallback(this.options.afterDone);
+		this.raiseCallback(this.options.afterDone);
 	};
 
 	// Remove clockpicker from input
