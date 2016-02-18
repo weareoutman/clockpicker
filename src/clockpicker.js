@@ -367,7 +367,7 @@
 		fromnow: 0,          // set default time to * milliseconds from now (using with default = 'now')
 		placement: 'bottom', // clock popover placement
 		align: 'left',       // popover arrow align
-		donetext: '完成',    // done button text
+		donetext: '完�??',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
 		vibrate: true        // vibrate the device when dragging clock hand
@@ -433,7 +433,9 @@
 		if (this.isShown) {
 			return;
 		}
-
+		if ($(this.element).is('[readonly]')) {
+			return;
+		}
 		raiseCallback(this.options.beforeShow);
 
 		var self = this;
