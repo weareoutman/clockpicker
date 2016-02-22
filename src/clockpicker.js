@@ -433,7 +433,9 @@
 		if (this.isShown) {
 			return;
 		}
-
+		if ($(this.element).is('[readonly]')) {
+			return;
+		}
 		raiseCallback(this.options.beforeShow);
 
 		var self = this;
