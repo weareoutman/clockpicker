@@ -61,6 +61,17 @@ if (something) {
 	// Manual operations (after clockpicker is initialized).
 	$('#demo-input').clockpicker('show') // Or hide, remove ...
 			.clockpicker('toggleView', 'minutes');
+
+	// Get the time of single clockpicker
+	var dateObject = $('#demo-input').clockpicker('getTime');
+	console.log(dateObject);
+
+	// Get the time of a clockpicker list
+	$('.clockpicker').clockpicker('getTime', function(dateObject) {
+		// The clockpicker element
+		console.log(this);
+		console.log(dateObject);
+	});
 }
 </script>
 ```
@@ -69,14 +80,18 @@ if (something) {
 
 | Name | Default | Description |
 | ---- | ------- | ----------- |
-| default | '' | default time, 'now' or '13:14' e.g. |
-| placement | 'bottom' | popover placement |
+| default | '' | default time, 'now', Date object or '13:14' e.g. |
+| placement | 'bottom' | popover placement. Supported values: 'top', 'bottom', 'left', 'right', 'top-adaptive', 'bottom-adaptive'. |
 | align | 'left' | popover arrow align |
 | donetext | '完成' | done button text |
 | autoclose | false | auto close when minute is selected |
 | twelvehour | false | enables twelve hour mode with AM & PM buttons |
 | vibrate | true | vibrate the device when dragging clock hand |
-| fromnow | 0 | set default time to * milliseconds from now (using with default = 'now') |
+| fromnow | 0 | set default time to * milliseconds from now (using with default = 'now' or default = Date) |
+| hourstep | 1 | allow to multi increment the hour |
+| minutestep | 1 | allow to multi increment the minute |
+| ampmSubmit | false | allow submit with AM and PM buttons instead of the minute selection/picker |
+| addonOnly | false	| disables the focus and click triggers on the input field (to allow delegation to native pickers) |
 | init | | callback function triggered after the colorpicker has been initiated |
 | beforeShow | | callback function triggered before popup is shown |
 | afterShow | | callback function triggered after popup is shown |
@@ -95,6 +110,7 @@ if (something) {
 | hide |   | hide the clockpicker |
 | remove |   | remove the clockpicker (and event listeners) |
 | toggleView | 'hours' or 'minutes' | toggle to hours or minutes view |
+| getTime | Optional callback (Can be used for list of elements) | Returns Date object. (Will call the callback if callback is given) |
 
 ## What's included
 
@@ -134,6 +150,13 @@ gulp
 - [ ] Seconds View ?
 
 ## Change log
+
+0.1.0
+
+* Able to set incremental step for hours and minutes
+* Added getTime
+* Able to set the default value via Date object
+* Some AM & PM bug fixes
 
 0.0.7
 
