@@ -117,48 +117,50 @@
 		this.spanMinutes = popover.find('.clockpicker-span-minutes');
 		this.spanAmPm = popover.find('.clockpicker-span-am-pm');
 		this.amOrPm = "PM";
-		
+
 		// Setup for for 12 hour clock if option is selected
 		if (options.twelvehour) {
-			
+
 			var  amPmButtonsTemplate = ['<div class="clockpicker-am-pm-block">',
 				'<button type="button" class="btn btn-sm btn-default clockpicker-button clockpicker-am-button">',
 				'AM</button>',
 				'<button type="button" class="btn btn-sm btn-default clockpicker-button clockpicker-pm-button">',
 				'PM</button>',
 				'</div>'].join('');
-			
+
 			var amPmButtons = $(amPmButtonsTemplate);
 			//amPmButtons.appendTo(plate);
-			
+
 			////Not working b/c they are not shown when this runs
 			//$('clockpicker-am-button')
 			//    .on("click", function() {
 			//        self.amOrPm = "AM";
 			//        $('.clockpicker-span-am-pm').empty().append('AM');
 			//    });
-			//    
+			//
 			//$('clockpicker-pm-button')
 			//    .on("click", function() {
 			//         self.amOrPm = "PM";
 			//        $('.clockpicker-span-am-pm').empty().append('PM');
 			//    });
-	
+
 			$('<button type="button" class="btn btn-sm btn-default clockpicker-button am-button">' + "AM" + '</button>')
 				.on("click", function() {
 					self.amOrPm = "AM";
 					$('.clockpicker-span-am-pm').empty().append('AM');
+					self.raiseCallback(self.options.afterAmPmSelect);
 				}).appendTo(this.amPmBlock);
-				
-				
+
+
 			$('<button type="button" class="btn btn-sm btn-default clockpicker-button pm-button">' + "PM" + '</button>')
 				.on("click", function() {
 					self.amOrPm = 'PM';
 					$('.clockpicker-span-am-pm').empty().append('PM');
+					self.raiseCallback(self.options.afterAmPmSelect);
 				}).appendTo(this.amPmBlock);
-				
+
 		}
-		
+
 		if (! options.autoclose) {
 			// If autoclose is not setted, append a button
 			$('<button type="button" class="btn btn-sm btn-default btn-block clockpicker-button">' + options.donetext + '</button>')
@@ -352,13 +354,7 @@
 			this.canvas = canvas;
 		}
 
-		raiseCallback(this.options.init);
-	}
-
-	function raiseCallback(callbackFunction) {
-		if (callbackFunction && typeof callbackFunction === "function") {
-			callbackFunction();
-		}
+		this.raiseCallback(this.options.init);
 	}
 
 	// Default options
@@ -371,6 +367,12 @@
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
 		vibrate: true        // vibrate the device when dragging clock hand
+	};
+
+	ClockPicker.prototype.raiseCallback = function(callbackFunction) {
+		if (callbackFunction && typeof callbackFunction === "function") {
+			callbackFunction(this);
+		}
 	};
 
 	// Show or hide popover
@@ -434,7 +436,7 @@
 			return;
 		}
 
-		raiseCallback(this.options.beforeShow);
+		this.raiseCallback(this.options.beforeShow);
 
 		var self = this;
 
@@ -492,12 +494,12 @@
 			}
 		});
 
-		raiseCallback(this.options.afterShow);
+		this.raiseCallback(this.options.afterShow);
 	};
 
 	// Hide popover
 	ClockPicker.prototype.hide = function(){
-		raiseCallback(this.options.beforeHide);
+		this.raiseCallback(this.options.beforeHide);
 
 		this.isShown = false;
 
@@ -507,14 +509,14 @@
 
 		this.popover.hide();
 
-		raiseCallback(this.options.afterHide);
+		this.raiseCallback(this.options.afterHide);
 	};
 
 	// Toggle to hours or minutes view
 	ClockPicker.prototype.toggleView = function(view, delay){
 		var raiseAfterHourSelect = false;
 		if (view === 'minutes' && $(this.hoursView).css("visibility") === "visible") {
-			raiseCallback(this.options.beforeHourSelect);
+			this.raiseCallback(this.options.beforeHourSelect);
 			raiseAfterHourSelect = true;
 		}
 		var isHours = view === 'hours',
@@ -540,7 +542,7 @@
 		}, duration);
 
 		if (raiseAfterHourSelect) {
-			raiseCallback(this.options.afterHourSelect);
+			this.raiseCallback(this.options.afterHourSelect);
 		}
 	};
 
@@ -576,7 +578,7 @@
 			inner = isHours && z < (outerRadius + innerRadius) / 2,
 			radius = inner ? innerRadius : outerRadius,
 			value;
-			
+
 			if (options.twelvehour) {
 				radius = outerRadius;
 			}
@@ -621,7 +623,7 @@
 				}
 			}
 		}
-		
+
 		// Once hours or minutes changed, vibrate the device
 		if (this[this.currentView] !== value) {
 			if (vibrate && this.options.vibrate) {
@@ -668,18 +670,22 @@
 		this.bg.setAttribute('cy', cy);
 		this.fg.setAttribute('cx', cx);
 		this.fg.setAttribute('cy', cy);
+
+		if(isHours === false) {
+			this.raiseCallback(this.options.afterMinuteSelect);
+		}
 	};
 
 	// Hours and minutes are selected
 	ClockPicker.prototype.done = function() {
-		raiseCallback(this.options.beforeDone);
+		this.raiseCallback(this.options.beforeDone);
 		this.hide();
 		var last = this.input.prop('value'),
 			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
 		if  (this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
-		
+
 		this.input.prop('value', value);
 		if (value !== last) {
 			this.input.triggerHandler('change');
@@ -692,7 +698,7 @@
 			this.input.trigger('blur');
 		}
 
-		raiseCallback(this.options.afterDone);
+		this.raiseCallback(this.options.afterDone);
 	};
 
 	// Remove clockpicker from input
