@@ -370,7 +370,8 @@
 		donetext: '完成',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-		vibrate: true        // vibrate the device when dragging clock hand
+		vibrate: true,        // vibrate the device when dragging clock hand
+		append: $(document.body) // object to append popover
 	};
 
 	// Show or hide popover
@@ -388,9 +389,14 @@
 			placement = this.options.placement,
 			align = this.options.align,
 			styles = {},
+			appendoffset = this.options.append.offset(),
 			self = this;
 
 		popover.show();
+
+		// Remove the referential offset
+		offset.left -= appendoffset.left;
+		offset.top -= appendoffset.top;
 
 		// Place the popover
 		switch (placement) {
@@ -440,8 +446,8 @@
 
 		// Initialize
 		if (! this.isAppended) {
-			// Append popover to body
-			$body = $(document.body).append(this.popover);
+			// Append popover
+			$body = $(this.options.append).append(this.popover);
 
 			// Reset position when resize
 			$win.on('resize.clockpicker' + this.id, function(){
