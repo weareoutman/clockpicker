@@ -293,7 +293,11 @@
 				if ((space || moved) && x === dx && y === dy) {
 					self.setHand(x, y);
 				}
+
 				if (self.currentView === 'hours') {
+					if (self.options.rtupdate) {
+						self.displayTime();
+					}
 					self.toggleView('minutes', duration / 2);
 				} else {
 					if (options.autoclose) {
@@ -301,6 +305,8 @@
 						setTimeout(function(){
 							self.done();
 						}, duration / 2);
+					} else if (self.options.rtupdate) {
+						self.displayTime();
 					}
 				}
 				plate.prepend(canvas);
@@ -370,7 +376,9 @@
 		donetext: '完成',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-		vibrate: true        // vibrate the device when dragging clock hand
+		vibrate: true,        // vibrate the device when dragging clock hand
+		append: $(document.body), // object to append popover
+		rtupdate: true // real time update value
 	};
 
 	// Show or hide popover
@@ -388,9 +396,14 @@
 			placement = this.options.placement,
 			align = this.options.align,
 			styles = {},
+			appendoffset = this.options.append.offset(),
 			self = this;
 
 		popover.show();
+
+		// Remove the referential offset
+		offset.left -= appendoffset.left;
+		offset.top -= appendoffset.top;
 
 		// Place the popover
 		switch (placement) {
@@ -440,8 +453,8 @@
 
 		// Initialize
 		if (! this.isAppended) {
-			// Append popover to body
-			$body = $(document.body).append(this.popover);
+			// Append popover
+			$body = $(this.options.append).append(this.popover);
 
 			// Reset position when resize
 			$win.on('resize.clockpicker' + this.id, function(){
@@ -669,17 +682,15 @@
 		this.fg.setAttribute('cx', cx);
 		this.fg.setAttribute('cy', cy);
 	};
-
-	// Hours and minutes are selected
-	ClockPicker.prototype.done = function() {
-		raiseCallback(this.options.beforeDone);
-		this.hide();
+	
+	// Set Hours and minutes
+	ClockPicker.prototype.displayTime = function() {
 		var last = this.input.prop('value'),
-			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
+				value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
 		if  (this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
-		
+
 		this.input.prop('value', value);
 		if (value !== last) {
 			this.input.triggerHandler('change');
@@ -687,6 +698,14 @@
 				this.element.trigger('change');
 			}
 		}
+	}
+
+	// Hours and minutes are selected
+	ClockPicker.prototype.done = function() {
+		raiseCallback(this.options.beforeDone);
+		this.hide();
+
+		this.displayTime();
 
 		if (this.options.autoclose) {
 			this.input.trigger('blur');
