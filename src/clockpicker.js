@@ -178,6 +178,7 @@
 
 		// Show or toggle
 		input.on('focus.clockpicker click.clockpicker', $.proxy(this.show, this));
+		input.on('click.clockpicker keyup.clockpicker', $.proxy(this.update, this));
 		addon.on('click.clockpicker', $.proxy(this.toggle, this));
 
 		// Build ticks
@@ -369,8 +370,9 @@
 		align: 'left',       // popover arrow align
 		donetext: '完成',    // done button text
 		autoclose: false,    // auto close when minute is selected
-		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-		vibrate: true        // vibrate the device when dragging clock hand
+		twelvehour: false,   // change to 12 hour AM/PM clock from 24 hour
+		vibrate: true,       // vibrate the device when dragging clock hand
+		separator: ':'       // the separator between hours and minutes
 	};
 
 	// Show or hide popover
@@ -453,27 +455,10 @@
 			this.isAppended = true;
 		}
 
-		// Get the time
-		var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
-		if (value[0] === 'now') {
-			var now = new Date(+ new Date() + this.options.fromnow);
-			value = [
-				now.getHours(),
-				now.getMinutes()
-			];
-		}
-		this.hours = + value[0] || 0;
-		this.minutes = + value[1] || 0;
-		this.spanHours.html(leadingZero(this.hours));
-		this.spanMinutes.html(leadingZero(this.minutes));
-
-		// Toggle to hours view
-		this.toggleView('hours');
-
-		// Set position
-		this.locate();
-
 		this.isShown = true;
+
+		// Update time from input
+		this.update();
 
 		// Hide when clicking or tabbing on any element except the clock, input and addon
 		$doc.on('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id, function(e){
@@ -494,6 +479,41 @@
 
 		raiseCallback(this.options.afterShow);
 	};
+
+	// Update from input value
+	ClockPicker.prototype.update = function(){
+		var separator = this.options['separator'];
+		var value = (this.input.val() || this.options['default'] || '');
+
+		// Get the time
+		var split = value.split(separator);
+		if (split[0] === 'now') {
+			var now = new Date(+ new Date() + this.options.fromnow);
+			split = [
+				now.getHours(),
+				now.getMinutes()
+			];
+		}
+		this.hours = + split[0] || 0;
+		this.minutes = + split[1] || 0;
+		this.spanHours.html(leadingZero(this.hours));
+		this.spanMinutes.html(leadingZero(this.minutes));
+
+		// Try figuring out whether the cursor currently is in the hours or in the minutes
+		var selection = (this.input.prop('selectionStart') || 0);
+		var separatorPosition = value.indexOf(separator);
+
+		if (separatorPosition > -1 && selection > separatorPosition) {
+			// Show minutes view when the cursor is positioned there
+			this.toggleView('minutes');
+		} else {
+			// Show hours view by default
+			this.toggleView('hours');
+		}
+
+		// Set position
+		this.locate();
+	}
 
 	// Hide popover
 	ClockPicker.prototype.hide = function(){
@@ -674,13 +694,13 @@
 	ClockPicker.prototype.done = function() {
 		raiseCallback(this.options.beforeDone);
 		this.hide();
-		var last = this.input.prop('value'),
+		var last = this.input.val(),
 			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
 		if  (this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
 		
-		this.input.prop('value', value);
+		this.input.val(value);
 		if (value !== last) {
 			this.input.triggerHandler('change');
 			if (! this.isInput) {
@@ -699,6 +719,7 @@
 	ClockPicker.prototype.remove = function() {
 		this.element.removeData('clockpicker');
 		this.input.off('focus.clockpicker click.clockpicker');
+		this.input.off('click.clockpicker keyup.clockpicker');
 		this.addon.off('click.clockpicker');
 		if (this.isShown) {
 			this.hide();
