@@ -96,6 +96,7 @@
 			isInput = element.prop('tagName') === 'INPUT',
 			input = isInput ? element : element.find('input'),
 			addon = element.find('.input-group-addon'),
+			range_sc = 0,
 			self = this,
 			timer;
 
@@ -108,6 +109,7 @@
 		this.isInput = isInput;
 		this.input = input;
 		this.addon = addon;
+		this.range_sc = range_sc;
 		this.popover = popover;
 		this.plate = plate;
 		this.hoursView = hoursView;
@@ -164,6 +166,11 @@
 			$('<button type="button" class="btn btn-sm btn-default btn-block clockpicker-button">' + options.donetext + '</button>')
 				.click($.proxy(this.done, this))
 				.appendTo(popover);
+		}
+		
+		if (options.range) {
+			$('<span class="clockpicker-span-type">'+options.starttext+'</span> ')
+				.prependTo(popover.find('.popover-title'));
 		}
 
 		// Placement and arrow align - make sure they make sense.
@@ -368,8 +375,11 @@
 		placement: 'bottom', // clock popover placement
 		align: 'left',       // popover arrow align
 		donetext: '完成',    // done button text
+		starttext: '開始',    // done button text
+		endtext: '結束',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+		range: false,    // time range pick
 		vibrate: true        // vibrate the device when dragging clock hand
 	};
 
@@ -454,7 +464,18 @@
 		}
 
 		// Get the time
-		var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
+		if(this.options.range){
+			var rang_value = ((this.input.prop('value') || this.options['default'] || '') + '').split(' - ');
+			if(this.range_sc!=0){
+				var value = rang_value[1].split(':');
+			}else{
+				var value = rang_value[0].split(':');
+			}
+		}else{
+			var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
+		}
+
+		//var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
 		if (value[0] === 'now') {
 			var now = new Date(+ new Date() + this.options.fromnow);
 			value = [
@@ -474,7 +495,7 @@
 		this.locate();
 
 		this.isShown = true;
-
+		
 		// Hide when clicking or tabbing on any element except the clock, input and addon
 		$doc.on('click.clockpicker.' + this.id + ' focusin.clockpicker.' + this.id, function(e){
 			var target = $(e.target);
@@ -674,10 +695,27 @@
 	ClockPicker.prototype.done = function() {
 		raiseCallback(this.options.beforeDone);
 		this.hide();
+
 		var last = this.input.prop('value'),
 			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
 		if  (this.options.twelvehour) {
 			value = value + this.amOrPm;
+		}
+
+		if (this.options.range) {
+			if(this.range_sc==0){
+				this.popover.find('.clockpicker-span-type').html(this.options.endtext)
+				this.range_sc=value;
+				var rang_value = ((this.input.prop('value') || this.options['default'] || '') + '').split(' - ');
+				this.input.prop('value', value+' - '+rang_value[1]);
+
+				this.show();
+				return;
+			}else{
+				this.popover.find('.clockpicker-span-type').html(this.options.starttext)
+				value = this.range_sc+' - '+value;
+				this.range_sc = 0;
+			}
 		}
 		
 		this.input.prop('value', value);
@@ -687,6 +725,7 @@
 				this.element.trigger('change');
 			}
 		}
+
 
 		if (this.options.autoclose) {
 			this.input.trigger('blur');
