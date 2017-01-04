@@ -52,25 +52,13 @@
 <div class="navbar navbar-inverse navbar-static-top" role="navigation">
 	<div class="container">
 		<ul class="nav navbar-nav pull-right">
-			<li><a href="https://github.com/weareoutman/clockpicker">Fork me on GitHub</a></li>
+			<li><a href="https://github.com/srowhani/clockpicker">Fork me on GitHub</a></li>
 		</ul>
-		<h3>ClockPicker</h3>
+		<h3>srowhani's ClockPicker fork</h3>
 	</div>
 </div>
 
 <div class="container">
-	<p class="lead">
-		A clock-style timepicker for Bootstrap (or jQuery).
-		<a href="https://travis-ci.org/weareoutman/clockpicker"><img src="https://travis-ci.org/weareoutman/clockpicker.svg" alt="Build Status" data-canonical-src="https://travis-ci.org/weareoutman/clockpicker.svg" style="max-width:100%;"></a>
-	</p>
-
-	<p>
-		<a href="https://github.com/weareoutman/clockpicker/archive/gh-pages.zip" class="btn btn-lg btn-default" target="_blank">
-			<span class="glyphicon glyphicon-cloud-download"></span> Download ZIP
-		</a>
-		&nbsp; CSS &lt; 6KB, JS &lt; 9KB, after minified.
-	</p>
-
 	<h3>Browser support</h3>
 	<p>
 		All major browsers are supported, including IE 9+. It should look and behave well enough in IE 8.
@@ -94,17 +82,16 @@
 	</p>
 
 	<h3>Examples</h3>
-	<a href="http://jsfiddle.net/weareoutman/YkvK9/">Try it on jsfiddle</a>
 	<div class="form-group">
 		<h4>Default: </h4>
 		<div class="input-group clockpicker">
-			<input type="text" class="form-control" value="09:30">
+			<input type="text" class="form-control" value="09:30:00">
 			<span class="input-group-addon">
 				<span class="glyphicon glyphicon-time"></span>
 			</span>
 		</div>
 		<pre class="hljs-pre"><code class="html">&lt;div class="input-group clockpicker"&gt;
-	&lt;input type="text" class="form-control" value="09:30"&gt;
+	&lt;input type="text" class="form-control" value="09:30:00"&gt;
 	&lt;span class="input-group-addon"&gt;
 		&lt;span class="glyphicon glyphicon-time"&gt;&lt;/span&gt;
 	&lt;/span&gt;
@@ -117,14 +104,14 @@ $('.clockpicker').clockpicker();
 		<h4>Place at left, align the arrow to top, auto close:</h4>
 		<div class="clearfix">
 			<div class="input-group clockpicker pull-center" data-placement="left" data-align="top" data-autoclose="true">
-				<input type="text" class="form-control" value="13:14">
+				<input type="text" class="form-control" value="13:14:00">
 				<span class="input-group-addon">
 					<span class="glyphicon glyphicon-time"></span>
 				</span>
 			</div>
 		</div>
 		<pre class="hljs-pre"><code class="html">&lt;div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true"&gt;
-	&lt;input type="text" class="form-control" value="13:14"&gt;
+	&lt;input type="text" class="form-control" value="13:14:00"&gt;
 	&lt;span class="input-group-addon"&gt;
 		&lt;span class="glyphicon glyphicon-time"&gt;&lt;/span&gt;
 	&lt;/span&gt;
@@ -136,13 +123,13 @@ $('.clockpicker').clockpicker();
 	<div class="form-group">
 		<h4>Set options in javascript, instead of <code>data-*</code> :</h4>
 		<div class="input-group clockpicker" data-placement="top" data-align="left" data-donetext="Done">
-			<input type="text" class="form-control" value="18:00">
+			<input type="text" class="form-control" value="18:00:48">
 			<span class="input-group-addon">
 				<span class="glyphicon glyphicon-time"></span>
 			</span>
 		</div>
 		<pre class="hljs-pre"><code class="html">&lt;div class="input-group clockpicker"&gt;
-	&lt;input type="text" class="form-control" value="18:00"&gt;
+	&lt;input type="text" class="form-control" value="18:00:48"&gt;
 	&lt;span class="input-group-addon"&gt;
 		&lt;span class="glyphicon glyphicon-time"&gt;&lt;/span&gt;
 	&lt;/span&gt;
@@ -187,7 +174,7 @@ $('#check-minutes').click(function(e){
 		<h4>Callbacks:</h4>
 		<div class="clearfix">
 			<div class="input-group clockpicker-with-callbacks">
-				<input type="text" class="form-control" value="10:10">
+				<input type="text" class="form-control" value="10:10:10">
 				<span class="input-group-addon">
 					<span class="glyphicon glyphicon-time"></span>
 				</span>

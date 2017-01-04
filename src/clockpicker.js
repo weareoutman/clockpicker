@@ -154,20 +154,6 @@
 			].join('');
 
 			var amPmButtons = $(amPmButtonsTemplate);
-			//amPmButtons.appendTo(plate);
-
-			////Not working b/c they are not shown when this runs
-			//$('clockpicker-am-button')
-			//    .on("click", function() {
-			//        self.amOrPm = "AM";
-			//        $('.clockpicker-span-am-pm').empty().append('AM');
-			//    });
-			//
-			//$('clockpicker-pm-button')
-			//    .on("click", function() {
-			//         self.amOrPm = "PM";
-			//        $('.clockpicker-span-am-pm').empty().append('PM');
-			//    });
 
 			$('<button type="button" class="btn btn-sm btn-default clockpicker-button am-button">' + "AM" + '</button>')
 				.on("click", function() {
@@ -391,9 +377,9 @@
 		raiseCallback(this.options.init);
 	}
 
-	function raiseCallback(callbackFunction) {
-		if (callbackFunction && typeof callbackFunction === "function") {
-			callbackFunction();
+	function raiseCallback(cb) {
+		if (cb && typeof cb === 'function') {
+			cb();
 		}
 	}
 
@@ -403,10 +389,10 @@
 		fromnow: 0,          // set default time to * milliseconds from now (using with default = 'now')
 		placement: 'bottom', // clock popover placement
 		align: 'left',       // popover arrow align
-		donetext: '完成',    // done button text
+		donetext: 'Done',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-		vibrate: true        // vibrate the device when dragging clock hand
+		vibrate: true,        // vibrate the device when dragging clock hand,
 	};
 
 	// Show or hide popover
