@@ -23,7 +23,7 @@
 	padding: 40px 0;
 }
 .input-group {
-	width: 110px;
+	width: 150px;
 	margin-bottom: 10px;
 }
 .pull-center {
@@ -199,7 +199,7 @@ $('#check-minutes').click(function(e){
 				&lt;script type="text/javascript"&gt;
 				var input = $('.clockpicker-with-callbacks').clockpicker({
 					donetext: 'Done',
-						init: function() { 
+						init: function() {
 							console.log("colorpicker initiated");
 						},
 						beforeShow: function() {
@@ -389,7 +389,7 @@ $('#check-minutes').click(function(e){
 <div class="container">
 	<div class="footer">
 		<p>
-			&copy; Wang Shenwei. 
+			&copy; Wang Shenwei.
 			<a href="https://github.com/weareoutman/clockpicker">Fork me on GitHub</a>
 		</p>
 	</div>
@@ -397,7 +397,7 @@ $('#check-minutes').click(function(e){
 
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="dist/bootstrap-clockpicker.min.js"></script>
+<script type="text/javascript" src="dist/bootstrap-clockpicker.js"></script>
 <script type="text/javascript">
 $('.clockpicker').clockpicker()
 	.find('input').change(function(){
@@ -412,7 +412,7 @@ var input = $('#single-input').clockpicker({
 
 $('.clockpicker-with-callbacks').clockpicker({
 		donetext: 'Done',
-		init: function() { 
+		init: function() {
 			console.log("colorpicker initiated");
 		},
 		beforeShow: function() {

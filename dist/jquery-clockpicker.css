@@ -272,6 +272,9 @@
 .clockpicker-minutes {
 	visibility: hidden;
 }
+.clockpicker-seconds {
+	visibility: hidden;
+}
 .clockpicker-tick {
 	border-radius: 50%;
 	color: #666;
@@ -327,6 +330,13 @@
 	-o-transform: scale(.8, .8);
 	transform: scale(.8, .8);
 }
+.clockpicker-minutes.clockpicker-dial-out {
+	-webkit-transform: scale(.7, .7);
+	-moz-transform: scale(.7, .7);
+	-ms-transform: scale(.7, .7);
+	-o-transform: scale(.7, .7);
+	transform: scale(.7, .7);
+}
 .clockpicker-canvas {
 	-webkit-transition: opacity 175ms;
 	-moz-transition: opacity 175ms;
@@ -360,7 +370,7 @@
 	padding: 5px;
 	border: 1px solid rgba(0, 0, 0, .2);
 	border-radius: 4px;
-	
+
 }
 .clockpicker-button.pm-button {
 	margin: 1px 1px 1px 136px;
