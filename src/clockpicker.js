@@ -535,6 +535,7 @@
 		this.popover.hide();
 
 		raiseCallback(this.options.afterHide);
+		this.finished()
 	};
 
 	// Toggle to hours or minutes view
@@ -670,19 +671,21 @@
 
 		this[this.currentView] = value;
 		this.viewMap[this.currentView].span.html(leadingZero(value));
+		var last = this.input.prop('value')
 		var v = moment()
 			.hours(this['hours'])
 			.minutes(this['minutes'])
 			.seconds(this['seconds'])
 			.format(this.options.format || 'HH:mm:ss');
 
-		this.input.prop('value', v);
-		if (value !== last) {
+		if (v !== last) {
+			this.input.prop('value', v);
 			this.input.triggerHandler('change');
-			if (! this.isInput) {
+
+			if (!this.isInput)
 				this.element.trigger('change');
-			}
 		}
+
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {
 			this[isHours ? 'hoursView' : 'minutesView'].find('.clockpicker-tick').each(function(){
@@ -718,7 +721,6 @@
 	// Hours and minutes are selected
 	ClockPicker.prototype.done = function() {
 		raiseCallback(this.options.beforeDone);
-		this.hide();
 		var last = this.input.prop('value'),
 			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes) + ':' + leadingZero(this.seconds);
 		if  (this.options.twelvehour) {
@@ -736,10 +738,11 @@
 		if (this.options.autoclose) {
 			this.input.trigger('blur');
 		}
-
-		raiseCallback(this.options.afterDone);
+		this.hide();
 	};
-
+	ClockPicker.prototype.finished = function () {
+		raiseCallback(this.options.afterDone)
+	};
 	// Remove clockpicker from input
 	ClockPicker.prototype.remove = function() {
 		this.element.removeData('clockpicker');
