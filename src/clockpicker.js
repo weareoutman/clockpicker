@@ -676,9 +676,12 @@
 			.seconds(this['seconds'])
 			.format(this.options.format || 'HH:mm:ss');
 
-		this.input.val(v)
-		if (this.options.onSelect) {
-			this.options.onSelect(v)
+		this.input.prop('value', v);
+		if (value !== last) {
+			this.input.triggerHandler('change');
+			if (! this.isInput) {
+				this.element.trigger('change');
+			}
 		}
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {
