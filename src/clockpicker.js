@@ -675,9 +675,11 @@
 			.minutes(this['minutes'])
 			.seconds(this['seconds'])
 			.format(this.options.format || 'HH:mm:ss');
-			
-		this.input.val(v)
 
+		this.input.val(v)
+		if (this.options.onSelect) {
+			this.options.onSelect(v)
+		}
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {
 			this[isHours ? 'hoursView' : 'minutesView'].find('.clockpicker-tick').each(function(){
