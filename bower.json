@@ -14,7 +14,10 @@
     "!LICENSE",
     "!README.md"
   ],
-  "keywords": ["timepicker", "jquery"],
+  "keywords": [
+    "timepicker",
+    "jquery"
+  ],
   "authors": [
     {
       "name": "Wang Shenwei",
@@ -28,6 +31,7 @@
     "url": "git://github.com/weareoutman/clockpicker.git"
   },
   "dependencies": {
-    "jquery" : ">=1.7"
+    "jquery": ">=1.7",
+    "moment": "^2.17.1"
   }
 }

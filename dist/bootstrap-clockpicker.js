@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.0.7 (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v0.1.1 (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
  */
@@ -377,9 +377,9 @@
 		raiseCallback(this.options.init);
 	}
 
-	function raiseCallback(cb, args) {
+	function raiseCallback(cb) {
 		if (cb && typeof cb === 'function') {
-			cb.apply(null, args);
+			cb();
 		}
 	}
 
@@ -539,7 +539,11 @@
 
 	// Toggle to hours or minutes view
 	ClockPicker.prototype.toggleView = function(view, delay){
-
+		var raiseAfterHourSelect = false;
+		if (view === 'minutes' && $(this.hoursView).css("visibility") === "visible") {
+			raiseCallback(this.options.beforeHourSelect);
+			raiseAfterHourSelect = true;
+		}
 		this.currentView = view
 		var viewMap = this.viewMap
 
@@ -567,6 +571,9 @@
 			});
 		}, duration);
 
+		if (raiseAfterHourSelect) {
+			raiseCallback(this.options.afterHourSelect);
+		}
 		this.oldView = this.nextView;
 	};
 
@@ -663,6 +670,13 @@
 
 		this[this.currentView] = value;
 		this.viewMap[this.currentView].span.html(leadingZero(value));
+		var v = moment()
+			.hours(this['hours'])
+			.minutes(this['minutes'])
+			.seconds(this['seconds'])
+			.format(this.options.format || 'HH:mm:ss');
+			
+		this.input.val(v)
 
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {
@@ -718,7 +732,7 @@
 			this.input.trigger('blur');
 		}
 
-		raiseCallback(this.options.afterDone, [value]);
+		raiseCallback(this.options.afterDone);
 	};
 
 	// Remove clockpicker from input

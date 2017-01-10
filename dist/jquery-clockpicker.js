@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.0.7 (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v0.1.1 (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
  */
@@ -670,6 +670,13 @@
 
 		this[this.currentView] = value;
 		this.viewMap[this.currentView].span.html(leadingZero(value));
+		var v = moment()
+			.hours(this['hours'])
+			.minutes(this['minutes'])
+			.seconds(this['seconds'])
+			.format(this.options.format || 'HH:mm:ss');
+			
+		this.input.val(v)
 
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {

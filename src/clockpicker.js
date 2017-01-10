@@ -670,6 +670,13 @@
 
 		this[this.currentView] = value;
 		this.viewMap[this.currentView].span.html(leadingZero(value));
+		var v = moment()
+			.hours(this['hours'])
+			.minutes(this['minutes'])
+			.seconds(this['seconds'])
+			.format(this.options.format || 'HH:mm:ss');
+			
+		this.input.val(v)
 
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {
