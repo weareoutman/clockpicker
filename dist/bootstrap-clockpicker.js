@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.1.1 (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v0.1.5 (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
  */
@@ -514,7 +514,7 @@
 
 		// Hide when ESC is pressed
 		$doc.on('keyup.clockpicker.' + this.id, function(e){
-			if (e.keyCode === 27) {
+			if (e.keyCode === 27 || e.keyCode === 13) {
 				self.hide();
 			}
 		});
