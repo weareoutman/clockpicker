@@ -1,6 +1,6 @@
 # ClockPicker [![Bower version](https://badge.fury.io/bo/clockpicker.svg)](http://badge.fury.io/bo/clockpicker) [![Build Status](https://travis-ci.org/weareoutman/clockpicker.svg)](https://travis-ci.org/weareoutman/clockpicker)  [![devDependency Status](https://david-dm.org/weareoutman/clockpicker/dev-status.svg)](https://david-dm.org/weareoutman/clockpicker#info=devDependencies)
 
-A clock-style timepicker for Bootstrap (or jQuery).
+A clock-style timepicker for Bootstrap 3 or 4 (or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
 
 ![Screenshot](http://weareoutman.github.io/clockpicker/assets/images/screenshot-1.png)
@@ -15,7 +15,7 @@ Both desktop and mobile device are supported. It also works great in touch scree
 
 ## Dependencies
 
-ClockPicker was designed for Bootstrap in the beginning. So Bootstrap (and jQuery) is the only dependency(s).
+ClockPicker was designed for Bootstrap in the beginning. So Bootstrap (3 or 4 and jQuery) is the only dependency(s).
 
 Since it only used `.popover` and some of `.btn` styles of Bootstrap, I picked these styles to build a jQuery plugin.
 Feel free to use `jquery-*` files instead of `bootstrap-*` , for non-bootstrap project.
@@ -72,7 +72,7 @@ if (something) {
 | default | '' | default time, 'now' or '13:14' e.g. |
 | placement | 'bottom' | popover placement |
 | align | 'left' | popover arrow align |
-| donetext | '完成' | done button text |
+| donetext | 'Done' | done button text |
 | autoclose | false | auto close when minute is selected |
 | twelvehour | false | enables twelve hour mode with AM & PM buttons |
 | vibrate | true | vibrate the device when dragging clock hand |
@@ -101,10 +101,14 @@ if (something) {
 ```bash
 clockpicker/
 ├── dist/
-│   ├── bootstrap-clockpicker.css      # full code for bootstrap
+│   ├── bootstrap-clockpicker.css      # full code for bootstrap 3
 │   ├── bootstrap-clockpicker.js
-│   ├── bootstrap-clockpicker.min.css  # compiled and minified files for bootstrap
+│   ├── bootstrap-clockpicker.min.css  # compiled and minified files for bootstrap 3
 │   ├── bootstrap-clockpicker.min.js
+|   |── bootstrap4-clockpicker.css      # full code for bootstrap 4
+│   ├── bootstrap4-clockpicker.js
+│   ├── bootstrap4-clockpicker.min.css  # compiled and minified files for bootstrap 4
+│   ├── bootstrap4-clockpicker.min.js
 │   ├── jquery-clockpicker.css         # full code for jquery
 │   ├── jquery-clockpicker.js
 │   ├── jquery-clockpicker.min.css     # compiled and minified files for jquery
@@ -134,6 +138,10 @@ gulp
 - [ ] Seconds View ?
 
 ## Change log
+0.1
+
+* Bootstrap 4 compatible (tested with BS 4.1.1)
+* Universal theming using CSS variables
 
 0.0.7
 
