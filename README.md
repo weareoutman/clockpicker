@@ -93,6 +93,7 @@ if (something) {
 | --------- | --------- | ----------- |
 | show |   | show the clockpicker |
 | hide |   | hide the clockpicker |
+| update |   | update the clockpicker with value from input field |
 | remove |   | remove the clockpicker (and event listeners) |
 | toggleView | 'hours' or 'minutes' | toggle to hours or minutes view |
 
@@ -120,7 +121,6 @@ clockpicker/
 ```bash
 git clone https://github.com/weareoutman/clockpicker.git
 cd clockpicker
-npm install -g gulp
 npm install
 gulp
 # gulp test

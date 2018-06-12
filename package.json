@@ -17,12 +17,12 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "gulp": "~3.8.7",
-    "gulp-uglify": "~0.3.1",
-    "gulp-minify-css": "~0.3.1",
-    "gulp-rename": "~1.2.0",
-    "gulp-concat": "~2.3.4",
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.3.5",
+    "gulp-minify-css": "^0.3.13",
     "gulp-qunit": "^0.3.3",
-    "gulp-replace": "^0.4.0"
+    "gulp-rename": "^1.2.3",
+    "gulp-replace": "^0.4.0",
+    "gulp-uglify": "^0.3.2"
   }
 }

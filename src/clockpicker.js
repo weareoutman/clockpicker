@@ -449,6 +449,44 @@
 		popover.css(styles);
 	};
 
+	// Update popover
+	ClockPicker.prototype.update = function(e){
+		// Get the time
+		var value = ((this.input.prop('value') || this.options['default'] || '') + '').split(':');
+
+		if (value[0] === 'now') {
+			var now = new Date(+ new Date() + this.options.fromnow);
+			value = [
+				now.getHours(),
+				now.getMinutes(),
+				now.getSeconds()
+			];
+		}
+
+		this.hours = + value[0] || 0;
+		this.minutes = + value[1] || 0;
+		this.seconds = + value[2] || 0;
+
+		this.spanHours.html(leadingZero(this.hours));
+		this.spanMinutes.html(leadingZero(this.minutes));
+		this.spanSeconds.html(leadingZero(this.seconds));
+
+		if (this.hoursBeforeUpdate !== this.hours) {
+			this.hoursBeforeUpdate = this.hours
+			this.toggleView('hours');
+		}
+
+		if (this.minutesBeforeUpdate !== this.minutes) {
+			this.minutesBeforeUpdate = this.minutes
+			this.toggleView('minutes');
+		}
+
+		if (this.secondsBeforeUpdate !== this.seconds) {
+			this.secondsBeforeUpdate = this.seconds
+			this.toggleView('seconds');
+		}
+	};
+
 	// Show popover
 	ClockPicker.prototype.show = function(e){
 		// Not show again
@@ -485,9 +523,9 @@
 				now.getSeconds()
 			];
 		}
-		this.hours = + value[0] || 0;
-		this.minutes = + value[1] || 0;
-		this.seconds = + value[2] || 0;
+		this.hours = this.hoursBeforeUpdate = + value[0] || 0;
+		this.minutes = this.minutesBeforeUpdate  = + value[1] || 0;
+		this.seconds = this.secondsBeforeUpdate  = + value[2] || 0;
 
 		this.spanHours.html(leadingZero(this.hours));
 		this.spanMinutes.html(leadingZero(this.minutes));
