@@ -263,7 +263,6 @@
 
 		// Minutes view
 		for (i = 0; i < 60; i += 5) {
-			var clickEnabled = true;
 			tick = tickTpl.clone();
 			radian = i / 30 * Math.PI;
 			tick.css({
