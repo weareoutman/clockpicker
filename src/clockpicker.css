@@ -81,9 +81,13 @@
 	cursor: pointer;
 }
 .clockpicker-tick.active,
-.clockpicker-tick:hover {
+.clockpicker-tick:not(.invalid):hover {
 	background-color: rgb(192, 229, 247);
 	background-color: rgba(0, 149, 221, .25);
+}
+.clockpicker-tick.invalid {
+	color:#ccc;
+	cursor: not-allowed;
 }
 .clockpicker-button {
 	background-image: none;
