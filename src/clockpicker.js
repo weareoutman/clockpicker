@@ -236,7 +236,6 @@
 			}
 		} else {
 			for (i = 0; i < 24; i += 1) {
-				var clickEnabled = true;
 				tick = tickTpl.clone();
 				radian = i / 6 * Math.PI;
 				var inner = i > 0 && i < 13;
