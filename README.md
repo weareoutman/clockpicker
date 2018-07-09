@@ -72,7 +72,7 @@ if (something) {
 | default | '' | default time, 'now' or '13:14' e.g. |
 | placement | 'bottom' | popover placement |
 | align | 'left' | popover arrow align |
-| donetext | 'Done' | done button text |
+| donetext | 'Done' ('完成' in BS3) | done button text |
 | autoclose | false | auto close when minute is selected |
 | twelvehour | false | enables twelve hour mode with AM & PM buttons |
 | vibrate | true | vibrate the device when dragging clock hand |
