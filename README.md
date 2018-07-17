@@ -138,6 +138,10 @@ gulp
 - [ ] Seconds View ?
 
 ## Change log
+0.1.1
+
+* Enhenced material design
+
 0.1
 
 * Bootstrap 4 compatible (tested with BS 4.1.1)
