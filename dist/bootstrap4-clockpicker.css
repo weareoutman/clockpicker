@@ -1,12 +1,12 @@
 /*!
- * ClockPicker v0.1 for Bootstrap (http://weareoutman.github.io/clockpicker/)
- * Copyright 2014 Wang Shenwei.
+ * ClockPicker v0.2 for Bootstrap (http://weareoutman.github.io/clockpicker/)
+ * Copyright 2014 Wang Shenwei
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
  * Bootstrap 4 compatibility by djibe
  */
 
 :root {
-  /* Just set your primary color in decimal RGB */
+  /* Just set your primary color in decimal RGB, here or in your own CSS */
   --primary-color: 19, 122, 249;
 }
 
@@ -36,43 +36,118 @@
   bottom: 6px;
 }
 
-.clockpicker-popover .popover-title {
-  background-color: var(--primary);
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 30px;
-  text-align: center;
+@-webkit-keyframes pickerFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
 }
 
-.clockpicker-popover .popover-title span {
-  cursor: pointer;
+@keyframes pickerFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
 }
 
-.clockpicker-popover .popover-content {
-  background-color: #fff;
-  padding: 12px;
+.clockpicker-popover {
+  -webkit-animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px;
+  border: 0;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: center top 0px;
+          transform-origin: center top 0px;
+  -webkit-box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
-.popover-content:last-child {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.clockpicker-plate {
-  background-color: #ededee;
-  border: 2px solid #dedede;
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  overflow: visible;
-  position: relative;
-  /* Disable text selection highlighting. Thanks to Hermanya */
+.clockpicker-popover * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.clockpicker-popover .popover-header {
+  background-color: var(--primary);
+  color: #fff;
+  font-size: 3rem;
+  font-weight: normal;
+  letter-spacing: normal;
+  text-align: center;
+  padding: 0.5rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.clockpicker-popover > .popover-header span {
+  cursor: pointer;
+}
+
+.clockpicker-span-hours {
+  margin-right: 0.25rem;
+}
+
+.clockpicker-span-minutes {
+  margin-left: 0.25rem;
+}
+
+.clockpicker-span-am-pm {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+.clockpicker-popover .popover-body {
+  background-color: #fff;
+  padding: 1rem 0.75rem 0.75rem;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.clockpicker-popover .btn {
+  border-radius: 4px;
+  min-width: 0;
+  margin-left: .25rem;
+}
+
+.clockpicker-popover .btn:focus {
+  outline: none !important;
+}
+
+.clockpicker-am-pm-block,
+.clockpicker-close-block {
+  display: none;
+  margin-top: 0.5rem;
+}
+
+.clockpicker-am-pm-block .btn {
+  min-width: 5.5rem;
+}
+
+.clockpicker-plate {
+  background-color: #ededee;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  overflow: visible;
+  position: relative;
 }
 
 .clockpicker-canvas,
@@ -109,25 +184,6 @@
   cursor: default;
 }
 
-.clockpicker-button {
-  background-image: none;
-  background-color: #fff;
-  border-width: 1px 0 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  margin: 0;
-  padding: 10px 0;
-}
-
-.clockpicker-button:hover {
-  background-image: none;
-  background-color: #ebebeb;
-}
-
-.clockpicker-button:focus {
-  outline: none !important;
-}
-
 .clockpicker-dial {
   -webkit-transition: -webkit-transform 350ms, opacity 350ms;
   -webkit-transition: opacity 350ms, -webkit-transform 350ms;
@@ -162,16 +218,18 @@
 .clockpicker-canvas-bearing,
 .clockpicker-canvas-fg {
   stroke: none;
-  fill: #747474;
+  fill: rgba(var(--primary-color), 0.25);
+}
+.clockpicker-canvas-bearing {
+	fill: var(--primary);
 }
 
 .clockpicker-canvas-bg {
   stroke: none;
-  fill: var(--primary-light);
+  fill: rgba(var(--primary-color), 0.25);
 }
 
 .clockpicker-canvas-bg-trans {
-  /*fill: rgba(0, 149, 221, .25);*/
   fill: rgba(var(--primary-color), 0.25);
 }
 
@@ -179,17 +237,4 @@
   stroke: var(--primary);
   stroke-width: 1;
   stroke-linecap: round;
-  /*shape-rendering: crispEdges;*/
-}
-.clockpicker-button.am-button {
-  /*margin: 1px;
-	padding: 5px;
-	border: 1px solid rgba(0, 0, 0, .2);
-	border-radius: 4px;*/
-}
-.clockpicker-button.pm-button {
-  /*margin: 1px 1px 1px 136px;
-	padding: 5px;
-	border: 1px solid rgba(0, 0, 0, .2);
-	border-radius: 4px;*/
 }
