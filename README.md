@@ -3,11 +3,12 @@
 A clock-style timepicker for Bootstrap 4 (or Bootstrap 3 or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
 
-Bootstrap 4
-![Bootstrap 4 clockpicker](assets/images/clockpicker-bs4.png?raw=true "Clockpicker for Bootstrap 4")
+Below are the screens for Bootstrap 4 and Bootstrap 4 with Daemonite material UI
 
-Bootstrap 4 with Daemonite material UI
+![Bootstrap 4 clockpicker](assets/images/clockpicker-bs4.png?raw=true "Clockpicker for Bootstrap 4")
 ![Bootstrap 4 clockpicker](assets/images/clockpicker-bs4-material.png?raw=true "Clockpicker for Bootstrap 4 with material design")
+
+And the original screens from Weareoutman for Bootstrap 3
 
 ![Screenshot](http://weareoutman.github.io/clockpicker/assets/images/screenshot-1.png)
 ![clockpicker-12-hour-screenshot](https://cloud.githubusercontent.com/assets/5218249/3613434/03da9888-0db8-11e4-8bdb-dbabb5e91e5c.png)
