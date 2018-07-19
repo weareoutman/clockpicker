@@ -4,7 +4,7 @@ A clock-style timepicker for Bootstrap 4 (or Bootstrap 3 or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
 
 Bootstrap 4
-![Bootstrap 4 clockpicker](assets/images/clockpicker-bs4.png?raw=true "Clockpicker for Bootstrap 4")
+
 
 Bootstrap 4 with Daemonite material UI
 ![Bootstrap 4 clockpicker](assets/images/clockpicker-bs4-material.png?raw=true "Clockpicker for Bootstrap 4 with material design")
