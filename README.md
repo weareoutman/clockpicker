@@ -138,9 +138,14 @@ gulp
 - [ ] Seconds View ?
 
 ## Change log
-0.1.1
+0.2
 
-* Enhenced material design
+* migrated all classes to BS4
+* enhenced material design
+* added popover opening animation
+* added Cancel button (doesn't work right now :( )
+* prevent user-select on all elements
+* next version : move AM and PM buttons in popover-header, fix cancel button
 
 0.1
 
