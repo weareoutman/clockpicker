@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.1 original by (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v0.2 original by (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
  * Bootstrap 4 support by djibe
@@ -79,19 +79,20 @@
   var tpl = [
     '<div class="popover clockpicker-popover">',
     '<div class="arrow"></div>',
-    '<div class="popover-title">',
-    '<span class="clockpicker-span-hours text-white-50"></span>',
-    " : ",
-    '<span class="clockpicker-span-minutes"></span>',
-    '<span class="clockpicker-span-am-pm ml-2"></span>',
+    '<div class="popover-header">',
+    '<span class="clockpicker-span-hours"></span>',
+    ":",
+    '<span class="clockpicker-span-minutes text-white-50"></span>',
+    '<span class="clockpicker-span-am-pm"></span>',
     "</div>",
-    '<div class="popover-content">',
+    '<div class="popover-body">',
     '<div class="clockpicker-plate">',
     '<div class="clockpicker-canvas"></div>',
     '<div class="clockpicker-dial clockpicker-hours"></div>',
     '<div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"></div>',
     "</div>",
-    '<span class="clockpicker-am-pm-block mt-2 d-flex justify-content-center"></span>',
+    '<div class="clockpicker-am-pm-block justify-content-around"></div>',
+    '<div class="clockpicker-close-block justify-content-end"></div>',
     "</div>",
     "</div>"
   ].join("");
@@ -107,6 +108,8 @@
       input = isInput ? element : element.find("input"),
       isHTML5 = input.prop("type") === "time",
       addon = element.find(".input-group-addon"),
+      popoverBody = popover.find(".popover-body"),
+      closeBlock = popoverBody.find(".clockpicker-close-block"),
       self = this,
       timer;
 
@@ -138,8 +141,10 @@
 
     // Setup for for 12 hour clock if option is selected
     if (options.twelvehour) {
+      amPmBlock.css("display", "flex");
+
       $(
-        '<button type="button" class="btn btn-sm btn-outline-secondary clockpicker-button am-button">' +
+        '<button type="button" class="btn btn-sm btn-outline-primary clockpicker-button am-button">' +
           "AM" +
           "</button>"
       )
@@ -158,7 +163,7 @@
         .appendTo(this.amPmBlock);
 
       $(
-        '<button type="button" class="btn btn-sm btn-outline-secondary clockpicker-button pm-button">' +
+        '<button type="button" class="btn btn-sm btn-outline-primary clockpicker-button pm-button">' +
           "PM" +
           "</button>"
       )
@@ -179,13 +184,39 @@
 
     if (!options.autoclose) {
       // If autoclose is not setted, append a button
-      $(
-        '<button type="button" class="btn btn-sm btn-outline-primary btn-block clockpicker-button">' +
-          options.donetext +
-          "</button>"
+      closeBlock
+        .append(
+          '<button type="button" class="btn btn-sm btn-outline-primary">' +
+            options.canceltext +
+            "</button>"
+        )
+        .on("click", function() {
+          $(this)
+            .closest(".clockpicker-popover")
+            .hide();
+        });
+
+      closeBlock
+        .css("display", "flex")
+        .append(
+          '<button type="button" class="btn btn-sm btn-outline-primary">' +
+            options.donetext +
+            "</button>"
+        )
+        .click($.proxy(this.done, this));
+
+      /*$('<button type="button" class="btn btn-sm btn-outline-primary">'
+		+ options.donetext +
+          '</button>'
       )
-        .click($.proxy(this.done, this))
-        .appendTo(popover);
+	    .click($.proxy(this.done, this))
+        .appendTo(popoverBody);
+		
+		/*$('<button type="button" class="btn btn-sm btn-outline-primary float-right">Cancel</button>')
+		.appendTo(popoverBody)
+		.on('click', function(){
+			$(this).closest('.clockpicker-popover').hide();
+		});*/
     }
 
     // Placement and arrow align - make sure they make sense.
@@ -477,7 +508,8 @@
     fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
     placement: "bottom", // clock popover placement
     align: "left", // popover arrow align
-    donetext: "Done", // done button text
+    donetext: "OK", // done button text
+    canceltext: "Cancel", // cancel button text
     autoclose: false, // auto close when minute is selected
     twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
     vibrate: true, // vibrate the device when dragging clock hand
@@ -702,8 +734,8 @@
 
     this.currentView = view;
 
-    this.spanHours.toggleClass("text-white-50", isHours);
-    this.spanMinutes.toggleClass("text-white-50", !isHours);
+    this.spanHours.toggleClass("text-white-50", !isHours);
+    this.spanMinutes.toggleClass("text-white-50", isHours);
 
     // Let's make transitions
     hideView.addClass("clockpicker-dial-out");
