@@ -1,7 +1,13 @@
 # ClockPicker [![Bower version](https://badge.fury.io/bo/clockpicker.svg)](http://badge.fury.io/bo/clockpicker) [![Build Status](https://travis-ci.org/weareoutman/clockpicker.svg)](https://travis-ci.org/weareoutman/clockpicker)  [![devDependency Status](https://david-dm.org/weareoutman/clockpicker/dev-status.svg)](https://david-dm.org/weareoutman/clockpicker#info=devDependencies)
 
-A clock-style timepicker for Bootstrap 3 or 4 (or jQuery).
+A clock-style timepicker for Bootstrap 4 (or Bootstrap 3 or jQuery).
 [Documentation and examples](http://weareoutman.github.io/clockpicker/).
+
+Bootstrap 4
+![Bootstrp 4 clockpicker](assets/images/clockpicker-bs4.png?raw=true "Clockpicker for Bootstrap 4")
+
+Bootstrap 4 with Daemonite material UI
+![Bootstrp 4 clockpicker](assets/images/clockpicker-bs4-material.png?raw=true "Clockpicker for Bootstrap 4 with material design")
 
 ![Screenshot](http://weareoutman.github.io/clockpicker/assets/images/screenshot-1.png)
 ![clockpicker-12-hour-screenshot](https://cloud.githubusercontent.com/assets/5218249/3613434/03da9888-0db8-11e4-8bdb-dbabb5e91e5c.png)
