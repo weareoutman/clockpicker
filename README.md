@@ -145,6 +145,13 @@ gulp
 - [ ] Seconds View ?
 
 ## Change log
+0.2.1
+
+* moved AM-PM buttons to the header and removed AM-PM block
+* inverted animation for top positioned picker
+* unified CSS files (compatible with BS 4.1.3, MDBootstrap 4.5.4 and Daemonite material UI)
+* need help to fix cancel button
+
 0.2
 
 * migrated all classes to BS4
