@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.2 original by (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v0.2.1 original by (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
  * Bootstrap 4 support by djibe
@@ -71,9 +71,8 @@
     outerRadius = 80,
     // innerRadius = 80 on 12 hour clock
     innerRadius = 54,
-    tickRadius = 13,
-    diameter = dialRadius * 2,
-    duration = transitionSupported ? 350 : 1;
+    tickRadius = 13;
+  (diameter = dialRadius * 2), (duration = transitionSupported ? 350 : 1);
 
   // Popover template
   var tpl = [
@@ -83,7 +82,7 @@
     '<span class="clockpicker-span-hours"></span>',
     ":",
     '<span class="clockpicker-span-minutes text-white-50"></span>',
-    '<span class="clockpicker-span-am-pm"></span>',
+    '<span class="clockpicker-buttons-am-pm"></span>',
     "</div>",
     '<div class="popover-body">',
     '<div class="clockpicker-plate">',
@@ -91,7 +90,6 @@
     '<div class="clockpicker-dial clockpicker-hours"></div>',
     '<div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"></div>',
     "</div>",
-    '<div class="clockpicker-am-pm-block justify-content-around"></div>',
     '<div class="clockpicker-close-block justify-content-end"></div>',
     "</div>",
     "</div>"
@@ -103,7 +101,6 @@
       plate = popover.find(".clockpicker-plate"),
       hoursView = popover.find(".clockpicker-hours"),
       minutesView = popover.find(".clockpicker-minutes"),
-      amPmBlock = popover.find(".clockpicker-am-pm-block"),
       isInput = element.prop("tagName") === "INPUT",
       input = isInput ? element : element.find("input"),
       isHTML5 = input.prop("type") === "time",
@@ -129,11 +126,9 @@
     this.plate = plate;
     this.hoursView = hoursView;
     this.minutesView = minutesView;
-    this.amPmBlock = amPmBlock;
     this.spanHours = popover.find(".clockpicker-span-hours");
     this.spanMinutes = popover.find(".clockpicker-span-minutes");
-    this.spanAmPm = popover.find(".clockpicker-span-am-pm");
-    this.amOrPm = "";
+    this.buttonsAmPm = popover.find(".clockpicker-buttons-am-pm");
     this.currentPlacementClass = options.placement;
     this.raiseCallback = function() {
       raiseCallback.apply(self, arguments);
@@ -141,45 +136,33 @@
 
     // Setup for for 12 hour clock if option is selected
     if (options.twelvehour) {
-      amPmBlock.css("display", "flex");
+      $(this.buttonsAmPm).css("display", "flex");
 
-      $(
-        '<button type="button" class="btn btn-sm btn-outline-primary clockpicker-button am-button">' +
-          "AM" +
-          "</button>"
-      )
+      $('<a class="btn-am">AM</a>')
         .on("click", function() {
           self.amOrPm = "AM";
-          $(".clockpicker-span-am-pm")
-            .empty()
-            .append("AM");
-
+          $(this).removeClass("text-white-50");
+          $(".btn-pm").addClass("text-white-50");
           if (options.ampmSubmit) {
             setTimeout(function() {
               self.done();
             }, duration / 2);
           }
         })
-        .appendTo(this.amPmBlock);
+        .appendTo(this.buttonsAmPm);
 
-      $(
-        '<button type="button" class="btn btn-sm btn-outline-primary clockpicker-button pm-button">' +
-          "PM" +
-          "</button>"
-      )
+      $('<a class="btn-pm text-white-50">PM</a>')
         .on("click", function() {
           self.amOrPm = "PM";
-          $(".clockpicker-span-am-pm")
-            .empty()
-            .append("PM");
-
+          $(this).removeClass("text-white-50");
+          $(".btn-am").addClass("text-white-50");
           if (options.ampmSubmit) {
             setTimeout(function() {
               self.done();
             }, duration / 2);
           }
         })
-        .appendTo(this.amPmBlock);
+        .appendTo(this.buttonsAmPm);
     }
 
     if (!options.autoclose) {
@@ -204,19 +187,6 @@
             "</button>"
         )
         .click($.proxy(this.done, this));
-
-      /*$('<button type="button" class="btn btn-sm btn-outline-primary">'
-		+ options.donetext +
-          '</button>'
-      )
-	    .click($.proxy(this.done, this))
-        .appendTo(popoverBody);
-		
-		/*$('<button type="button" class="btn btn-sm btn-outline-primary float-right">Cancel</button>')
-		.appendTo(popoverBody)
-		.on('click', function(){
-			$(this).closest('.clockpicker-popover').hide();
-		});*/
     }
 
     // Placement and arrow align - make sure they make sense.
@@ -414,7 +384,7 @@
       bearing.setAttribute("class", "clockpicker-canvas-bearing");
       bearing.setAttribute("cx", 0);
       bearing.setAttribute("cy", 0);
-      bearing.setAttribute("r", 2);
+      bearing.setAttribute("r", 3);
       var hand = createSvgElement("line");
       hand.setAttribute("x1", 0);
       hand.setAttribute("y1", 0);
@@ -628,7 +598,8 @@
 
     if (this.options.twelvehour) {
       var period = (value[1] + "").replace(/\d+/g, "").toLowerCase();
-      this.amOrPm = this.hours > 12 || period === "pm" ? "PM" : "AM";
+      //this.amOrPm = this.hours > 12 || period === "pm" ? "PM" : "AM";
+      this.amOrPm = this.hours > 12 || period === "am" ? "AM" : "PM";
     }
   };
 
@@ -663,10 +634,6 @@
 
     this.spanHours.html(leadingZero(this.hours));
     this.spanMinutes.html(leadingZero(this.minutes));
-
-    if (this.options.twelvehour) {
-      this.spanAmPm.empty().append(this.amOrPm);
-    }
 
     // Toggle to hours view
     this.toggleView("hours");
