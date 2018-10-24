@@ -598,7 +598,7 @@
 			if (!this.minutes) {
 				this.minutes = parseInt(this.spanMinutes.html());
 			}
-			if (!isHours && ((this.hours = this.min[0]) || (this.hours = this.max[0]))) {
+			if (!isHours && ((this.hours === this.min[0]) || (this.hours === this.max[0]))) {
 				// mark items as invalid for minutes
 				for (let i = 0; i < ticks.length; i++) {
 					var tick = $(ticks[i]);
