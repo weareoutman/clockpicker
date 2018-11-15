@@ -592,25 +592,38 @@
 		// Check if the minutes need to be disabled for the selected hour (Based on the minimum value)
 		if (this.min || this.max) {
 			var ticks = this.minutesView.find('div.clockpicker-tick');
+			var tick,
+				tickValue;
+		
 			if (!this.hours) {
-				this.hours = parseInt(this.spanHours.html());	
+				this.hours = parseInt(this.spanHours.html());
 			}
 			if (!this.minutes) {
 				this.minutes = parseInt(this.spanMinutes.html());
 			}
-			if (!isHours && ((this.hours === this.min[0]) || (this.hours === this.max[0]))) {
-				// mark items as invalid for minutes
+			if (!isHours && (this.hours === this.min[0])) {
+				// mark items as invalid for minutes if min hour applies
 				for (let i = 0; i < ticks.length; i++) {
-					var tick = $(ticks[i]);
-					var tickValue = parseInt(tick.html());
-					if (tickValue < this.min[1] || tickValue > this.max[1]) {
+					tick = $(ticks[i]);
+					tickValue = parseInt(tick.html());
+					if (tickValue < this.min[1]) {
+						tick.addClass('invalid');
+					}
+				}
+			}
+			else if (!isHours && (this.hours === this.max[0])) {
+				// mark items as invalid for minutes if max hour applies
+				for (let i = 0; i < ticks.length; i++) {
+					tick = $(ticks[i]);
+					tickValue = parseInt(tick.html());
+					if (tickValue > this.max[1]) {
 						tick.addClass('invalid');
 					}
 				}
 			}
 			else {
 				for (let i = 0; i < ticks.length; i++) {
-					var tick = $(ticks[i]);
+					tick = $(ticks[i]);
 					tick.removeClass('invalid');
 				}
 			}
