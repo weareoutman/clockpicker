@@ -145,6 +145,13 @@ gulp
 - [ ] Seconds View ?
 
 ## Change log
+0.2.2
+
+* phanku : Fixed clock picker so the clock picker will work when the trigger element is within a modal
+* SCSS source file added for easier maintenance
+* Minor CSS tweaks
+*  fallback added for a Bootstrap free use (ex: background-color: var(--primary, #007bff);)
+
 0.2.1
 
 * moved AM-PM buttons to the header and removed AM-PM block
