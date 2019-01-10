@@ -5,6 +5,11 @@
  * Bootstrap 4 compatibility by djibe (https://github.com/djibe/clockpicker)
  */
 
+:root {
+  /* Just set your primary color in decimal RGB, here or in your own CSS */
+  --primary-color: 0, 123, 255;
+}
+
 .clockpicker .input-group-addon {
   cursor: pointer;
 }
@@ -63,7 +68,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #007bff;
+  background-color: var(--primary, #007bff);
   color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -158,7 +163,7 @@
 
 .clockpicker-tick.active,
 .clockpicker-tick:not(.disabled):hover {
-  background-color: rgba(0, 123, 255, 0.25);
+  background-color: rgba(var(--primary-color, 0, 123, 255), 0.25);
 }
 
 .clockpicker-tick.disabled {
@@ -197,28 +202,28 @@
 }
 
 .clockpicker-canvas line {
-  stroke: #007bff;
+  stroke: var(--primary, #007bff);
   stroke-width: 2;
   stroke-linecap: round;
 }
 
 .clockpicker-canvas-bearing {
   stroke: none;
-  fill: #007bff;
+  fill: var(--primary, #007bff);
 }
 
 .clockpicker-canvas-fg {
   stroke: none;
-  fill: rgba(0, 123, 255, 0.5);
+  fill: rgba(var(--primary-color, 0, 123, 255), 0.5);
 }
 
 .clockpicker-canvas-bg {
   stroke: none;
-  fill: rgba(0, 123, 255, 0.25);
+  fill: rgba(var(--primary-color, 0, 123, 255), 0.25);
 }
 
 .clockpicker-canvas-bg-trans {
-  fill: rgba(0, 123, 255, 0.25);
+  fill: rgba(var(--primary-color, 0, 123, 255), 0.25);
 }
 
 .clockpicker-buttons-am-pm {
