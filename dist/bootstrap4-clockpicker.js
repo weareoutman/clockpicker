@@ -510,14 +510,18 @@
   // Set popover position and update placement class, if needed
   ClockPicker.prototype.locate = function() {
     var element = this.element,
-      popover = this.popover,
-      offset = element.offset(),
-      width = element.outerWidth(),
-      height = element.outerHeight(),
-      placement = this.options.placement,
-      align = this.options.align,
-      styles = {},
-      self = this;
+        popover = this.popover,
+        offset = element.offset(),
+        width = element.outerWidth(),
+        height = element.outerHeight(),
+        placement = this.options.placement,
+        align = this.options.align,
+        windowHeight = $win.height(),
+        windowWidth = $win.width(),
+        popoverHeight = popover.height(),
+        popoverWidth = popover.width(),
+        styles = {},
+        self = this;
 
     if (placement === "top-adaptive" || placement === "bottom-adaptive") {
       var preferredPlacement = placement.substr(0, placement.indexOf("-"));
@@ -568,7 +572,15 @@
         styles.top = offset.top + height - popover.outerHeight();
         break;
     }
-
+     
+    // Correct the popover position outside the window
+    if (popoverHeight + styles.top > windowHeight) {
+        styles.top = windowHeight - popoverHeight;
+    }
+    if (popoverWidth + styles.left > windowWidth) {
+        styles.left = windowWidth - popoverWidth;
+    }
+    
     popover.css(styles);
   };
 
