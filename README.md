@@ -148,6 +148,11 @@ gulp
 - [ ] Seconds View ?
 
 ## Change log
+0.2.3
+
+* [Poradz : Prevented the popover position from overflowing outside the window](https://github.com/djibe/clockpicker/commit/191ca92ae612bf6cec4c9981e3704d9d482e0ad9).
+* [Poradz : Parsing input value in getTime function broke picked value when beforeHide or beforeDone callbacks were in use]( https://github.com/djibe/clockpicker/pull/2/commits/204417a37ad02f0f7581907368a3d0c03af865a7).
+
 0.2.2
 
 * phanku : Fixed clock picker so the clock picker will work when the trigger element is within a modal
