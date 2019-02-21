@@ -1,5 +1,5 @@
 /*!
- * ClockPicker v0.2.1 original by (http://weareoutman.github.io/clockpicker/)
+ * ClockPicker v0.2.3 original by (http://weareoutman.github.io/clockpicker/)
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
  * Bootstrap 4 support by djibe
