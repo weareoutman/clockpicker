@@ -875,8 +875,6 @@
 
   // Allow user to get time time as Date object
   ClockPicker.prototype.getTime = function(callback) {
-    this.parseInputValue();
-
     var hours = this.hours;
     if (this.options.twelvehour && hours < 12 && this.amOrPm === "PM") {
       hours += 12;
