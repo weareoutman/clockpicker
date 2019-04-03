@@ -169,24 +169,22 @@
       // If autoclose is not setted, append a button
       closeBlock
         .append(
-          '<button type="button" class="btn btn-sm btn-outline-primary">' +
+          '<button type="button" class="btn btn-sm btn-outline-primary cancel">' +
             options.canceltext +
             "</button>"
         )
-        .on("click", function() {
-          $(this)
-            .closest(".clockpicker-popover")
-            .hide();
+        .on("click", ".cancel", function () {
+          self.hide();
         });
 
       closeBlock
         .css("display", "flex")
         .append(
-          '<button type="button" class="btn btn-sm btn-outline-primary">' +
+          '<button type="button" class="btn btn-sm btn-outline-primary done">' +
             options.donetext +
             "</button>"
         )
-        .click($.proxy(this.done, this));
+        .on("click", ".done", $.proxy(this.done, this));
     }
 
     // Placement and arrow align - make sure they make sense.
@@ -611,7 +609,7 @@
     if (this.options.twelvehour) {
       var period = (value[1] + "").replace(/\d+/g, "").toLowerCase();
       //this.amOrPm = this.hours > 12 || period === "pm" ? "PM" : "AM";
-      this.amOrPm = this.hours > 12 || period === "am" ? "AM" : "PM";
+      this.amOrPm = this.hours < 12 || period === "am" ? "AM" : "PM";
     }
   };
 
