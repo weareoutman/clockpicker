@@ -1,0 +1,235 @@
+/*!
+ * ClockPicker v0.2.2 for Bootstrap (https://weareoutman.github.io/clockpicker/)
+ * Copyright 2014 Wang Shenwei
+ * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
+ * Bootstrap 4 compatibility by djibe (https://github.com/djibe/clockpicker)
+ */
+
+$clockpicker-border-radius: 4px;
+
+@import "../bootstrap-4.2.1/functions";
+@import "../bootstrap-4.2.1/variables";
+
+.clockpicker {
+  .input-group-addon {
+    cursor: pointer;
+  }
+
+  &-moving {
+    cursor: move;
+  }
+
+  &-align-left.popover>.arrow {
+    left: 25px;
+  }
+
+  &-align-top.popover>.arrow {
+    top: 17px;
+  }
+
+  &-align-right.popover>.arrow {
+    left: auto;
+    right: 25px;
+  }
+
+  &-align-bottom.popover>.arrow {
+    top: auto;
+    bottom: 6px;
+  }
+
+  &-popover {
+    animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+    border: 0;
+    transform: scale(1);
+    transform-origin: center top 0px;
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+      0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px 0 rgba(0, 0, 0, 0.2);
+
+    &.top {
+      transform-origin: center bottom 0px;
+    }
+
+    * {
+      user-select: none;
+    }
+
+    .popover-header {
+      align-items: center;
+      justify-content: center;
+      background-color: $primary;
+      color: #fff;
+      display: flex;
+      font-size: 3rem;
+      font-weight: normal;
+      letter-spacing: normal;
+      text-align: center;
+      padding: 0.5rem;
+      border-top-left-radius: $clockpicker-border-radius;
+      border-top-right-radius: $clockpicker-border-radius;
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    .popover-body {
+      background-color: #fff;
+      padding: 1rem 0.75rem 0.75rem;
+      border-bottom-right-radius: $clockpicker-border-radius;
+      border-bottom-left-radius: $clockpicker-border-radius;
+    }
+
+    .btn {
+      border: 0 !important;
+      border-radius: 4px;
+      box-shadow: none;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.59375rem 1rem;
+      min-width: 0;
+      margin: 0;
+      margin-left: 0.25rem;
+      text-transform: uppercase;
+
+      &:focus,
+      &:hover,
+      &:active {
+        outline: none !important;
+        background-image: linear-gradient(180deg,
+          rgba(0, 0, 0, 0.12),
+          rgba(0, 0, 0, 0.12));
+        box-shadow: none;
+      }
+    }
+  }
+
+  &-span-hours {
+    margin-right: 0.25rem;
+  }
+
+  &-span-minutes {
+    margin-left: 0.25rem;
+  }
+
+  &-close-block {
+    margin-top: 0.75rem;
+  }
+
+  &-plate {
+    background-color: #ededee;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: visible;
+    position: relative;
+  }
+
+  &-canvas,
+  &-dial {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+  }
+
+  &-minutes {
+    visibility: hidden;
+  }
+
+  &-tick {
+    border-radius: 50%;
+    line-height: 26px;
+    text-align: center;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    cursor: pointer;
+
+    &.active,
+    &:not(.disabled):hover {
+      background-color: rgba($primary, 0.25);
+    }
+
+    &.disabled {
+      color: #eee;
+      cursor: default;
+    }
+  }
+
+  &-dial {
+    transition: transform 350ms, opacity 350ms;
+
+    &-out {
+      opacity: 0;
+    }
+  }
+
+  &-hours.clockpicker-dial-out {
+    transform: scale(1.2, 1.2);
+  }
+
+  &-minutes.clockpicker-dial-out {
+    transform: scale(0.8, 0.8);
+  }
+
+  &-canvas {
+    transition: opacity 175ms;
+
+    &-out {
+      opacity: 0.25;
+    }
+
+    line {
+      stroke: $primary;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    &-bearing {
+      stroke: none;
+      fill: $primary;
+    }
+
+    &-fg {
+      stroke: none;
+      fill: rgba($primary, 0.5);
+    }
+
+    // Circle selection
+    &-bg {
+      stroke: none;
+      fill: rgba($primary, 0.25);
+
+      // Circle drag selection
+      &-trans {
+        fill: rgba($primary, 0.25);
+      }
+    }
+  }
+
+  // New buttons by djibe
+  &-buttons-am-pm {
+    color: white;
+    display: none;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1rem;
+    margin-left: 0.75rem;
+  }
+}
+
+@keyframes pickerFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

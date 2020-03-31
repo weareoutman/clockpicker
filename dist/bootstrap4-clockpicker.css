@@ -1,0 +1,273 @@
+/*!
+ * ClockPicker v0.2.2 for Bootstrap (https://weareoutman.github.io/clockpicker/)
+ * Copyright 2014 Wang Shenwei
+ * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
+ * Bootstrap 4 compatibility by djibe (https://github.com/djibe/clockpicker)
+ */
+
+:root {
+  /* Just set your primary color in decimal RGB, here or in your own CSS */
+  --primary-color: 0, 123, 255;
+}
+
+.clockpicker .input-group-addon {
+  cursor: pointer;
+}
+
+.clockpicker-moving {
+  cursor: move;
+}
+
+.clockpicker-align-left.popover>.arrow {
+  left: 25px;
+}
+
+.clockpicker-align-top.popover>.arrow {
+  top: 17px;
+}
+
+.clockpicker-align-right.popover>.arrow {
+  left: auto;
+  right: 25px;
+}
+
+.clockpicker-align-bottom.popover>.arrow {
+  top: auto;
+  bottom: 6px;
+}
+
+.clockpicker-popover {
+  -webkit-animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          animation: pickerFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px;
+  border: 0;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: center top 0px;
+          transform-origin: center top 0px;
+  -webkit-box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+.clockpicker-popover.top {
+  -webkit-transform-origin: center bottom 0px;
+          transform-origin: center bottom 0px;
+}
+
+.clockpicker-popover * {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.clockpicker-popover .popover-header {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: var(--primary, #007bff);
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 3rem;
+  font-weight: normal;
+  letter-spacing: normal;
+  text-align: center;
+  padding: 0.5rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.clockpicker-popover .popover-header span {
+  cursor: pointer;
+}
+
+.clockpicker-popover .popover-body {
+  background-color: #fff;
+  padding: 1rem 0.75rem 0.75rem;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.clockpicker-popover .btn {
+  border: 0 !important;
+  border-radius: 4px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.59375rem 1rem;
+  min-width: 0;
+  margin: 0;
+  margin-left: 0.25rem;
+  text-transform: uppercase;
+}
+
+.clockpicker-popover .btn:focus,
+.clockpicker-popover .btn:hover,
+.clockpicker-popover .btn:active {
+  outline: none !important;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.12)), to(rgba(0, 0, 0, 0.12)));
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12));
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.clockpicker-span-hours {
+  margin-right: 0.25rem;
+}
+
+.clockpicker-span-minutes {
+  margin-left: 0.25rem;
+}
+
+.clockpicker-close-block {
+  margin-top: 0.75rem;
+}
+
+.clockpicker-plate {
+  background-color: #ededee;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  overflow: visible;
+  position: relative;
+}
+
+.clockpicker-canvas,
+.clockpicker-dial {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: -1px;
+  top: -1px;
+}
+
+.clockpicker-minutes {
+  visibility: hidden;
+}
+
+.clockpicker-tick {
+  border-radius: 50%;
+  line-height: 26px;
+  text-align: center;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.clockpicker-tick.active,
+.clockpicker-tick:not(.disabled):hover {
+  background-color: rgba(var(--primary-color, 0, 123, 255), 0.25);
+}
+
+.clockpicker-tick.disabled {
+  color: #eee;
+  cursor: default;
+}
+
+.clockpicker-dial {
+  -webkit-transition: opacity 350ms, -webkit-transform 350ms;
+  transition: opacity 350ms, -webkit-transform 350ms;
+  transition: transform 350ms, opacity 350ms;
+  transition: transform 350ms, opacity 350ms, -webkit-transform 350ms;
+}
+
+.clockpicker-dial-out {
+  opacity: 0;
+}
+
+.clockpicker-hours.clockpicker-dial-out {
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
+
+.clockpicker-minutes.clockpicker-dial-out {
+  -webkit-transform: scale(0.8, 0.8);
+          transform: scale(0.8, 0.8);
+}
+
+.clockpicker-canvas {
+  -webkit-transition: opacity 175ms;
+  transition: opacity 175ms;
+}
+
+.clockpicker-canvas-out {
+  opacity: 0.25;
+}
+
+.clockpicker-canvas line {
+  stroke: var(--primary, #007bff);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.clockpicker-canvas-bearing {
+  stroke: none;
+  fill: var(--primary, #007bff);
+}
+
+.clockpicker-canvas-fg {
+  stroke: none;
+  fill: rgba(var(--primary-color, 0, 123, 255), 0.5);
+}
+
+.clockpicker-canvas-bg {
+  stroke: none;
+  fill: rgba(var(--primary-color, 0, 123, 255), 0.25);
+}
+
+.clockpicker-canvas-bg-trans {
+  fill: rgba(var(--primary-color, 0, 123, 255), 0.25);
+}
+
+.clockpicker-buttons-am-pm {
+  color: white;
+  display: none;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1rem;
+  margin-left: 0.75rem;
+}
+
+@-webkit-keyframes pickerFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes pickerFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
