@@ -226,7 +226,24 @@ $('#check-minutes').click(function(e){
 			</code>
 		</pre>
 	</div>
+	<p>Time Picker with format - HH:mm:ss , HH:mm, HH</p>
+	<div class="clearfix">
+		<div class="pull-center clearfix" style="margin-bottom:10px;">
+			<input class="form-control pull-left" id="time-input-hh-mm-ss" value="" placeholder="HH:mm:ss" style="width:100px;margin-right:20px;">
+		</div>
 
+	<div class="clearfix">
+		<div class="pull-center clearfix" style="margin-bottom:10px;">
+			<input class="form-control pull-left" id="time-input-hh-mm" value="" placeholder="HH:mm" style="width:80px;margin-right:20px;">
+		</div>
+	</div>
+
+	<div class="clearfix">
+		<div class="pull-center clearfix" style="margin-bottom:10px;">
+			<input class="form-control pull-left" id="time-input-hh" value="" placeholder="HH"
+				style="width:50px;margin-right:20px;">
+		</div>
+	</div>
 	<h3>Options</h3>
 	<table class="table table-bordered table-striped">
 	<thead><tr>
@@ -384,7 +401,7 @@ $('#check-minutes').click(function(e){
 
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="dist/bootstrap-clockpicker.js"></script>
+<script type="text/javascript" src="src/clockpicker.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 
 <script type="text/javascript">
@@ -394,6 +411,30 @@ $('.clockpicker').clockpicker()
 	});
 var input = $('#single-input').clockpicker({
 	placement: 'bottom',
+	align: 'left',
+	autoclose: true,
+	'default': 'now'
+});
+
+var time_input = $('#time-input-hh-mm-ss').clockpicker({
+	placement: 'bottom',
+	format: 'HH:mm:ss',
+	align: 'left',
+	autoclose: true,
+	'default': 'now'
+});
+
+var time_input = $('#time-input-hh-mm').clockpicker({
+	placement: 'bottom',
+	format: 'HH:mm',
+	align: 'left',
+	autoclose: true,
+	'default': 'now'
+});
+
+var time_input = $('#time-input-hh').clockpicker({
+	placement: 'bottom',
+	format: 'HH',
 	align: 'left',
 	autoclose: true,
 	'default': 'now'

@@ -64,8 +64,14 @@
 		diameter = dialRadius * 2,
 		duration = transitionSupported ? 350 : 1;
 
-	// Popover template
-	var tpl = [
+	var TIME_FORMATS = {
+		HH_MM_SS: 'HH:mm:ss',
+		HH_MM: 'HH:mm',
+		HH: 'HH'
+	}
+
+	// Popover template for different formats - HH:MM:SS , HH:MM , HH
+	var tpl_HH_MM_SS = [
 		'<div class="popover clockpicker-popover">',
 			'<div class="arrow"></div>',
 			'<div class="popover-title">',
@@ -89,8 +95,64 @@
 		'</div>'
 	].join('');
 
+	var tpl_HH_MM = [
+		'<div class="popover clockpicker-popover">',
+			'<div class="arrow"></div>',
+			'<div class="popover-title">',
+				'<span class="clockpicker-span-hours text-primary"></span>',
+				' : ',
+				'<span class="clockpicker-span-minutes"></span>',
+				'<span class="clockpicker-span-am-pm"></span>',
+			'</div>',
+			'<div class="popover-content">',
+				'<div class="clockpicker-plate">',
+					'<div class="clockpicker-canvas"></div>',
+					'<div class="clockpicker-dial clockpicker-hours"></div>',
+					'<div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"></div>',
+					'<div class="clockpicker-dial clockpicker-seconds clockpicker-dial-out"></div>',
+				'</div>',
+				'<span class="clockpicker-am-pm-block">',
+				'</span>',
+			'</div>',
+		'</div>'
+	].join('');
+
+	var tpl_HH = [
+		'<div class="popover clockpicker-popover">',
+			'<div class="arrow"></div>',
+			'<div class="popover-title">',
+				'<span class="clockpicker-span-hours text-primary"></span>',
+			'</div>',
+			'<div class="popover-content">',
+				'<div class="clockpicker-plate">',
+					'<div class="clockpicker-canvas"></div>',
+					'<div class="clockpicker-dial clockpicker-hours"></div>',
+					'<div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"></div>',
+					'<div class="clockpicker-dial clockpicker-seconds clockpicker-dial-out"></div>',
+				'</div>',
+				'<span class="clockpicker-am-pm-block">',
+				'</span>',
+			'</div>',
+		'</div>'
+	].join('');
+
+	var TPL_FORMAT_MAP = {
+		[TIME_FORMATS.HH_MM_SS] : tpl_HH_MM_SS,
+		[TIME_FORMATS.HH_MM] : tpl_HH_MM,
+		[TIME_FORMATS.HH]: tpl_HH
+	}
+
 	// ClockPicker
 	function ClockPicker(element, options) {
+		// Get template according to format
+		var tpl;
+		if (options.format && options.format === TIME_FORMATS.HH_MM) {
+			tpl = TPL_FORMAT_MAP[TIME_FORMATS.HH_MM];
+		} else if (options.format && options.format === TIME_FORMATS.HH) {
+			tpl = TPL_FORMAT_MAP[TIME_FORMATS.HH];
+		} else
+			tpl = TPL_FORMAT_MAP[TIME_FORMATS.HH_MM_SS];
+
 		var popover = $(tpl),
 			plate = popover.find('.clockpicker-plate'),
 			hoursView = popover.find('.clockpicker-hours'),
@@ -125,6 +187,7 @@
 
 		this.spanAmPm = popover.find('.clockpicker-span-am-pm');
 		this.amOrPm = "PM";
+
 		this.viewMap = {
 			hours: {
 				span: this.spanHours,
@@ -141,6 +204,31 @@
 				view: this.secondsView
 			}
 		};
+
+		if (this.options.format === TIME_FORMATS.HH_MM) {
+			this.viewMap = {
+				hours: {
+					span: this.spanHours,
+					view: this.hoursView,
+					next: 'minutes',
+				},
+				minutes: {
+					span: this.spanMinutes,
+					view: this.minutesView
+				}
+			};
+		}
+
+		if (this.options.format === TIME_FORMATS.HH) {
+			this.viewMap = {
+				hours: {
+					span: this.spanHours,
+					view: this.hoursView
+				}
+			};
+		}
+
+		
 		// Setup for for 12 hour clock if option is selected
 		if (options.twelvehour) {
 
@@ -759,8 +847,16 @@
 	// Hours and minutes are selected
 	ClockPicker.prototype.done = function() {
 		raiseCallback(this.options.beforeDone);
-		var last = this.input.prop('value'),
-			value = leadingZero(this.hours) + ':' + leadingZero(this.minutes) + ':' + leadingZero(this.seconds);
+		if (this.options.format === TIME_FORMATS.HH_MM) {
+			var last = this.input.prop('value'),
+				value = leadingZero(this.hours) + ':' + leadingZero(this.minutes);
+		} else if (this.options.format === TIME_FORMATS.HH) {
+			var last = this.input.prop('value'),
+				value = leadingZero(this.hours);
+		} else {
+			var last = this.input.prop('value'),
+				value = leadingZero(this.hours) + ':' + leadingZero(this.minutes) + ':' + leadingZero(this.seconds);
+		}
 		if  (this.options.twelvehour) {
 			value = value + this.amOrPm;
 		}
