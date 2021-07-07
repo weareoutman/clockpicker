@@ -367,7 +367,7 @@
 		fromnow: 0,          // set default time to * milliseconds from now (using with default = 'now')
 		placement: 'bottom', // clock popover placement
 		align: 'left',       // popover arrow align
-		donetext: '完成',    // done button text
+		donetext: 'Done',    // done button text
 		autoclose: false,    // auto close when minute is selected
 		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
 		vibrate: true        // vibrate the device when dragging clock hand
@@ -382,6 +382,7 @@
 	ClockPicker.prototype.locate = function(){
 		var element = this.element,
 			popover = this.popover,
+			arrow = this.popover.find('.arrow'),
 			offset = element.offset(),
 			width = element.outerWidth(),
 			height = element.outerHeight(),
@@ -410,11 +411,16 @@
 
 		// Align the popover arrow
 		switch (align) {
+			case 'center':
+				styles.left = offset.left - ((popover.outerWidth() - element.outerWidth())/2);
+				break;
 			case 'left':
 				styles.left = offset.left;
+				arrow.style.left = '10%';
 				break;
 			case 'right':
 				styles.left = offset.left + width - popover.outerWidth();
+				arrow.style.left = '90%';
 				break;
 			case 'top':
 				styles.top = offset.top;
